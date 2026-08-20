@@ -32,6 +32,7 @@ export function MenuDrawer({ open, onClose, onJump, onEvaluate }: Props) {
   const tier = useDeviceTier();
   const { mounted, shown, reduced, onExitComplete } = usePresence(open);
   const rich = !reduced && tier !== "low";
+  const frost = tier !== "low";
 
   useEffect(() => {
     if (shown || !mounted || reduced) {
@@ -94,7 +95,7 @@ export function MenuDrawer({ open, onClose, onJump, onEvaluate }: Props) {
 
   return (
     <div
-      className={`drawer${shown ? " is-shown" : ""}${rich ? " drawer--rich" : ""}`}
+      className={`drawer${shown ? " is-shown" : ""}${rich ? " drawer--rich" : ""}${frost ? " drawer--frost" : ""}`}
       aria-hidden={!shown}
       inert={!shown ? true : undefined}
     >

@@ -18,9 +18,15 @@
   position: absolute;
   inset: 0;
   border: 0;
-  background: color-mix(in srgb, var(--black) 52%, var(--page));
+  background: color-mix(in srgb, var(--black) 38%, transparent);
   opacity: 0;
   transition: opacity 0.28s ease;
+}
+
+.drawer--frost .drawer__scrim {
+  background: color-mix(in srgb, var(--black) 18%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(1.15);
+  backdrop-filter: blur(16px) saturate(1.15);
 }
 
 .drawer.is-shown .drawer__scrim {
@@ -271,5 +277,13 @@
 
   .drawer__close:active {
     transform: none;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .drawer--frost .drawer__scrim {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: color-mix(in srgb, var(--black) 42%, transparent);
   }
 }
