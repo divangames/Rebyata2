@@ -1,5 +1,9 @@
 # Журнал изменений
 
+## 1.3.31 — 2026-08-20
+
+- Подключены шрифты из `public/fonts`: Intro Regular/Bold и Druk Wide Bold.
+
 ## 1.3.30 — 2026-08-20
 
 - Сайт публикуется на GitHub Pages: https://divangames.github.io/Rebyata2/

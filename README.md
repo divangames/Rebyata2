@@ -49,8 +49,8 @@ Windows: `deploy.bat` (или `npm run build` и `npm run prepare:deploy`).
 
 ## Шрифты
 
-- **Intro** — основной текст и кнопки. Лицензионные `Intro-Regular.woff2` и `Intro-Bold.woff2` кладутся в `public/fonts`. Пока файлов нет, подключён **Onest**.
-- **Druk Wide Bold** — заголовки и цены. Это коммерческий шрифт Commercial Type, на Google Fonts его нет. Положите `DrukWide-Bold.woff2` в `public/fonts`. Пока файла нет, для кириллицы подключён **Unbounded** (Google Fonts).
+- **Intro** — основной текст и кнопки: `public/fonts/Intro-Regular.ttf` и `Intro-Bold.ttf`.
+- **Druk Wide Bold** — заголовки и цены: `public/fonts/DrukWide-Bold.otf`. Если в файле нет кириллицы, для русского текста остаётся запасной **Unbounded**.
 - **Caveat Bold** — рукописные акценты (слоган в hero).
 
 ## Технологии

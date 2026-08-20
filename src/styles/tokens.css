@@ -1,5 +1,5 @@
 /* Токены брендбука «Свои ребята». */
-/* Шрифты: положите woff2 в public/fonts и добавьте url() в @font-face. */
+/* Шрифты подключаются из public/fonts; Vite кладёт файлы в сборку с учётом base. */
 
 :root {
   --black: #070707;
@@ -46,7 +46,7 @@
 
 @font-face {
   font-family: Intro;
-  src: local("Intro"), local("Intro Regular");
+  src: url("../../public/fonts/Intro-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -54,7 +54,7 @@
 
 @font-face {
   font-family: Intro;
-  src: local("Intro Bold"), local("Intro");
+  src: url("../../public/fonts/Intro-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -62,7 +62,7 @@
 
 @font-face {
   font-family: "Druk Wide";
-  src: local("Druk Wide Bold");
+  src: url("../../public/fonts/DrukWide-Bold.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
