@@ -4,8 +4,10 @@
 //
 ////////////////////////////////////////////////////////
 
+import { publicUrl } from "../helpers/publicUrl";
+
 export const logos = {
-  horizon: "/images/logo-horizon.svg",
-  vertical: "/images/logo-vertical.svg",
-  verticalDark: "/images/logo-vertical-dark.svg",
+  horizon: publicUrl("images/logo-horizon.svg"),
+  vertical: publicUrl("images/logo-vertical.svg"),
+  verticalDark: publicUrl("images/logo-vertical-dark.svg"),
 } as const;

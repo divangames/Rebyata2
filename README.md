@@ -45,6 +45,8 @@ Windows: `deploy.bat` (или `npm run build` и `npm run prepare:deploy`).
 
 Подойдёт любой статический хостинг (Apache, Nginx, Cloudflare Pages, Netlify, GitHub Pages).
 
+Онлайн-версия на GitHub Pages: [divangames.github.io/Rebyata2](https://divangames.github.io/Rebyata2/). Сборка публикуется автоматически при пуше в `main`.
+
 ## Шрифты
 
 - **Intro** — основной текст и кнопки. Лицензионные `Intro-Regular.woff2` и `Intro-Bold.woff2` кладутся в `public/fonts`. Пока файлов нет, подключён **Onest**.
