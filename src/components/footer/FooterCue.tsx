@@ -95,16 +95,14 @@ export function FooterCue() {
       className={`footer-cue${play ? " is-drawn" : ""}${visible ? " is-visible" : ""}`}
       style={{ "--footer-arrow-delay": `${arrowDelayMs}ms` } as CSSProperties}
     >
-      <div className="footer-cue__mark">
-        <AnimatedSlogan
-          compact
-          play={play}
-          underline={false}
-          lines={footerCue.handLines}
-          label={footerCue.handFull}
-        />
-        <CueArrow alive={alive} />
-      </div>
+      <AnimatedSlogan
+        compact
+        play={play}
+        underline={false}
+        lines={footerCue.handLines}
+        label={footerCue.handFull}
+      />
+      <CueArrow alive={alive} />
       <ContactsSocial onDark />
     </div>
   );

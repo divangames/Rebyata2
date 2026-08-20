@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "prepare:deploy": "node scripts/prepare-deploy.mjs",
     "preview": "vite preview --host --port 4173"
   },
   "dependencies": {
