@@ -41,7 +41,7 @@ npm run dev
 
 Windows: `deploy.bat` (или `npm run build` и `npm run prepare:deploy`).
 
-Скрипт соберёт статическую папку `deploy\` и архив `deploy.zip`. Залейте **содержимое** `deploy\` в корень сайта (`public_html`, `www`, `htdocs`). Node.js на хостинге не нужен. Для PWA нужен HTTPS.
+Скрипт соберёт статическую папку `deploy\` и архив `deploy.zip`. Готовая папка также лежит в репозитории: [deploy](https://github.com/divangames/Rebyata2/tree/main/deploy). Залейте **содержимое** `deploy\` в корень сайта (`public_html`, `www`, `htdocs`). Node.js на хостинге не нужен. Для PWA нужен HTTPS.
 
 Подойдёт любой статический хостинг (Apache, Nginx, Cloudflare Pages, Netlify, GitHub Pages).
 
