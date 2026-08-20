@@ -1,0 +1,91 @@
+/* Список преимуществ: иконка в squircle и две строки текста. */
+
+.adv {
+  --band-pad-top: 1.35rem;
+  --band-pad-bottom: 1.2rem;
+  --adv-icon: 2.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: var(--page);
+}
+
+.adv h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 5.4vw, 1.65rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.adv__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.05rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.adv__item {
+  display: grid;
+  grid-template-columns: var(--adv-icon) minmax(0, 1fr);
+  column-gap: 0.85rem;
+  align-items: center;
+}
+
+.adv__icon {
+  display: grid;
+  place-items: center;
+  width: var(--adv-icon);
+  height: var(--adv-icon);
+  border-radius: 0.72rem;
+  background: rgba(20, 20, 20, 0.07);
+  color: var(--ink);
+}
+
+.adv__icon svg {
+  width: 1.28rem;
+  height: 1.28rem;
+}
+
+.adv__copy {
+  display: grid;
+  gap: 0.16rem;
+  min-width: 0;
+}
+
+.adv h3 {
+  font-family: var(--font-ui);
+  font-size: clamp(0.95rem, 3.5vw, 1.05rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+
+.adv p {
+  color: var(--muted);
+  font-size: clamp(0.82rem, 3vw, 0.9rem);
+  line-height: 1.4;
+}
+
+.adv__note {
+  margin-top: 0.15rem;
+  color: var(--muted);
+  font-size: clamp(0.78rem, 2.8vw, 0.85rem);
+  line-height: 1.35;
+}
+
+.adv .btn {
+  margin-top: 0.1rem;
+}
+
+@media (min-width: 720px) {
+  .adv {
+    --adv-icon: 3rem;
+  }
+
+  .adv__list {
+    gap: 1.15rem;
+  }
+}

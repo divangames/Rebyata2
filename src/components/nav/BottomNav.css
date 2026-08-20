@@ -1,0 +1,86 @@
+/* Белый док как на макете нижней панели. */
+
+.dock {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.2rem;
+  padding: 0.45rem 0.4rem calc(0.45rem + env(safe-area-inset-bottom));
+  background: #fff;
+  color: #111;
+  border-top: 1px solid #ececec;
+  border-radius: 1.15rem 1.15rem 0 0;
+}
+
+.dock__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.18rem;
+  min-height: 3.15rem;
+  border: 0;
+  background: none;
+  color: #222;
+  font-size: 0.68rem;
+  font-weight: 500;
+}
+
+.dock__item svg {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+.dock__item.is-active {
+  color: #000;
+}
+
+.dock__item--cta {
+  color: var(--ink);
+}
+
+.dock__item--cta svg {
+  width: clamp(2.5rem, 7.2vw, 2.9rem);
+  height: clamp(2.5rem, 7.2vw, 2.9rem);
+  transition: transform 0.22s var(--ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .dock__item--cta:hover svg {
+    transform: scale(1.05);
+  }
+}
+
+.dock__item--cta:active svg {
+  transform: scale(0.94);
+}
+
+.dock__item--cta:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 50%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dock__item--cta svg {
+    transition: none;
+  }
+
+  .dock__item--cta:hover svg,
+  .dock__item--cta:active svg {
+    transform: none;
+  }
+}
+
+@media (min-width: 900px) {
+  .dock {
+    left: 50%;
+    right: auto;
+    width: min(100%, var(--max));
+    transform: translateX(-50%);
+  }
+}

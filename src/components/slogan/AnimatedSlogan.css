@@ -1,0 +1,100 @@
+/* Движение рукописного акцента на GPU (opacity / transform). */
+
+.slogan {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  margin: 0;
+  color: var(--green);
+}
+
+.slogan--compact {
+  max-width: none;
+}
+
+.slogan__line {
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  font-family: var(--font-slogan);
+  font-size: clamp(1.42rem, 6.4vw, 2.05rem);
+  font-weight: 700;
+  line-height: 0.76;
+  margin-top: -0.14em;
+  letter-spacing: 0.01em;
+  color: var(--green);
+  text-shadow:
+    0 0 8px rgba(124, 251, 10, 0.42),
+    0 0 18px rgba(124, 251, 10, 0.2);
+}
+
+.slogan__line:first-child {
+  margin-top: 0;
+}
+
+.slogan__line:nth-child(2) {
+  margin-left: 0.08em;
+}
+
+.slogan__line:nth-child(4) {
+  margin-left: 0.06em;
+}
+
+.slogan__char {
+  display: block;
+  flex: 0 0 auto;
+  opacity: 0;
+  transform: translate3d(0, 0.35em, 0);
+}
+
+.slogan.is-play .slogan__char {
+  animation: slogan-ink 0.55s var(--ease) forwards;
+}
+
+.slogan__stroke {
+  position: absolute;
+  left: 0;
+  width: 108%;
+  bottom: -0.22em;
+  height: 0.58em;
+  color: var(--green);
+  transform: scaleX(0);
+  transform-origin: left center;
+  filter: drop-shadow(0 0 8px rgba(124, 251, 10, 0.55));
+  pointer-events: none;
+}
+
+.slogan__stroke svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+.slogan.is-play .slogan__stroke {
+  animation: slogan-line 0.7s var(--ease) forwards;
+}
+
+@keyframes slogan-ink {
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slogan-line {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slogan__char,
+  .slogan__stroke {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}

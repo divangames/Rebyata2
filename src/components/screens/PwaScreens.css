@@ -1,0 +1,20 @@
+/* Простые экраны нижней навигации. */
+
+.pwa-screen {
+  --band-pad-top: 0.4rem;
+  --band-pad-bottom: 2rem;
+  display: grid;
+  gap: 0.8rem;
+  min-height: 60vh;
+  align-content: start;
+  background: var(--page-white);
+}
+
+.pwa-screen h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 7vw, 2rem);
+}
+
+.pwa-screen p {
+  color: var(--muted);
+}

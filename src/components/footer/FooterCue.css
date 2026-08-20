@@ -1,0 +1,128 @@
+/* Баннер подвала: рукописная фраза, стрелка под ней и мессенджеры. */
+
+.footer-cue {
+  --footer-arrow-delay: 1.2s;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.45rem 0.9rem;
+  margin: 0 0 1rem;
+  padding: 0.15rem 0 1.1rem;
+  border-bottom: 1px solid var(--line-dark);
+}
+
+.footer-cue__mark {
+  display: grid;
+  justify-items: start;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.footer-cue .slogan {
+  max-width: 12rem;
+  transform: rotate(-8deg);
+  transform-origin: left center;
+}
+
+.footer-cue .slogan__line {
+  font-size: clamp(1.28rem, 5.8vw, 1.82rem);
+  line-height: 0.92;
+  margin-top: 0.02em;
+}
+
+.footer-cue .slogan__line:first-child {
+  margin-top: 0;
+}
+
+.footer-cue .slogan__line:nth-child(2) {
+  margin-left: 0.06em;
+}
+
+.footer-cue__arrow {
+  display: block;
+  width: clamp(4.2rem, 22vw, 6.2rem);
+  margin: 0 0 0 1.05rem;
+  color: var(--green);
+  filter: drop-shadow(0 0 8px rgba(124, 251, 10, 0.45));
+  transform: rotate(-8deg);
+  transform-origin: 12% 50%;
+}
+
+.footer-cue__arrow svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.footer-cue__shaft,
+.footer-cue__head {
+  fill: none;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.footer-cue.is-drawn .footer-cue__shaft {
+  animation: footer-cue-draw 0.7s var(--ease) var(--footer-arrow-delay) forwards;
+}
+
+.footer-cue.is-drawn .footer-cue__head {
+  animation: footer-cue-draw 0.4s var(--ease) calc(var(--footer-arrow-delay) + 0.38s) forwards;
+}
+
+.footer-cue.is-drawn .footer-cue__arrow.is-alive {
+  animation: footer-cue-nudge 1.7s ease-in-out calc(var(--footer-arrow-delay) + 0.85s) infinite;
+  animation-play-state: paused;
+}
+
+.footer-cue.is-drawn.is-visible .footer-cue__arrow.is-alive {
+  animation-play-state: running;
+}
+
+.footer-cue .contacts__social {
+  justify-self: end;
+  gap: 0.65rem;
+  margin: 0;
+}
+
+.footer-cue .contacts__social-link {
+  width: 4.25rem;
+  height: 4.25rem;
+  min-width: 4.25rem;
+  min-height: 4.25rem;
+}
+
+.footer-cue .contacts__social-link svg,
+.footer-cue .contacts__social-link img {
+  width: 1.7rem;
+  height: 1.7rem;
+}
+
+@keyframes footer-cue-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes footer-cue-nudge {
+  0%,
+  100% {
+    transform: rotate(-8deg) translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: rotate(-4deg) translate3d(0.2rem, 0.06rem, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-cue__shaft,
+  .footer-cue__head,
+  .footer-cue__arrow.is-alive {
+    animation: none;
+  }
+
+  .footer-cue__shaft,
+  .footer-cue__head {
+    stroke-dashoffset: 0;
+  }
+}

@@ -1,0 +1,69 @@
+/* Токены брендбука «Свои ребята». */
+/* Шрифты: положите woff2 в public/fonts и добавьте url() в @font-face. */
+
+:root {
+  --black: #070707;
+  --white: #f7f7f5;
+  --page: #f1e8e9;
+  --page-white: #ffffff;
+  --ink: #141414;
+  --green: #7cfb0a;
+  --graphite: #1d1f22;
+  --warm: #eae6e2;
+  --muted: #6a6a6a;
+  --muted-dark: rgba(247, 247, 245, 0.62);
+  --line: rgba(20, 20, 20, 0.12);
+  --line-dark: rgba(247, 247, 245, 0.12);
+
+  --service-section: #f4f2f3;
+  --service-card: #ffffff;
+  --service-card-border: transparent;
+  --service-desc: #3a3a3a;
+  --service-price: #0a6b2e;
+
+  --font-display: "Druk Wide", Unbounded, "Saira Extra Expanded", sans-serif;
+  --font-ui: Intro, Onest, Inter, system-ui, sans-serif;
+  --font-hand: Caveat, cursive;
+  --font-slogan: Caveat, cursive;
+
+  --space-xs: clamp(0.4rem, 1.4vw, 0.6rem);
+  --space-sm: clamp(0.7rem, 2vw, 1rem);
+  --space-md: clamp(1rem, 3vw, 1.5rem);
+  --space-lg: clamp(1.4rem, 4vw, 2.2rem);
+  --space-xl: clamp(2rem, 6vw, 3.4rem);
+
+  --radius-sm: 0.75rem;
+  --radius-md: 1.15rem;
+  --radius-lg: 1.6rem;
+  --radius-pill: 999px;
+  --scoop: clamp(1.7rem, 8vw, 2.75rem);
+
+  --header-h: 3.6rem;
+  --nav-h: 4.6rem;
+  --max: 34rem;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@font-face {
+  font-family: Intro;
+  src: local("Intro"), local("Intro Regular");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Intro;
+  src: local("Intro Bold"), local("Intro");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Druk Wide";
+  src: local("Druk Wide Bold");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

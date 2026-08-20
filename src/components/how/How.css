@@ -1,0 +1,75 @@
+/* Шаги оценки: заголовок секции и стопка отдельных карточек. */
+
+.how {
+  --band-pad-top: 1.35rem;
+  --band-pad-bottom: 1.15rem;
+  --how-num: 1.7rem;
+  --how-gap: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  background: var(--page);
+}
+
+.how h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 5.4vw, 1.65rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.how__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.how__card {
+  display: grid;
+  grid-template-columns: var(--how-num) minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: var(--how-gap);
+  row-gap: 0.22rem;
+  padding: 0.95rem 1rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 0.85rem;
+  background: var(--white);
+}
+
+.how__num {
+  grid-column: 1;
+  grid-row: 1;
+  display: grid;
+  place-items: center;
+  width: var(--how-num);
+  height: var(--how-num);
+  align-self: center;
+  border-radius: 50%;
+  background: var(--black);
+  color: var(--white);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.how__name {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  font-family: var(--font-ui);
+  font-size: clamp(0.92rem, 3.4vw, 1.02rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.how__text {
+  grid-column: 2;
+  grid-row: 2;
+  color: var(--muted);
+  font-size: clamp(0.82rem, 3vw, 0.9rem);
+  line-height: 1.4;
+}

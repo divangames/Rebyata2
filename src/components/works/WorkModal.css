@@ -1,0 +1,88 @@
+/* Центрированная карточка сравнения поверх затемнения. */
+
+.work-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+}
+
+.work-modal[hidden] {
+  display: none;
+}
+
+.work-modal__scrim {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(7, 7, 7, 0.62);
+}
+
+.work-modal__panel {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: grid;
+  gap: 0.7rem;
+  width: min(26rem, calc(100% - 1.4rem));
+  max-height: min(92dvh, 44rem);
+  overflow: auto;
+  padding: 1.2rem 1.1rem calc(1.15rem + env(safe-area-inset-bottom));
+  background: #eceae6;
+  color: #141414;
+  border-radius: 1.25rem;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+  transform: translate(-50%, -50%);
+}
+
+.work-modal.is-open .work-modal__panel {
+  animation: work-modal-in 0.32s var(--ease);
+}
+
+.work-modal__close {
+  position: absolute;
+  top: 0.45rem;
+  right: 0.35rem;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  background: none;
+  color: #222;
+}
+
+.work-modal__close svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.work-modal__eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6b6b6b;
+}
+
+.work-modal__panel h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 5vw, 1.5rem);
+  line-height: 1.05;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-modal.is-open .work-modal__panel {
+    animation: none;
+  }
+}
+
+@keyframes work-modal-in {
+  from {
+    opacity: 0.4;
+    transform: translate(-50%, -46%) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}

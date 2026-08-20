@@ -1,0 +1,239 @@
+/* Контакты: CTA, список с иконками, карта, соцсети; подвал чёрный. */
+
+.contacts {
+  display: grid;
+  isolation: isolate;
+  background: transparent;
+}
+
+.contacts__body {
+  --band-pad-bottom: 1.35rem;
+  z-index: 2;
+  display: grid;
+  gap: 1.15rem;
+  background: var(--page);
+  container-type: inline-size;
+}
+
+.contacts__cta {
+  display: grid;
+  gap: 0.7rem;
+  padding: 1.15rem 1.1rem 1.2rem;
+  background: color-mix(in srgb, var(--page-white) 82%, var(--page));
+  color: var(--ink);
+  border-radius: var(--radius-lg);
+}
+
+.contacts__cta h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 5.4vw, 1.6rem);
+  line-height: 1.08;
+}
+
+.contacts__cta p {
+  max-width: 36ch;
+  color: var(--ink);
+  font-size: clamp(0.88rem, 3.1vw, 0.98rem);
+  line-height: 1.45;
+}
+
+.contacts__title {
+  margin: 0.15rem 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 5.6vw, 1.7rem);
+  line-height: 1.05;
+}
+
+.contacts__list {
+  display: grid;
+  gap: 0.85rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contacts__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+}
+
+.contacts__list svg {
+  width: 1.35rem;
+  height: 1.35rem;
+  flex: 0 0 auto;
+  margin-top: 0.12rem;
+  color: #9a9a9a;
+}
+
+.contacts__list a,
+.contacts__list span,
+.contacts__list strong {
+  min-width: 0;
+  color: var(--ink);
+  font-size: clamp(0.95rem, 3.3vw, 1.05rem);
+  font-weight: 500;
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+.contacts__list a:hover {
+  color: var(--service-price);
+}
+
+.contacts__list strong {
+  font-weight: 700;
+}
+
+.contacts__map {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  aspect-ratio: 16 / 10;
+  min-height: 11.5rem;
+  border-radius: var(--radius-md);
+  background:
+    radial-gradient(circle at 48% 42%, rgba(124, 251, 10, 0.18), transparent 28%),
+    linear-gradient(180deg, #eceae8, #e3e0dc);
+}
+
+.contacts__map-frame {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  width: 190%;
+  height: 190%;
+  border: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+.contacts__map-cover {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, rgba(247, 247, 245, 0.04), rgba(20, 20, 20, 0.1));
+  text-decoration: none;
+}
+
+.contacts__map-open {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1rem;
+  border-radius: var(--radius-pill);
+  background: var(--page-white);
+  color: var(--ink);
+  font-size: 0.92rem;
+  font-weight: 600;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.14);
+  transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease);
+}
+
+.contacts__map-open svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.contacts__map-open:hover {
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.18);
+  transform: scale(1.03);
+}
+
+.contacts__social {
+  display: flex;
+  justify-content: center;
+  gap: 0.85rem;
+  margin: 0.15rem 0 0.2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.contacts__social-link {
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--black);
+  color: var(--white);
+  transition: transform 0.28s var(--ease), background 0.28s var(--ease);
+}
+
+.contacts__social-link svg,
+.contacts__social-link img {
+  width: 1.25rem;
+  height: 1.25rem;
+  object-fit: contain;
+}
+
+.contacts__social-link:hover {
+  background: #1a1a1a;
+  transform: scale(1.06);
+}
+
+.contacts__social--on-dark {
+  justify-content: flex-start;
+  margin: 0;
+}
+
+.contacts__social--on-dark .contacts__social-link {
+  border-color: var(--line-dark);
+  background: #121212;
+}
+
+.contacts__social--on-dark .contacts__social-link:hover {
+  background: #1d1d1d;
+  border-color: color-mix(in srgb, var(--green) 50%, var(--line-dark));
+}
+
+.contacts footer {
+  --band-pad-top: 1.45rem;
+  --band-pad-bottom: 1.3rem;
+  z-index: 1;
+  display: grid;
+  gap: 0.35rem;
+  background: var(--black);
+  color: var(--muted-dark);
+  font-size: 0.8rem;
+}
+
+.contacts footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.8rem;
+}
+
+.contacts footer button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--white);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contacts__map-open,
+  .contacts__social-link {
+    transition: none;
+  }
+
+  .contacts__map-open:hover,
+  .contacts__social-link:hover {
+    transform: none;
+  }
+}
+
+@container (min-width: 28rem) {
+  .contacts__cta {
+    padding: 1.35rem 1.3rem;
+  }
+
+  .contacts__map {
+    min-height: 13.5rem;
+  }
+}

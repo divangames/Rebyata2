@@ -1,0 +1,53 @@
+/* Чёрная фиксированная шапка с SVG-логотипом. */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(100%, 52rem);
+  min-height: calc(var(--header-h) + env(safe-area-inset-top));
+  padding: calc(0.28rem + env(safe-area-inset-top)) 0.55rem 0.28rem 1rem;
+  background: var(--black);
+  transform: translateX(-50%);
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  max-width: calc(100% - 3.1rem);
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.header__logo img {
+  display: block;
+  height: clamp(1.05rem, 4.6vw, 1.35rem);
+  width: auto;
+  max-width: 100%;
+}
+
+.header__menu {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  background: none;
+  color: var(--white);
+}
+
+.header__menu svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+@media (min-width: 1100px) {
+  .header {
+    width: min(100%, 42rem);
+  }
+}

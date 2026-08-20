@@ -1,0 +1,119 @@
+/* Глобальные стили: сброс, ритм, доступность. */
+
+@import "./tokens.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: clamp(0.92rem, 2.6vw, 1.05rem);
+  line-height: 1.45;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+}
+
+/* Нижний край блока: мягкое скругление поверх следующего фона. */
+.band {
+  position: relative;
+  padding-top: var(--band-pad-top, var(--space-xl));
+  padding-right: 1.05rem;
+  padding-left: 1.05rem;
+  padding-bottom: calc(var(--band-pad-bottom, 1.2rem) + var(--scoop) * 0.45);
+  border-bottom-left-radius: var(--scoop);
+  border-bottom-right-radius: var(--scoop);
+}
+
+.app main > .band + .band,
+.contacts > .band + .band {
+  margin-top: calc(-1 * var(--scoop));
+  padding-top: calc(var(--band-pad-top, var(--space-xl)) + var(--scoop));
+}
+
+.faq + .contacts {
+  margin-top: calc(-1 * var(--scoop));
+}
+
+.faq + .contacts .contacts__body {
+  padding-top: calc(var(--band-pad-top, var(--space-xl)) + var(--scoop));
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

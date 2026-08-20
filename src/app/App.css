@@ -1,0 +1,53 @@
+/* Оболочка PWA: розовый фон страницы и отступ под шапку и док. */
+
+.app {
+  position: relative;
+  width: min(100%, 52rem);
+  margin: 0 auto;
+  min-height: 100dvh;
+  padding-top: calc(var(--header-h) + env(safe-area-inset-top));
+  padding-bottom: calc(var(--nav-h) + env(safe-area-inset-bottom) + 0.6rem);
+  overflow-x: clip;
+  background: var(--page);
+}
+
+.app main {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+}
+
+/* Верхний блок всегда перекрывает нижний, чтобы был виден «ковш». */
+.app main > :nth-child(1) {
+  z-index: 8;
+}
+
+.app main > :nth-child(2) {
+  z-index: 7;
+}
+
+.app main > :nth-child(3) {
+  z-index: 6;
+}
+
+.app main > :nth-child(4) {
+  z-index: 5;
+}
+
+.app main > :nth-child(5) {
+  z-index: 4;
+}
+
+.app main > :nth-child(6) {
+  z-index: 3;
+}
+
+.app main > :nth-child(7) {
+  z-index: 2;
+}
+
+@media (min-width: 1100px) {
+  .app {
+    width: min(100%, 42rem);
+  }
+}

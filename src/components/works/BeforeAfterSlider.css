@@ -1,0 +1,119 @@
+/* Кадр сравнения: GPU-клип, без анимации ширины. */
+
+.compare {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.compare__stage {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 0.95rem;
+  background: var(--graphite);
+  touch-action: none;
+  user-select: none;
+  cursor: ew-resize;
+}
+
+.compare__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.compare__img--before {
+  clip-path: inset(0 calc(100% - var(--compare)) 0 0);
+}
+
+.compare__rule {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--compare);
+  z-index: 2;
+  width: 2px;
+  background: #fff;
+  transform: translateX(-50%);
+  pointer-events: none;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.18);
+}
+
+.compare__knob {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: rgba(7, 7, 7, 0.42);
+  backdrop-filter: blur(8px);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+}
+
+.compare__knob::before,
+.compare__knob::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+}
+
+.compare__knob::before {
+  left: 0.72rem;
+  transform: translateY(-50%) rotate(135deg);
+}
+
+.compare__knob::after {
+  right: 0.72rem;
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.compare__tag {
+  position: absolute;
+  bottom: 0.7rem;
+  z-index: 2;
+  padding: 0.22rem 0.55rem;
+  border-radius: var(--radius-pill);
+  background: rgba(7, 7, 7, 0.55);
+  color: #fff;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  pointer-events: none;
+}
+
+.compare__tag--before {
+  left: 0.7rem;
+}
+
+.compare__tag--after {
+  right: 0.7rem;
+}
+
+.compare__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.compare__range {
+  width: 100%;
+  min-height: 2.75rem;
+  accent-color: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .compare__knob {
+    backdrop-filter: none;
+  }
+}

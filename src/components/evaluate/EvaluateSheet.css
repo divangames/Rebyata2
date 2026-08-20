@@ -1,0 +1,122 @@
+/* Нижний лист оценки: выезд снизу, без блокировки скролла страницы через overlay. */
+
+.sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+}
+
+.sheet[hidden] {
+  display: none;
+}
+
+.sheet__scrim {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.sheet__panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  gap: 0.75rem;
+  max-height: min(88vh, 40rem);
+  overflow: auto;
+  padding: 1.1rem 1.1rem calc(1.2rem + env(safe-area-inset-bottom));
+  background: var(--graphite);
+  color: var(--white);
+  color-scheme: dark;
+  border-radius: 1.4rem 1.4rem 0 0;
+}
+
+.sheet__panel h2 {
+  padding-right: 2.8rem;
+  font-size: clamp(1.2rem, 5vw, 1.55rem);
+  line-height: 1.1;
+  color: var(--white);
+}
+
+.sheet__lead {
+  margin: 0;
+  padding-right: 2.8rem;
+  color: var(--muted-dark);
+  font-size: 0.95rem;
+}
+
+.sheet.is-open .sheet__panel {
+  animation: sheet-up 0.32s var(--ease);
+}
+
+.sheet__close {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  background: none;
+  color: var(--white);
+}
+
+.sheet__close svg {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.sheet__drop {
+  display: grid;
+  place-items: center;
+  gap: 0.4rem;
+  min-height: 9rem;
+  border: 1px dashed rgba(247, 247, 245, 0.28);
+  border-radius: var(--radius-md);
+  color: var(--white);
+}
+
+.sheet__drop svg {
+  width: 2rem;
+  height: 2rem;
+  color: var(--green);
+}
+
+.sheet__drop input {
+  display: none;
+}
+
+.sheet__steps {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--muted-dark);
+}
+
+.sheet__steps li::marker {
+  color: var(--green);
+}
+
+.sheet__ok,
+.sheet__count {
+  color: var(--green);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet.is-open .sheet__panel {
+    animation: none;
+  }
+}
+
+@keyframes sheet-up {
+  from {
+    transform: translate3d(0, 12%, 0);
+    opacity: 0.4;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
