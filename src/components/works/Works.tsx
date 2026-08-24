@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import { workFilters, works } from "../../config/content";
 import type { WorkExample, WorkFilter } from "../../types";
 import { WorkModal } from "./WorkModal";
@@ -17,10 +17,8 @@ type Props = {
 
 /** Галерея работ: живое превью сравнения, полный слайдер — в модалке. */
 export function Works({ onEvaluate }: Props) {
-  const listRef = useRef<HTMLUListElement>(null);
   const [filter, setFilter] = useState<WorkFilter>("all");
   const [active, setActive] = useState<WorkExample | null>(null);
-  const [live, setLive] = useState(false);
 
   const items = useMemo(() => {
     if (filter === "all") {
@@ -28,24 +26,6 @@ export function Works({ onEvaluate }: Props) {
     }
     return works.filter((item) => item.filter === filter);
   }, [filter]);
-
-  useEffect(() => {
-    const node = listRef.current;
-    if (!node) {
-      return;
-    }
-
-    /** Линия движется, только пока сетка работ в кадре. */
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setLive(Boolean(entry?.isIntersecting));
-      },
-      { threshold: 0.2 },
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [items.length]);
 
   return (
     <section className="works band" id="works">
@@ -65,22 +45,21 @@ export function Works({ onEvaluate }: Props) {
           </button>
         ))}
       </div>
-      <ul
-        ref={listRef}
-        className={`works__list${live && active === null ? " is-live" : ""}`}
-      >
+      <ul className={`works__list${active ? " is-paused" : ""}`}>
         {items.map((item) => (
           <li key={item.id}>
             <h3>{item.title}</h3>
-            <button
-              type="button"
-              className="works__card"
-              onClick={() => setActive(item)}
-              aria-haspopup="dialog"
-            >
+            <div className="works__card">
               <WorkPreview before={item.before} after={item.after} />
-              <span className="works__sr">Открыть сравнение: {item.title}</span>
-            </button>
+              <button
+                type="button"
+                className="works__open"
+                onClick={() => setActive(item)}
+                aria-haspopup="dialog"
+              >
+                <span className="works__sr">Открыть сравнение: {item.title}</span>
+              </button>
+            </div>
           </li>
         ))}
       </ul>
