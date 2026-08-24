@@ -122,6 +122,41 @@
   animation: works-wipe-line 4.4s ease-in-out infinite;
 }
 
+/* Круг со стрелками как у слайдера в модалке, только декоративный. */
+.works__knob {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(1.55rem, 8vw, 2.2rem);
+  height: clamp(1.55rem, 8vw, 2.2rem);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: rgba(7, 7, 7, 0.45);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28);
+  transform: translate(-50%, -50%);
+}
+
+.works__knob::before,
+.works__knob::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 0.34rem;
+  height: 0.34rem;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+}
+
+.works__knob::before {
+  left: 0.38rem;
+  transform: translateY(-50%) rotate(135deg);
+}
+
+.works__knob::after {
+  right: 0.38rem;
+  transform: translateY(-50%) rotate(-45deg);
+}
+
 .works__hint {
   position: absolute;
   left: 0.4rem;
@@ -222,6 +257,10 @@
   .works__shot {
     transition: none;
   }
+
+  .works__knob {
+    backdrop-filter: none;
+  }
 }
 
 @media (min-width: 64rem) {
@@ -246,5 +285,24 @@
 
   .works__list h3 {
     font-size: 0.78rem;
+  }
+
+  .works__knob {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+
+  .works__knob::before,
+  .works__knob::after {
+    width: 0.38rem;
+    height: 0.38rem;
+  }
+
+  .works__knob::before {
+    left: 0.52rem;
+  }
+
+  .works__knob::after {
+    right: 0.52rem;
   }
 }
