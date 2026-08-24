@@ -76,11 +76,9 @@
   }
 }
 
-@media (min-width: 900px) {
+/* На широком экране навигация живёт в шапке. */
+@media (min-width: 64rem) {
   .dock {
-    left: 50%;
-    right: auto;
-    width: min(100%, var(--max));
-    transform: translateX(-50%);
+    display: none;
   }
 }

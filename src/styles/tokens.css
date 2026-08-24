@@ -41,7 +41,15 @@
   --header-h: 3.6rem;
   --nav-h: 4.6rem;
   --max: 34rem;
+  --content: 72rem;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --header-h: 4.25rem;
+    --scoop: clamp(2.2rem, 4vw, 3.4rem);
+  }
 }
 
 @font-face {

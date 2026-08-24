@@ -107,6 +107,26 @@
   }
 }
 
+@media (min-width: 64rem) {
+  .footer-cue {
+    gap: 0.35rem 0.85rem;
+    margin-bottom: 1.2rem;
+    padding-bottom: 1.3rem;
+  }
+
+  .footer-cue .slogan {
+    max-width: 16rem;
+  }
+
+  .footer-cue .slogan__line {
+    font-size: clamp(1.6rem, 2vw, 2.05rem);
+  }
+
+  .footer-cue__arrow {
+    width: 5.4rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .footer-cue__shaft,
   .footer-cue__head,

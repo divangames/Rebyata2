@@ -104,12 +104,6 @@
   color: var(--green);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .sheet.is-open .sheet__panel {
-    animation: none;
-  }
-}
-
 @keyframes sheet-up {
   from {
     transform: translate3d(0, 12%, 0);
@@ -118,5 +112,41 @@
   to {
     transform: none;
     opacity: 1;
+  }
+}
+
+@keyframes sheet-center {
+  from {
+    opacity: 0.4;
+    transform: translate(-50%, -46%) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@media (min-width: 64rem) {
+  .sheet__panel {
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    top: 50%;
+    width: min(32rem, calc(100% - 3rem));
+    max-height: min(82vh, 42rem);
+    padding: 1.4rem 1.4rem 1.35rem;
+    border-radius: 1.4rem;
+    transform: translate(-50%, -50%);
+  }
+
+  .sheet.is-open .sheet__panel {
+    animation: sheet-center 0.32s var(--ease);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet.is-open .sheet__panel {
+    animation: none;
   }
 }

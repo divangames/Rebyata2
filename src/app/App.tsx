@@ -50,7 +50,17 @@ export function App() {
 
   return (
     <div className={`app app--${tier}`}>
-      <Header onMenu={() => setMenu(true)} onHome={goHome} />
+      <Header
+        active={screen}
+        onMenu={() => setMenu(true)}
+        onHome={goHome}
+        onJump={jump}
+        onEvaluate={openEvaluate}
+        onNavigate={(next) => {
+          setScreen(next);
+          window.scrollTo({ top: 0 });
+        }}
+      />
       <main>
         {screen === "home" ? (
           <>

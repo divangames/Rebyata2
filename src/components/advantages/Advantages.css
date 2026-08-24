@@ -89,3 +89,53 @@
     gap: 1.15rem;
   }
 }
+
+@media (min-width: 64rem) {
+  .adv {
+    --band-pad-top: 2.5rem;
+    --adv-icon: 3.15rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1.2rem 2rem;
+    align-items: start;
+  }
+
+  .adv h2 {
+    grid-column: 1 / -1;
+    font-size: clamp(1.7rem, 2.4vw, 2.15rem);
+    max-width: 16ch;
+  }
+
+  .adv__list {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.35rem 1.5rem;
+  }
+
+  .adv__item {
+    align-items: start;
+    padding: 1.1rem 1rem 1.15rem;
+    border-radius: 1rem;
+    background: color-mix(in srgb, var(--page-white) 72%, transparent);
+  }
+
+  .adv h3 {
+    font-size: 1.08rem;
+  }
+
+  .adv p {
+    font-size: 0.95rem;
+  }
+
+  .adv__note {
+    margin: 0.4rem 0 0;
+    font-size: 0.92rem;
+  }
+
+  .adv .btn {
+    width: auto;
+    min-width: 17rem;
+    margin-top: 0.4rem;
+  }
+}
