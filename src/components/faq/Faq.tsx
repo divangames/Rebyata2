@@ -25,7 +25,10 @@ export function Faq({ onAsk }: Props) {
 
   return (
     <section className="faq band" id="faq" aria-labelledby="faq-title">
-      <h2 id="faq-title">Отвечаем на вопросы</h2>
+      <h2 id="faq-title">
+        Отвечаем
+        <span className="faq__title-rest"> на вопросы</span>
+      </h2>
       <ul className="faq__list">
         {faqItems.map((item) => (
           <FaqItem key={item.id} item={item} open={openId === item.id} onToggle={toggle} />

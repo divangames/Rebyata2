@@ -75,25 +75,52 @@
 }
 
 .works__shot {
+  --wipe: 38%;
   position: relative;
   display: block;
   overflow: hidden;
   border-radius: 0.75rem;
   background: var(--graphite);
+  transform: scale(1);
+  transition: transform 0.45s var(--ease);
 }
 
-.works__shot img {
+.works__img {
+  display: block;
   width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
-  transform: scale(1);
-  transition: transform 0.45s var(--ease);
+  pointer-events: none;
+}
+
+.works__img--after {
+  position: relative;
+}
+
+.works__img--before {
+  position: absolute;
+  inset: 0;
+  clip-path: inset(0 calc(100% - var(--wipe)) 0 0);
+}
+
+.works__rule {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--wipe);
+  z-index: 2;
+  width: 2px;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(124, 251, 10, 0.35);
+  transform: translateX(-50%);
+  pointer-events: none;
 }
 
 .works__hint {
   position: absolute;
   left: 0.4rem;
   bottom: 0.4rem;
+  z-index: 3;
   padding: 0.12rem 0.4rem;
   border-radius: var(--radius-pill);
   background: rgba(7, 7, 7, 0.55);
@@ -115,15 +142,60 @@
     background: #f3f3f1;
   }
 
-  .works__card:hover .works__shot img {
+  .works__card:hover .works__shot {
     transform: scale(1.035);
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .works__shot img {
-    transition: none;
+@property --wipe {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 38%;
+}
+
+@keyframes works-wipe {
+  0%,
+  10% {
+    --wipe: 22%;
   }
+
+  50% {
+    --wipe: 78%;
+  }
+
+  90%,
+  100% {
+    --wipe: 22%;
+  }
+}
+
+.works__list.is-live .works__shot {
+  animation: works-wipe 4.4s ease-in-out infinite;
+}
+
+.works__list.is-live li:nth-child(2) .works__shot {
+  animation-delay: 0.35s;
+}
+
+.works__list.is-live li:nth-child(3) .works__shot {
+  animation-delay: 0.7s;
+}
+
+.works__list.is-live li:nth-child(4) .works__shot {
+  animation-delay: 1.05s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .works__shot {
+    --wipe: 48%;
+    transition: none;
+    animation: none;
+  }
+}
+
+.app--low .works__list.is-live .works__shot {
+  animation: none;
+  --wipe: 48%;
 }
 
 @media (min-width: 64rem) {

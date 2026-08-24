@@ -167,7 +167,15 @@
     grid-column: 1;
     grid-row: 1;
     font-size: clamp(1.8rem, 2.6vw, 2.3rem);
-    max-width: 10ch;
+    max-width: none;
+    line-height: 1.22;
+    padding-bottom: 0.22em;
+    overflow: visible;
+  }
+
+  /* Вторая строка: «на вопросы» не отрывается. */
+  .faq__title-rest {
+    display: block;
   }
 
   .faq__list {
@@ -178,7 +186,7 @@
   .faq__help {
     grid-column: 1;
     grid-row: 2;
-    margin-top: 0.6rem;
+    margin-top: 1rem;
   }
 
   .faq__cta {
