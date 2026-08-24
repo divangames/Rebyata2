@@ -16,7 +16,13 @@ export function WorkPreview({ before, after }: Props) {
       <img className="works__img works__img--after" src={after} alt="" loading="lazy" decoding="async" />
       <img className="works__img works__img--before" src={before} alt="" loading="lazy" decoding="async" />
       <span className="works__rule" aria-hidden="true">
-        <span className="works__knob" />
+        <span className="works__line" />
+        <span className="works__knob">
+          <svg viewBox="0 0 32 32" width="32" height="32" focusable="false">
+            <path d="M13 7 6 16l7 9" />
+            <path d="M19 7l7 9-7 9" />
+          </svg>
+        </span>
       </span>
       <span className="works__hint">до / после</span>
     </span>
