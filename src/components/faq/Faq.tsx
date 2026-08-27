@@ -1,21 +1,17 @@
 ////////////////////////////////////////////////////////
 //
-// Экран 05: аккордеон вопросов карточками и CTA внизу.
+// Экран 05: аккордеон вопросов карточками и иконки мессенджеров.
 //
 ////////////////////////////////////////////////////////
 
 import { useState } from "react";
 import { faqItems } from "../../config/content";
-import { Button } from "../button/Button";
+import { ContactsSocial } from "../contacts/ContactsSocial";
 import { FaqItem } from "./FaqItem";
 import "./Faq.css";
 
-type Props = {
-  onAsk: () => void;
-};
-
 /** Блок «Отвечаем на вопросы»: список карточек и приглашение написать. */
-export function Faq({ onAsk }: Props) {
+export function Faq() {
   const [openId, setOpenId] = useState<string | null>(null);
 
   /** Открывает один вопрос, повторный клик закрывает. */
@@ -38,9 +34,9 @@ export function Faq({ onAsk }: Props) {
         <strong>Не нашли ответ?</strong>
         <p>Напишите нам — ответим в мессенджерах</p>
       </div>
-      <Button className="faq__cta" variant="secondary" onClick={onAsk}>
-        Задать вопрос
-      </Button>
+      <div className="faq__social">
+        <ContactsSocial pending />
+      </div>
     </section>
   );
 }

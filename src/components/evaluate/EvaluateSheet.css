@@ -78,6 +78,7 @@
 }
 
 .sheet__drop {
+  position: relative;
   display: grid;
   place-items: center;
   gap: 0.4rem;
@@ -92,6 +93,25 @@
   width: 2rem;
   height: 2rem;
   color: var(--green);
+}
+
+.sheet__drop-hint {
+  color: var(--muted-dark);
+  font-size: 0.82rem;
+}
+
+.sheet__file {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .sheet__panel--evaluate:has(.sheet__thumbs) .sheet__drop {

@@ -116,8 +116,13 @@
   line-height: 1.4;
 }
 
-.faq__cta {
+.faq__social {
   margin-top: 0.15rem;
+}
+
+.faq__social .contacts__social {
+  justify-content: flex-start;
+  margin: 0;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -189,11 +194,9 @@
     margin-top: 1rem;
   }
 
-  .faq__cta {
+  .faq__social {
     grid-column: 1;
     grid-row: 3;
-    width: auto;
-    min-width: 14rem;
     justify-self: start;
     align-self: start;
   }

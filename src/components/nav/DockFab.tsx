@@ -76,10 +76,8 @@ export function DockFab({ open, onClose, onEvaluate, onCourier }: Props) {
         aria-label="Быстрые действия"
         onTransitionEnd={handleCardTransitionEnd}
       >
-        <Button onClick={() => pick(onEvaluate)}>
-          {cta.estimate}
-        </Button>
-        <Button variant="light" icon={null} onClick={() => pick(onCourier)}>
+        <Button onClick={() => pick(onEvaluate)}>{cta.estimate}</Button>
+        <Button variant="light" onClick={() => pick(onCourier)}>
           {cta.courier}
         </Button>
         <p className="dock-fab__write">{cta.writeVia}</p>

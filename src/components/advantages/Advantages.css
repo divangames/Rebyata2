@@ -76,8 +76,15 @@
   line-height: 1.35;
 }
 
-.adv .btn {
+.adv__actions {
+  display: grid;
+  gap: 0.65rem;
   margin-top: 0.1rem;
+}
+
+.adv__actions .btn--secondary {
+  background: var(--black);
+  color: var(--white);
 }
 
 @media (min-width: 720px) {
@@ -133,9 +140,8 @@
     font-size: 0.92rem;
   }
 
-  .adv .btn {
-    width: auto;
-    min-width: 17rem;
+  .adv__actions {
     margin-top: 0.4rem;
+    min-width: 17rem;
   }
 }

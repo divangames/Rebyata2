@@ -48,7 +48,7 @@ export function MenuDrawerMeta({ onEvaluate, onCourier }: Props) {
       <ContactsSocial onDark />
       <div className="drawer__cta">
         <Button onClick={onEvaluate}>{cta.estimate}</Button>
-        <Button variant="light" icon={null} onClick={onCourier}>
+        <Button variant="light" onClick={onCourier}>
           {cta.courier}
         </Button>
       </div>

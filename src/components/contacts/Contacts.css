@@ -37,6 +37,16 @@
   line-height: 1.45;
 }
 
+.contacts__cta-actions {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.contacts__cta-actions .btn--secondary {
+  background: var(--black);
+  color: var(--white);
+}
+
 .contacts__title {
   margin: 0.15rem 0 0;
   font-family: var(--font-display);
@@ -264,11 +274,6 @@
 
   .contacts__cta h2 {
     font-size: 1.85rem;
-  }
-
-  .contacts__cta .btn {
-    width: auto;
-    min-width: 16rem;
   }
 
   .contacts__title {

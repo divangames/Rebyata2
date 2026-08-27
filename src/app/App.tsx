@@ -71,9 +71,9 @@ export function App() {
             <How />
             <Services onEvaluate={openEvaluate} onCourier={openCourier} onRequest={openRequest} />
             <Works onEvaluate={openEvaluate} />
-            <Advantages onEvaluate={openEvaluate} />
-            <Faq onAsk={openEvaluate} />
-            <Contacts onEvaluate={openEvaluate} onJump={jump} />
+            <Advantages onEvaluate={openEvaluate} onCourier={openCourier} />
+            <Faq />
+            <Contacts onEvaluate={openEvaluate} onCourier={openCourier} onJump={jump} />
           </>
         ) : null}
         {screen === "orders" ? <OrdersScreen onEvaluate={openEvaluate} /> : null}

@@ -9,7 +9,6 @@ import { brand, categories, cta } from "../../config/content";
 import { logos } from "../../config/logos";
 import { Button } from "../button/Button";
 import { iconForCategory } from "../icons/categoryMap";
-import { ArrowIcon } from "../icons/Icons";
 import { AnimatedSlogan } from "../slogan/AnimatedSlogan";
 import "./Hero.css";
 
@@ -50,10 +49,8 @@ export function Hero({ onEvaluate, onCourier }: Props) {
         })}
       </ul>
       <div className="hero__actions">
-        <Button onClick={onEvaluate} icon={<ArrowIcon />}>
-          {cta.estimate}
-        </Button>
-        <Button variant="ghost" icon={null} onClick={onCourier}>
+        <Button onClick={onEvaluate}>{cta.estimate}</Button>
+        <Button variant="light" onClick={onCourier}>
           {cta.courier}
         </Button>
       </div>

@@ -4,17 +4,18 @@
 //
 ////////////////////////////////////////////////////////
 
-import { advantages } from "../../config/content";
+import { advantages, cta } from "../../config/content";
 import { Button } from "../button/Button";
 import { iconForAdvantage } from "../icons/categoryMap";
 import "./Advantages.css";
 
 type Props = {
   onEvaluate: () => void;
+  onCourier: () => void;
 };
 
 /** Вертикальный список: иконка в squircle, заголовок, пояснение и CTA. */
-export function Advantages({ onEvaluate }: Props) {
+export function Advantages({ onEvaluate, onCourier }: Props) {
   return (
     <section className="adv band" id="about" aria-labelledby="adv-title">
       <h2 id="adv-title">Больше, чем просто чистка</h2>
@@ -35,7 +36,12 @@ export function Advantages({ onEvaluate }: Props) {
         })}
       </ul>
       <p className="adv__note">Фото до/после + регистрация в журнале</p>
-      <Button onClick={onEvaluate}>Получить оценку мастера</Button>
+      <div className="adv__actions">
+        <Button onClick={onEvaluate}>Получить оценку мастера</Button>
+        <Button variant="secondary" onClick={onCourier}>
+          {cta.courier}
+        </Button>
+      </div>
     </section>
   );
 }

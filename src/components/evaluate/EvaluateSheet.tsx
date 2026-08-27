@@ -64,7 +64,15 @@ export function EvaluateSheet({ open, onClose }: Props) {
         <label className="sheet__drop" htmlFor={inputId}>
           <CameraIcon />
           <span>{files.length > 0 ? evaluateCopy.dropMore : evaluateCopy.dropEmpty}</span>
-          <input id={inputId} type="file" accept="image/*" multiple onChange={onPick} />
+          {files.length === 0 ? <span className="sheet__drop-hint">{evaluateCopy.dropHint}</span> : null}
+          <input
+            id={inputId}
+            className="sheet__file"
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={onPick}
+          />
         </label>
         <EvaluateThumbs files={files} onRemove={onRemove} />
         <ol className="sheet__steps">
