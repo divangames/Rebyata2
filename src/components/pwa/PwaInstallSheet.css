@@ -1,0 +1,192 @@
+/* Шторка установки PWA: телефон, выезд снизу, крупные зоны нажатия. */
+
+.pwa-install {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+}
+
+.pwa-install.is-open {
+  pointer-events: auto;
+}
+
+.pwa-install__scrim {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(4, 9, 12, 0.62);
+  opacity: 0;
+  transition: opacity 0.28s var(--ease);
+}
+
+.pwa-install.is-open .pwa-install__scrim {
+  opacity: 1;
+}
+
+.pwa-install__panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  gap: 0.7rem;
+  width: 100%;
+  max-height: min(92dvh, 44rem);
+  overflow: auto;
+  padding: 1.2rem 1.1rem calc(1.15rem + env(safe-area-inset-bottom, 0px));
+  background: var(--graphite);
+  color: var(--white);
+  color-scheme: dark;
+  border-radius: 1.45rem 1.45rem 0 0;
+  transform: translateY(110%);
+  transition: transform 0.38s var(--ease);
+}
+
+.pwa-install.is-open .pwa-install__panel {
+  transform: translateY(0);
+}
+
+.pwa-install__close {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  display: grid;
+  place-items: center;
+  width: 2.85rem;
+  height: 2.85rem;
+  border: 0;
+  background: none;
+  color: var(--white);
+}
+
+.pwa-install__close svg {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.pwa-install__badge {
+  width: fit-content;
+  margin: 0;
+  padding: 0.28rem 0.7rem;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--green) 18%, transparent);
+  color: var(--green);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.pwa-install__panel h2 {
+  padding-right: 2.8rem;
+  font-size: clamp(1.25rem, 6vw, 1.65rem);
+  line-height: 1.08;
+}
+
+.pwa-install__lead,
+.pwa-install__note {
+  margin: 0;
+  color: var(--muted-dark);
+  font-size: 0.95rem;
+}
+
+.pwa-install__note {
+  padding: 0.65rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background: rgba(247, 247, 245, 0.06);
+  color: var(--white);
+}
+
+.pwa-install__benefits {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0.15rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pwa-install__benefits li {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 2.6rem;
+  padding: 0.45rem 0.7rem;
+  border-radius: var(--radius-md);
+  background: rgba(247, 247, 245, 0.05);
+  font-size: 0.9rem;
+}
+
+.pwa-install__benefits svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  flex: 0 0 auto;
+  color: var(--green);
+}
+
+.pwa-install__steps {
+  display: grid;
+  gap: 0.7rem;
+  margin: 0.2rem 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: pwa-step;
+}
+
+.pwa-install__steps li {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: 0.7rem;
+  align-items: start;
+}
+
+.pwa-install__steps strong {
+  display: block;
+  margin-bottom: 0.15rem;
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+}
+
+.pwa-install__steps span:last-child {
+  color: var(--muted-dark);
+  font-size: 0.88rem;
+}
+
+.pwa-install__glyph {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.85rem;
+  background: var(--black);
+  color: var(--green);
+}
+
+.pwa-install__glyph svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.pwa-install__n {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--green);
+}
+
+.pwa-install__actions {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 0.35rem;
+}
+
+@media (min-width: 64rem) {
+  .pwa-install {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pwa-install__scrim,
+  .pwa-install__panel {
+    transition: none;
+  }
+}

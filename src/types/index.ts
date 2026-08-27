@@ -48,3 +48,6 @@ export type FaqItem = {
 };
 
 export type DeviceTier = "low" | "high";
+
+/** Мобильная ОС для инструкции установки PWA. */
+export type MobileOs = "ios" | "android";

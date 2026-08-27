@@ -24,7 +24,8 @@
   bottom: 0;
   display: grid;
   gap: 0.75rem;
-  max-height: min(88vh, 40rem);
+  width: 100%;
+  max-height: min(88dvh, 40rem);
   overflow: auto;
   padding: 1.1rem 1.1rem calc(1.2rem + env(safe-area-inset-bottom));
   background: var(--graphite);
@@ -208,7 +209,7 @@
     bottom: auto;
     top: 50%;
     width: min(32rem, calc(100% - 3rem));
-    max-height: min(82vh, 42rem);
+    max-height: min(82dvh, 42rem);
     padding: 1.4rem 1.4rem 1.35rem;
     border-radius: 1.4rem;
     transform: translate(-50%, -50%);

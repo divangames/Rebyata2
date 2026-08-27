@@ -10,6 +10,7 @@ import { formatRuPhone, isFullRuPhone } from "../../helpers/phone";
 import { Button } from "../button/Button";
 import { ContactsSocial } from "../contacts/ContactsSocial";
 import { CloseIcon } from "../icons/Icons";
+import { OverlayHost } from "../overlay/OverlayHost";
 import "../evaluate/EvaluateSheet.css";
 import "./CourierSheet.css";
 
@@ -56,6 +57,7 @@ export function CourierSheet({ open, onClose }: Props) {
   }
 
   return (
+    <OverlayHost open={open}>
     <div className={`sheet${open ? " is-open" : ""}`} hidden={!open}>
       <button type="button" className="sheet__scrim" aria-label="Закрыть" onClick={onClose} />
       <form
@@ -115,5 +117,6 @@ export function CourierSheet({ open, onClose }: Props) {
         <ContactsSocial onDark pending />
       </form>
     </div>
+    </OverlayHost>
   );
 }

@@ -15,17 +15,20 @@ import { Hero } from "../components/hero/Hero";
 import { How } from "../components/how/How";
 import { MenuDrawer } from "../components/menu/MenuDrawer";
 import { BottomNav } from "../components/nav/BottomNav";
+import { PwaInstallSheet } from "../components/pwa/PwaInstallSheet";
 import { RequestModal } from "../components/request/RequestModal";
 import { AccountScreen, OrdersScreen } from "../components/screens/PwaScreens";
 import { Services } from "../components/services/Services";
 import { Works } from "../components/works/Works";
 import { useDeviceTier } from "../hooks/useDeviceTier";
+import { usePwaInstallPrompt } from "../hooks/usePwaInstallPrompt";
 import type { ScreenId } from "../types";
 import "./App.css";
 
 /** Собирает посадочник и оболочки PWA. */
 export function App() {
   const tier = useDeviceTier();
+  const pwaInstall = usePwaInstallPrompt();
   const [screen, setScreen] = useState<ScreenId>("home");
   const [menu, setMenu] = useState(false);
   const [evaluate, setEvaluate] = useState(false);
@@ -101,6 +104,16 @@ export function App() {
         open={requestTitle !== null}
         serviceTitle={requestTitle ?? ""}
         onClose={() => setRequestTitle(null)}
+      />
+      <PwaInstallSheet
+        open={pwaInstall.open}
+        os={pwaInstall.os}
+        iosAltBrowser={pwaInstall.iosAltBrowser}
+        canNativeInstall={pwaInstall.canNativeInstall}
+        onDismiss={pwaInstall.dismiss}
+        onInstallNative={() => {
+          void pwaInstall.installNative();
+        }}
       />
     </div>
   );

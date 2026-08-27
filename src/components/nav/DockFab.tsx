@@ -9,6 +9,7 @@ import { cta } from "../../config/content";
 import { usePresence } from "../../hooks/usePresence";
 import { Button } from "../button/Button";
 import { ContactsSocial } from "../contacts/ContactsSocial";
+import { OverlayHost } from "../overlay/OverlayHost";
 import "./DockFab.css";
 
 type Props = {
@@ -68,6 +69,7 @@ export function DockFab({ open, onClose, onEvaluate, onCourier }: Props) {
   }
 
   return (
+    <OverlayHost open={mounted}>
     <div className={`dock-fab${shown ? " is-shown" : ""}`} aria-hidden={!shown}>
       <button type="button" className="dock-fab__scrim" aria-label="Закрыть меню" onClick={onClose} />
       <div
@@ -84,5 +86,6 @@ export function DockFab({ open, onClose, onEvaluate, onCourier }: Props) {
         <ContactsSocial onDark />
       </div>
     </div>
+    </OverlayHost>
   );
 }

@@ -7,7 +7,6 @@
   min-height: 100dvh;
   padding-top: calc(var(--header-h) + env(safe-area-inset-top));
   padding-bottom: calc(var(--nav-h) + env(safe-area-inset-bottom) + 0.6rem);
-  overflow-x: clip;
   background: var(--page);
 }
 
@@ -15,6 +14,7 @@
   position: relative;
   z-index: 1;
   isolation: isolate;
+  overflow-x: clip;
 }
 
 /* Верхний блок всегда перекрывает нижний, чтобы был виден «ковш». */

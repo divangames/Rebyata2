@@ -9,6 +9,7 @@ import { cta } from "../../config/content";
 import type { WorkExample } from "../../types";
 import { Button } from "../button/Button";
 import { CloseIcon } from "../icons/Icons";
+import { OverlayHost } from "../overlay/OverlayHost";
 import { BeforeAfterSlider } from "./BeforeAfterSlider";
 import "./WorkModal.css";
 
@@ -34,12 +35,7 @@ export function WorkModal({ item, onClose, onEvaluate, onCourier }: Props) {
     if (!open) {
       return;
     }
-    const previous = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
     closeRef.current?.focus();
-    return () => {
-      document.body.style.overflow = previous;
-    };
   }, [open, item?.id]);
 
   useEffect(() => {
@@ -71,6 +67,7 @@ export function WorkModal({ item, onClose, onEvaluate, onCourier }: Props) {
   }
 
   return (
+    <OverlayHost open={open}>
     <div className={`work-modal${open ? " is-open" : ""}`} hidden={!open}>
       <button type="button" className="work-modal__scrim" aria-label="Закрыть" onClick={onClose} />
       {item && slide ? (
@@ -114,5 +111,6 @@ export function WorkModal({ item, onClose, onEvaluate, onCourier }: Props) {
         </div>
       ) : null}
     </div>
+    </OverlayHost>
   );
 }

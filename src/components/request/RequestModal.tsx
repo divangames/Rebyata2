@@ -8,6 +8,7 @@ import { useEffect, useId, useState, type FormEvent } from "react";
 import { formatRuPhone, isFullRuPhone } from "../../helpers/phone";
 import { Button } from "../button/Button";
 import { CloseIcon } from "../icons/Icons";
+import { OverlayHost } from "../overlay/OverlayHost";
 import "./RequestModal.css";
 
 type Props = {
@@ -35,17 +36,6 @@ export function RequestModal({ open, serviceTitle, onClose }: Props) {
     setSent(false);
   }, [open, serviceTitle]);
 
-  useEffect(() => {
-    if (!open) {
-      return;
-    }
-    const previous = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = previous;
-    };
-  }, [open]);
-
   /** Проверяет поля и показывает статус отправки. */
   function onSubmit(event: FormEvent) {
     event.preventDefault();
@@ -62,6 +52,7 @@ export function RequestModal({ open, serviceTitle, onClose }: Props) {
   }
 
   return (
+    <OverlayHost open={open}>
     <div className={`request${open ? " is-open" : ""}`} hidden={!open}>
       <button type="button" className="request__scrim" aria-label="Закрыть" onClick={onClose} />
       <form
@@ -108,5 +99,6 @@ export function RequestModal({ open, serviceTitle, onClose }: Props) {
         )}
       </form>
     </div>
+    </OverlayHost>
   );
 }

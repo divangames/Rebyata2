@@ -9,6 +9,7 @@ import { footerNav } from "../../config/content";
 import { useDeviceTier } from "../../hooks/useDeviceTier";
 import { usePresence } from "../../hooks/usePresence";
 import { CloseIcon } from "../icons/Icons";
+import { OverlayHost } from "../overlay/OverlayHost";
 import { MenuDrawerMeta } from "./MenuDrawerMeta";
 import "./MenuDrawer.css";
 
@@ -101,6 +102,7 @@ export function MenuDrawer({ open, onClose, onJump, onEvaluate, onCourier }: Pro
   }
 
   return (
+    <OverlayHost open={mounted}>
     <div
       className={`drawer${shown ? " is-shown" : ""}${rich ? " drawer--rich" : ""}${frost ? " drawer--frost" : ""}`}
       aria-hidden={!shown}
@@ -135,5 +137,6 @@ export function MenuDrawer({ open, onClose, onJump, onEvaluate, onCourier }: Pro
         <MenuDrawerMeta onEvaluate={handleEvaluate} onCourier={handleCourier} />
       </aside>
     </div>
+    </OverlayHost>
   );
 }

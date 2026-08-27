@@ -8,6 +8,7 @@ import { useId, useState, type ChangeEvent } from "react";
 import { cta, evaluateCopy, howSteps } from "../../config/content";
 import { Button } from "../button/Button";
 import { CameraIcon, CloseIcon } from "../icons/Icons";
+import { OverlayHost } from "../overlay/OverlayHost";
 import { EvaluateThumbs } from "./EvaluateThumbs";
 import "./EvaluateSheet.css";
 
@@ -53,6 +54,7 @@ export function EvaluateSheet({ open, onClose }: Props) {
   }
 
   return (
+    <OverlayHost open={open}>
     <div className={`sheet${open ? " is-open" : ""}`} hidden={!open}>
       <button type="button" className="sheet__scrim" aria-label="Закрыть" onClick={onClose} />
       <section className="sheet__panel sheet__panel--evaluate" role="dialog" aria-labelledby="eval-title">
@@ -86,5 +88,6 @@ export function EvaluateSheet({ open, onClose }: Props) {
         {sent ? <p className="sheet__ok">Ответ в течение 2–3 минут.</p> : null}
       </section>
     </div>
+    </OverlayHost>
   );
 }

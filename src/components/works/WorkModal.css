@@ -19,23 +19,23 @@
 
 .work-modal__panel {
   position: absolute;
-  left: 50%;
-  top: 50%;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: grid;
   gap: 0.7rem;
-  width: min(26rem, calc(100% - 1.4rem));
-  max-height: min(92dvh, 44rem);
+  width: 100%;
+  max-height: min(92dvh, 52rem);
   overflow: auto;
   padding: 1.2rem 1.1rem calc(1.15rem + env(safe-area-inset-bottom));
   background: #eceae6;
   color: #141414;
-  border-radius: 1.25rem;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
-  transform: translate(-50%, -50%);
+  border-radius: 1.4rem 1.4rem 0 0;
+  box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.28);
 }
 
 .work-modal.is-open .work-modal__panel {
-  animation: work-modal-in 0.32s var(--ease);
+  animation: work-modal-sheet 0.32s var(--ease);
 }
 
 .work-modal__close {
@@ -129,7 +129,19 @@
   }
 }
 
-@keyframes work-modal-in {
+@keyframes work-modal-sheet {
+  from {
+    opacity: 0.4;
+    transform: translate3d(0, 12%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes work-modal-center {
   from {
     opacity: 0.4;
     transform: translate(-50%, -46%) scale(0.98);
@@ -143,7 +155,19 @@
 
 @media (min-width: 64rem) {
   .work-modal__panel {
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    top: 50%;
     width: min(42rem, calc(100% - 3rem));
+    max-height: min(92dvh, 44rem);
     padding: 1.45rem 1.4rem 1.35rem;
+    border-radius: 1.25rem;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+    transform: translate(-50%, -50%);
+  }
+
+  .work-modal.is-open .work-modal__panel {
+    animation-name: work-modal-center;
   }
 }

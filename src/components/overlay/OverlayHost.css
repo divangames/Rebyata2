@@ -1,0 +1,28 @@
+/* Слой шторок и окон: всегда на видимый экран, не на прокрученную страницу. */
+
+.overlay-host {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 80;
+  width: 100%;
+  height: 100dvh;
+  pointer-events: none;
+}
+
+.overlay-host[data-open="true"] {
+  pointer-events: auto;
+}
+
+.overlay-host__fill {
+  position: absolute;
+  inset: 0;
+}
+
+/* Шторки внутри хоста — absolute, иначе fixed снова цепляется за страницу. */
+.overlay-host__fill > * {
+  position: absolute;
+  inset: 0;
+  width: auto;
+  height: auto;
+}
