@@ -6,7 +6,7 @@
 
 export type ScreenId = "home" | "orders" | "account";
 
-export type WorkFilter = "all" | "shoes" | "bags" | "clothes";
+export type WorkService = "Химчистка" | "Реставрация" | "Ремонт";
 
 export type ServiceCard = {
   id: string;
@@ -16,12 +16,24 @@ export type ServiceCard = {
   image: string;
 };
 
+export type WorkSlide = {
+  id: string;
+  before: string;
+  after: string;
+};
+
 export type WorkExample = {
   id: string;
   title: string;
-  filter: Exclude<WorkFilter, "all">;
-  before: string;
-  after: string;
+  service: WorkService;
+  description: string;
+  slides: WorkSlide[];
+};
+
+export type WorkRow = {
+  id: string;
+  title: string;
+  items: WorkExample[];
 };
 
 export type HowStep = {

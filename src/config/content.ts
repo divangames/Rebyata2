@@ -17,11 +17,9 @@ import workBackpackAfter from "../assets/work/backpack_01.png";
 import workBackpackBefore from "../assets/work/backpack_02.png";
 import workBagAfter from "../assets/work/bag_01.png";
 import workBagBefore from "../assets/work/bag_02.png";
-import workPufferAfter from "../assets/work/puffer_01.png";
-import workPufferBefore from "../assets/work/puffer_02.png";
 import workSneakersAfter from "../assets/work/sneakers_1.png";
 import workSneakersBefore from "../assets/work/sneakers_2.png";
-import type { FaqItem, HowStep, ServiceCard, WorkExample } from "../types";
+import type { FaqItem, HowStep, ServiceCard, WorkExample, WorkRow, WorkService, WorkSlide } from "../types";
 
 export const brand = {
   name: "Свои ребята",
@@ -101,43 +99,65 @@ export const services: ServiceCard[] = [
   },
 ];
 
-export const works: WorkExample[] = [
+/** Три вида работ в каждом ряду: заголовок карточки и текст в модалке. */
+export const workKinds: { service: WorkService; description: string }[] = [
   {
-    id: "sneakers",
-    title: "Кроссовки",
-    filter: "shoes",
-    before: workSneakersBefore,
-    after: workSneakersAfter,
+    service: "Химчистка",
+    description:
+      "Убрали загрязнения, восстановили цвет и обработали материал защитным составом. Состав работ и сроки согласуем после осмотра.",
   },
   {
-    id: "bag",
-    title: "Сумка",
-    filter: "bags",
-    before: workBagBefore,
-    after: workBagAfter,
+    service: "Реставрация",
+    description:
+      "Восстановили цвет, форму и потёртые участки, вернули вещи аккуратный вид. Состав работ и сроки согласуем после осмотра.",
   },
   {
-    id: "puffer",
-    title: "Пуховик",
-    filter: "clothes",
-    before: workPufferBefore,
-    after: workPufferAfter,
-  },
-  {
-    id: "backpack",
-    title: "Рюкзак",
-    filter: "bags",
-    before: workBackpackBefore,
-    after: workBackpackAfter,
+    service: "Ремонт",
+    description:
+      "Починили фурнитуру, швы и конструкцию, чтобы вещью снова было удобно пользоваться. Состав работ и сроки согласуем после осмотра.",
   },
 ];
 
-export const workFilters = [
-  { id: "all", label: "Все" },
-  { id: "shoes", label: "Обувь" },
-  { id: "bags", label: "Сумки" },
-  { id: "clothes", label: "Одежда" },
-] as const;
+/** Три кадра сравнения из одной пары — заглушка миниатюр. */
+function workSlides(prefix: string, before: string, after: string): WorkSlide[] {
+  return [1, 2, 3].map((index) => ({
+    id: `${prefix}-slide-${index}`,
+    before,
+    after,
+  }));
+}
+
+/** В ряду всегда химчистка, реставрация и ремонт — фото пока одно на три карточки. */
+function workTrio(id: string, before: string, after: string): WorkExample[] {
+  return workKinds.map((kind, index) => ({
+    id: `${id}-${index + 1}`,
+    title: kind.service,
+    service: kind.service,
+    description: kind.description,
+    slides: workSlides(`${id}-${index + 1}`, before, after),
+  }));
+}
+
+export const workRows: WorkRow[] = [
+  {
+    id: "shoes",
+    title: "Обувь",
+    items: workTrio("sneakers", workSneakersBefore, workSneakersAfter),
+  },
+  {
+    id: "bags",
+    title: "Сумки",
+    items: workTrio("bag", workBagBefore, workBagAfter),
+  },
+  {
+    id: "backpacks",
+    title: "Рюкзаки",
+    items: workTrio("backpack", workBackpackBefore, workBackpackAfter),
+  },
+];
+
+/** Плоский список для модалки и поиска по id. */
+export const works: WorkExample[] = workRows.flatMap((row) => row.items);
 
 export const advantages = [
   {

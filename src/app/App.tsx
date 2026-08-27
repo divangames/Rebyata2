@@ -70,7 +70,7 @@ export function App() {
             <Hero onEvaluate={openEvaluate} onCourier={openCourier} />
             <How />
             <Services onEvaluate={openEvaluate} onCourier={openCourier} onRequest={openRequest} />
-            <Works onEvaluate={openEvaluate} />
+            <Works onEvaluate={openEvaluate} onCourier={openCourier} />
             <Advantages onEvaluate={openEvaluate} onCourier={openCourier} />
             <Faq />
             <Contacts onEvaluate={openEvaluate} onCourier={openCourier} onJump={jump} />

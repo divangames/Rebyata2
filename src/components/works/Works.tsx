@@ -1,69 +1,84 @@
 ////////////////////////////////////////////////////////
 //
-// Экран 03: примеры работ — превью и модалка «до / после».
+// Экран 03: примеры работ — ряды-слайдеры и модалка «до / после».
 //
 ////////////////////////////////////////////////////////
 
-import { useMemo, useState } from "react";
-import { workFilters, works } from "../../config/content";
-import type { WorkExample, WorkFilter } from "../../types";
+import { useEffect, useState } from "react";
+import { workRows } from "../../config/content";
+import { useReducedMotion } from "../../hooks/useReducedMotion";
+import { useRepeatInView } from "../../hooks/useRepeatInView";
+import type { WorkExample } from "../../types";
+import { WorkCarousel } from "./WorkCarousel";
 import { WorkModal } from "./WorkModal";
-import { WorkPreview } from "./WorkPreview";
 import "./Works.css";
 
 type Props = {
   onEvaluate: () => void;
+  onCourier: () => void;
 };
 
-/** Галерея работ: живое превью сравнения, полный слайдер — в модалке. */
-export function Works({ onEvaluate }: Props) {
-  const [filter, setFilter] = useState<WorkFilter>("all");
-  const [active, setActive] = useState<WorkExample | null>(null);
+/** Узкий экран: на нём показываем жест «можно свайпнуть». */
+function usePhoneViewport(): boolean {
+  const [phone, setPhone] = useState(false);
 
-  const items = useMemo(() => {
-    if (filter === "all") {
-      return works;
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 47.99rem)");
+    const update = () => setPhone(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+
+  return phone;
+}
+
+/** Галерея по категориям: свайп ряда, полный разбор — в модалке. */
+export function Works({ onEvaluate, onCourier }: Props) {
+  const [active, setActive] = useState<WorkExample | null>(null);
+  const reduced = useReducedMotion();
+  const phone = usePhoneViewport();
+  const { ref, visible } = useRepeatInView<HTMLElement>();
+  const [hintReady, setHintReady] = useState(false);
+  const phoneReady = visible && phone && !reduced;
+
+  useEffect(() => {
+    if (!phoneReady) {
+      setHintReady(false);
+      return;
     }
-    return works.filter((item) => item.filter === filter);
-  }, [filter]);
+    const wait = window.setTimeout(() => setHintReady(true), 340);
+    return () => window.clearTimeout(wait);
+  }, [phoneReady]);
 
   return (
-    <section className="works band" id="works">
-      <h2>Примеры работ</h2>
-      <p className="works__sub">до и после наших забот</p>
-      <div className="works__chips" role="tablist" aria-label="Фильтр примеров">
-        {workFilters.map((chip) => (
-          <button
-            key={chip.id}
-            type="button"
-            role="tab"
-            aria-selected={filter === chip.id}
-            className={filter === chip.id ? "is-on" : ""}
-            onClick={() => setFilter(chip.id)}
-          >
-            {chip.label}
-          </button>
+    <section ref={ref} className="works band" id="works">
+      <header className="works__intro">
+        <h2>Примеры работ</h2>
+        <p className="works__sub">до и после наших забот</p>
+      </header>
+      <div className="works__rows">
+        {workRows.map((row, index) => (
+          <section key={row.id} className="works__row" aria-labelledby={`works-${row.id}`}>
+            <h3 id={`works-${row.id}`} className="works__kicker">
+              {row.title}
+            </h3>
+            <WorkCarousel
+              items={row.items}
+              paused={active !== null}
+              hint={index === 0 && hintReady}
+              label={row.title}
+              onOpen={setActive}
+            />
+          </section>
         ))}
       </div>
-      <ul className={`works__list${active ? " is-paused" : ""}`}>
-        {items.map((item) => (
-          <li key={item.id}>
-            <h3>{item.title}</h3>
-            <div className="works__card">
-              <WorkPreview before={item.before} after={item.after} />
-              <button
-                type="button"
-                className="works__open"
-                onClick={() => setActive(item)}
-                aria-haspopup="dialog"
-              >
-                <span className="works__sr">Открыть сравнение: {item.title}</span>
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
-      <WorkModal item={active} onClose={() => setActive(null)} onEvaluate={onEvaluate} />
+      <WorkModal
+        item={active}
+        onClose={() => setActive(null)}
+        onEvaluate={onEvaluate}
+        onCourier={onCourier}
+      />
     </section>
   );
 }

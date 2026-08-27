@@ -1,10 +1,10 @@
 ////////////////////////////////////////////////////////
 //
-// Модалка работы: слайдер «до / после» и переход к оценке.
+// Модалка работы: сравнение, миниатюры, описание и действия.
 //
 ////////////////////////////////////////////////////////
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cta } from "../../config/content";
 import type { WorkExample } from "../../types";
 import { Button } from "../button/Button";
@@ -16,12 +16,19 @@ type Props = {
   item: WorkExample | null;
   onClose: () => void;
   onEvaluate: () => void;
+  onCourier: () => void;
 };
 
-/** Диалог с сравнением кадров выбранной работы. */
-export function WorkModal({ item, onClose, onEvaluate }: Props) {
+/** Диалог с кадрами выбранной работы и шаблоном описания. */
+export function WorkModal({ item, onClose, onEvaluate, onCourier }: Props) {
   const closeRef = useRef<HTMLButtonElement>(null);
+  const [slideIndex, setSlideIndex] = useState(0);
   const open = item !== null;
+  const slide = item?.slides[slideIndex] ?? item?.slides[0];
+
+  useEffect(() => {
+    setSlideIndex(0);
+  }, [item?.id]);
 
   useEffect(() => {
     if (!open) {
@@ -57,10 +64,16 @@ export function WorkModal({ item, onClose, onEvaluate }: Props) {
     onEvaluate();
   }
 
+  /** Закрывает сравнение и открывает заявку на курьера. */
+  function onAskCourier() {
+    onClose();
+    onCourier();
+  }
+
   return (
     <div className={`work-modal${open ? " is-open" : ""}`} hidden={!open}>
       <button type="button" className="work-modal__scrim" aria-label="Закрыть" onClick={onClose} />
-      {item ? (
+      {item && slide ? (
         <div className="work-modal__panel" role="dialog" aria-modal="true" aria-labelledby="work-modal-title">
           <button
             ref={closeRef}
@@ -71,10 +84,33 @@ export function WorkModal({ item, onClose, onEvaluate }: Props) {
           >
             <CloseIcon />
           </button>
-          <p className="work-modal__eyebrow">До и после</p>
           <h2 id="work-modal-title">{item.title}</h2>
-          <BeforeAfterSlider key={item.id} before={item.before} after={item.after} title={item.title} />
-          <Button onClick={onAskEstimate}>{cta.estimate}</Button>
+          <BeforeAfterSlider key={slide.id} before={slide.before} after={slide.after} title={item.title} />
+          <ul className="work-modal__thumbs" aria-label="Другие кадры">
+            {item.slides.map((entry, index) => (
+              <li key={entry.id}>
+                <button
+                  type="button"
+                  className={index === slideIndex ? "is-on" : ""}
+                  aria-current={index === slideIndex ? "true" : undefined}
+                  aria-label={`Кадр ${index + 1}`}
+                  onClick={() => setSlideIndex(index)}
+                >
+                  <img src={entry.after} alt="" />
+                </button>
+              </li>
+            ))}
+          </ul>
+          <div className="work-modal__story">
+            <h3>{item.service}</h3>
+            <p>{item.description}</p>
+          </div>
+          <div className="work-modal__actions">
+            <Button onClick={onAskEstimate}>{cta.estimate}</Button>
+            <Button variant="secondary" onClick={onAskCourier}>
+              {cta.courier}
+            </Button>
+          </div>
         </div>
       ) : null}
     </div>

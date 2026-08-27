@@ -56,17 +56,71 @@
   height: 1.25rem;
 }
 
-.work-modal__eyebrow {
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #6b6b6b;
+.work-modal__panel h2 {
+  padding-right: 2.4rem;
+  color: #9a9a9a;
+  font-family: var(--font-ui);
+  font-size: clamp(0.92rem, 3.6vw, 1.05rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
 }
 
-.work-modal__panel h2 {
+.work-modal__thumbs {
+  display: flex;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.work-modal__thumbs button {
+  display: block;
+  width: 3.35rem;
+  height: 3.35rem;
+  padding: 0;
+  overflow: hidden;
+  border: 2px solid transparent;
+  border-radius: 0.55rem;
+  background: #d8d5d0;
+}
+
+.work-modal__thumbs img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.work-modal__thumbs .is-on {
+  border-color: var(--ink);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .work-modal__thumbs button:hover:not(.is-on) {
+    border-color: rgba(20, 20, 20, 0.35);
+  }
+}
+
+.work-modal__story {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.work-modal__story h3 {
   font-family: var(--font-display);
-  font-size: clamp(1.15rem, 5vw, 1.5rem);
-  line-height: 1.05;
+  font-size: clamp(0.95rem, 4vw, 1.15rem);
+  line-height: 1.1;
+}
+
+.work-modal__story p {
+  color: #3a3a3a;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.work-modal__actions {
+  display: grid;
+  gap: 0.55rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
