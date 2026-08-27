@@ -5,6 +5,7 @@
 ////////////////////////////////////////////////////////
 
 import { useEffect, useRef } from "react";
+import { cta } from "../../config/content";
 import type { WorkExample } from "../../types";
 import { Button } from "../button/Button";
 import { CloseIcon } from "../icons/Icons";
@@ -73,7 +74,7 @@ export function WorkModal({ item, onClose, onEvaluate }: Props) {
           <p className="work-modal__eyebrow">До и после</p>
           <h2 id="work-modal-title">{item.title}</h2>
           <BeforeAfterSlider key={item.id} before={item.before} after={item.after} title={item.title} />
-          <Button onClick={onAskEstimate}>Оценить по фото</Button>
+          <Button onClick={onAskEstimate}>{cta.estimate}</Button>
         </div>
       ) : null}
     </div>

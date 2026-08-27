@@ -1,0 +1,88 @@
+/* Выпадашка над доком: тёмная карточка и крупные зоны нажатия. */
+
+.dock-fab {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: calc(var(--nav-h) + env(safe-area-inset-bottom));
+  z-index: 32;
+  pointer-events: none;
+}
+
+.dock-fab.is-shown {
+  pointer-events: auto;
+}
+
+.dock-fab__scrim {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: color-mix(in srgb, var(--black) 42%, transparent);
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+
+.dock-fab.is-shown .dock-fab__scrim {
+  opacity: 1;
+}
+
+.dock-fab__card {
+  position: absolute;
+  left: 0.7rem;
+  right: 0.7rem;
+  bottom: 0.45rem;
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.95rem 0.9rem 1rem;
+  border-radius: var(--radius-lg);
+  background: var(--black);
+  color: var(--white);
+  box-shadow: 0 18px 40px color-mix(in srgb, var(--black) 38%, transparent);
+  opacity: 0;
+  transform: translate3d(0, 0.85rem, 0) scale(0.96);
+  transform-origin: 70% 100%;
+  transition:
+    opacity 0.2s ease,
+    transform 0.28s var(--ease);
+}
+
+.dock-fab.is-shown .dock-fab__card {
+  opacity: 1;
+  transform: none;
+}
+
+.dock-fab__write {
+  margin: 0.35rem 0 0;
+  color: var(--muted-dark);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.dock-fab .contacts__social {
+  justify-content: flex-start;
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dock-fab__scrim,
+  .dock-fab__card {
+    transition: none;
+  }
+
+  .dock-fab:not(.is-shown) .dock-fab__card {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .dock-fab__scrim {
+    background: color-mix(in srgb, var(--black) 58%, transparent);
+  }
+}
+
+@media (min-width: 64rem) {
+  .dock-fab {
+    display: none;
+  }
+}

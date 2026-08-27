@@ -1,10 +1,10 @@
 ////////////////////////////////////////////////////////
 //
-// Низ шторки: контакты, мессенджеры и оценка по фото.
+// Низ шторки: контакты, мессенджеры, оценка и вызов курьера.
 //
 ////////////////////////////////////////////////////////
 
-import { contacts } from "../../config/content";
+import { contacts, cta } from "../../config/content";
 import { yandexMapsUrl } from "../../helpers/maps";
 import { Button } from "../button/Button";
 import { ClockIcon, PhoneIcon } from "../contacts/ContactIcons";
@@ -14,10 +14,11 @@ import { PinIcon } from "../icons/Icons";
 
 type Props = {
   onEvaluate: () => void;
+  onCourier: () => void;
 };
 
 /** Адрес, телефон, часы, соцсети и CTA внизу меню. */
-export function MenuDrawerMeta({ onEvaluate }: Props) {
+export function MenuDrawerMeta({ onEvaluate, onCourier }: Props) {
   const mapsUrl = yandexMapsUrl({
     lat: contacts.map.lat,
     lon: contacts.map.lon,
@@ -45,7 +46,12 @@ export function MenuDrawerMeta({ onEvaluate }: Props) {
         </li>
       </ul>
       <ContactsSocial onDark />
-      <Button onClick={onEvaluate}>Оценить по фото</Button>
+      <div className="drawer__cta">
+        <Button onClick={onEvaluate}>{cta.estimate}</Button>
+        <Button variant="light" icon={null} onClick={onCourier}>
+          {cta.courier}
+        </Button>
+      </div>
     </div>
   );
 }

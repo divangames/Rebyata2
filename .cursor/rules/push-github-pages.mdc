@@ -1,0 +1,20 @@
+---
+description: По слову «Пуш» — коммит, push в Rebyata2 и обновление GitHub Pages
+alwaysApply: true
+---
+
+# Пуш → GitHub Pages
+
+Когда пользователь пишет **Пуш** или **Push**:
+
+1. Сделай коммит актуальных изменений (без `.env` и секретов). Сообщение — на русском, в стиле CHANGELOG.
+2. Отправь ветку `main` в https://github.com/divangames/Rebyata2
+3. Дождись workflow **GitHub Pages** (push в `main` или `workflow_dispatch`).
+4. Верни ссылку: https://divangames.github.io/Rebyata2/
+
+Не спрашивай повторное подтверждение: слово «Пуш» уже означает коммит и push.
+
+Не делай `git config --global`. При ошибке dubious ownership используй  
+`git -c safe.directory="<абсолютный путь проекта>"`.
+
+Не делай force-push в `main`.

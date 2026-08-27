@@ -69,14 +69,23 @@
   height: 1.3rem;
 }
 
+.sheet__panel--evaluate {
+  gap: 1.05rem;
+  min-height: min(30rem, 70vh);
+  max-height: min(92vh, 48rem);
+  padding-top: 1.35rem;
+  padding-bottom: calc(1.45rem + env(safe-area-inset-bottom));
+}
+
 .sheet__drop {
   display: grid;
   place-items: center;
   gap: 0.4rem;
-  min-height: 9rem;
+  min-height: 10rem;
   border: 1px dashed rgba(247, 247, 245, 0.28);
   border-radius: var(--radius-md);
   color: var(--white);
+  cursor: pointer;
 }
 
 .sheet__drop svg {
@@ -85,8 +94,49 @@
   color: var(--green);
 }
 
-.sheet__drop input {
-  display: none;
+.sheet__panel--evaluate:has(.sheet__thumbs) .sheet__drop {
+  min-height: 6.5rem;
+}
+
+.sheet__thumbs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(4.75rem, 1fr));
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sheet__thumb {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 0.7rem;
+  background: rgba(247, 247, 245, 0.06);
+}
+
+.sheet__thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sheet__thumb-remove {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.2rem;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(4, 9, 12, 0.72);
+  color: var(--white);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
 }
 
 .sheet__steps {
@@ -95,12 +145,16 @@
   color: var(--muted-dark);
 }
 
+.sheet__panel--evaluate .sheet__steps {
+  color: rgba(247, 247, 245, 0.92);
+  line-height: 1.35;
+}
+
 .sheet__steps li::marker {
   color: var(--green);
 }
 
-.sheet__ok,
-.sheet__count {
+.sheet__ok {
   color: var(--green);
 }
 
@@ -138,6 +192,13 @@
     padding: 1.4rem 1.4rem 1.35rem;
     border-radius: 1.4rem;
     transform: translate(-50%, -50%);
+  }
+
+  .sheet__panel--evaluate {
+    width: min(34rem, calc(100% - 3rem));
+    min-height: min(32rem, 74vh);
+    max-height: min(90vh, 50rem);
+    padding: 1.55rem 1.5rem 1.6rem;
   }
 
   .sheet.is-open .sheet__panel {

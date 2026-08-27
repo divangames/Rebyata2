@@ -49,14 +49,26 @@
   transition: transform 0.22s var(--ease);
 }
 
+.dock__item--cta.is-open svg {
+  transform: rotate(45deg);
+}
+
 @media (hover: hover) and (pointer: fine) {
   .dock__item--cta:hover svg {
     transform: scale(1.05);
+  }
+
+  .dock__item--cta.is-open:hover svg {
+    transform: rotate(45deg) scale(1.05);
   }
 }
 
 .dock__item--cta:active svg {
   transform: scale(0.94);
+}
+
+.dock__item--cta.is-open:active svg {
+  transform: rotate(45deg) scale(0.94);
 }
 
 .dock__item--cta:focus-visible {
@@ -71,7 +83,8 @@
   }
 
   .dock__item--cta:hover svg,
-  .dock__item--cta:active svg {
+  .dock__item--cta:active svg,
+  .dock__item--cta.is-open svg {
     transform: none;
   }
 }

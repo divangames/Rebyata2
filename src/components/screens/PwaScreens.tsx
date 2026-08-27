@@ -4,6 +4,7 @@
 //
 ////////////////////////////////////////////////////////
 
+import { cta } from "../../config/content";
 import { Button } from "../button/Button";
 import "./PwaScreens.css";
 
@@ -17,7 +18,7 @@ export function OrdersScreen({ onEvaluate }: Props) {
     <section className="pwa-screen band">
       <h1>Заказы</h1>
       <p>Покажите вещь — скажем, что можно сделать.</p>
-      <Button onClick={onEvaluate}>Оценить по фото</Button>
+      <Button onClick={onEvaluate}>{cta.estimate}</Button>
     </section>
   );
 }

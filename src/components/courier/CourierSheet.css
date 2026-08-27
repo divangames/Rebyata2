@@ -1,0 +1,53 @@
+/* Поля заявки курьера на тёмной шторке и блок мессенджеров. */
+
+.courier {
+  gap: 0.7rem;
+}
+
+.courier__field {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  color: var(--muted-dark);
+}
+
+.courier__caption {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.courier__optional {
+  font-size: 0.72rem;
+  color: color-mix(in srgb, var(--muted-dark) 80%, var(--white));
+}
+
+.courier__field input {
+  min-height: 3rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--line-dark);
+  border-radius: 0.85rem;
+  background: color-mix(in srgb, var(--black) 62%, var(--graphite));
+  color: var(--white);
+}
+
+.courier__field input:focus {
+  outline: 2px solid var(--green);
+  outline-offset: 1px;
+}
+
+.courier__error {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #ff8a7a;
+}
+
+.courier__write {
+  margin: 0.35rem 0 0;
+  font-size: 0.88rem;
+  color: var(--muted-dark);
+}
+
+.courier .contacts__social {
+  justify-content: flex-start;
+}

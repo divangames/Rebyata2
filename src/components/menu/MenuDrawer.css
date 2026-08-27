@@ -211,6 +211,11 @@
   padding-top: 1.15rem;
 }
 
+.drawer__cta {
+  display: grid;
+  gap: 0.55rem;
+}
+
 .drawer__contacts {
   display: grid;
   gap: 0.7rem;

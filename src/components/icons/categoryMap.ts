@@ -12,12 +12,10 @@ import {
   HeartIcon,
   MailIcon,
   MasterIcon,
-  PufferIcon,
   ShieldIcon,
   ShirtIcon,
   ShoeIcon,
   SparklesIcon,
-  SuitcaseIcon,
   TruckIcon,
 } from "./Icons";
 
@@ -27,8 +25,6 @@ const categoryIcons: Record<string, IconCmp> = {
   shoes: ShoeIcon,
   bags: BagIcon,
   backpacks: BackpackIcon,
-  suitcases: SuitcaseIcon,
-  puffer: PufferIcon,
   other: ShirtIcon,
 };
 

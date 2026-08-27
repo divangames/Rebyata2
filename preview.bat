@@ -6,4 +6,5 @@ if not exist dist (
   pause
   exit /b 1
 )
+echo Предпросмотр: http://127.0.0.1:4173/
 call npm run preview

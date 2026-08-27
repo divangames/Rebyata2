@@ -5,9 +5,10 @@
 ////////////////////////////////////////////////////////
 
 import { useId, useState, type ChangeEvent } from "react";
-import { howSteps } from "../../config/content";
+import { cta, evaluateCopy, howSteps } from "../../config/content";
 import { Button } from "../button/Button";
 import { CameraIcon, CloseIcon } from "../icons/Icons";
+import { EvaluateThumbs } from "./EvaluateThumbs";
 import "./EvaluateSheet.css";
 
 type Props = {
@@ -15,19 +16,31 @@ type Props = {
   onClose: () => void;
 };
 
-/** Нижний лист «Оценить по фото». */
+/** Шаги в шторке: первый пункт объясняет, зачем несколько ракурсов. */
+function sheetSteps() {
+  return howSteps.map((step, index) => (index === 0 ? evaluateCopy.step1 : step.title));
+}
+
+/** Нижний лист «Узнать стоимость». */
 export function EvaluateSheet({ open, onClose }: Props) {
   const inputId = useId();
   const [files, setFiles] = useState<File[]>([]);
   const [sent, setSent] = useState(false);
 
-  /** Сохраняет выбранные пользователем фото. */
+  /** Добавляет выбранные фото к уже загруженным. */
   function onPick(event: ChangeEvent<HTMLInputElement>) {
     const list = event.target.files;
     if (!list) {
       return;
     }
-    setFiles(Array.from(list));
+    setFiles((prev) => [...prev, ...Array.from(list)]);
+    setSent(false);
+    event.target.value = "";
+  }
+
+  /** Убирает одно фото из списка. */
+  function onRemove(index: number) {
+    setFiles((prev) => prev.filter((_, itemIndex) => itemIndex !== index));
     setSent(false);
   }
 
@@ -42,21 +55,21 @@ export function EvaluateSheet({ open, onClose }: Props) {
   return (
     <div className={`sheet${open ? " is-open" : ""}`} hidden={!open}>
       <button type="button" className="sheet__scrim" aria-label="Закрыть" onClick={onClose} />
-      <section className="sheet__panel" role="dialog" aria-labelledby="eval-title">
+      <section className="sheet__panel sheet__panel--evaluate" role="dialog" aria-labelledby="eval-title">
         <button type="button" className="sheet__close" onClick={onClose} aria-label="Закрыть">
           <CloseIcon />
         </button>
-        <h2 id="eval-title">Оценить по фото</h2>
-        <p className="sheet__lead">Загрузите фото вещи</p>
+        <h2 id="eval-title">{cta.estimate}</h2>
+        <p className="sheet__lead">{evaluateCopy.lead}</p>
         <label className="sheet__drop" htmlFor={inputId}>
           <CameraIcon />
-          <span>ФОТО ВЕЩИ</span>
+          <span>{files.length > 0 ? evaluateCopy.dropMore : evaluateCopy.dropEmpty}</span>
           <input id={inputId} type="file" accept="image/*" multiple onChange={onPick} />
         </label>
-        {files.length > 0 ? <p className="sheet__count">Файлов: {files.length}</p> : null}
+        <EvaluateThumbs files={files} onRemove={onRemove} />
         <ol className="sheet__steps">
-          {howSteps.map((step) => (
-            <li key={step.title}>{step.title}</li>
+          {sheetSteps().map((title) => (
+            <li key={title}>{title}</li>
           ))}
         </ol>
         <Button onClick={onSubmit} disabled={files.length === 0}>

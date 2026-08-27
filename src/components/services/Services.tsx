@@ -4,18 +4,19 @@
 //
 ////////////////////////////////////////////////////////
 
-import { services } from "../../config/content";
+import { cta, services } from "../../config/content";
 import { Button } from "../button/Button";
 import { ArrowIcon } from "../icons/Icons";
 import "./Services.css";
 
 type Props = {
   onEvaluate: () => void;
+  onCourier: () => void;
   onRequest: (title: string) => void;
 };
 
 /** Сетка услуг 2 колонки: фото, название, описание, цена. */
-export function Services({ onEvaluate, onRequest }: Props) {
+export function Services({ onEvaluate, onCourier, onRequest }: Props) {
   return (
     <section className="services band" id="services" aria-labelledby="services-title">
       <header className="services__head">
@@ -48,7 +49,12 @@ export function Services({ onEvaluate, onRequest }: Props) {
         ))}
       </div>
 
-      <Button onClick={onEvaluate}>Узнать стоимость по фото</Button>
+      <div className="services__actions">
+        <Button onClick={onEvaluate}>{cta.estimate}</Button>
+        <Button variant="secondary" onClick={onCourier}>
+          {cta.courier}
+        </Button>
+      </div>
     </section>
   );
 }

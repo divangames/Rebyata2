@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////
 
-import { brand } from "../../config/content";
+import { brand, cta } from "../../config/content";
 import { logos } from "../../config/logos";
 import type { ScreenId } from "../../types";
 import { Button } from "../button/Button";
@@ -56,7 +56,7 @@ export function Header({ active, onMenu, onHome, onJump, onEvaluate, onNavigate 
         </button>
       </nav>
       <Button className="header__cta" onClick={onEvaluate}>
-        Оценить по фото
+        {cta.estimate}
       </Button>
       <button type="button" className="header__menu" onClick={onMenu} aria-label="Меню">
         <MenuIcon />

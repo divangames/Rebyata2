@@ -6,8 +6,9 @@
 
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-// Unbounded — широкая кириллица с Google Fonts, пока нет файла Druk Wide Bold.
+import "@fontsource/caveat/700.css";
 import "@fontsource/unbounded/700.css";
+
 import { App } from "./app/App";
 import "./styles/global.css";
 
@@ -23,7 +24,12 @@ createRoot(root).render(
   </StrictMode>,
 );
 
-if ("serviceWorker" in navigator) {
+////////////////////////////////////////////////////////
+//
+// SW только в сборке: в dev он мешает HMR, особенно с VPN.
+//
+////////////////////////////////////////////////////////
+if (import.meta.env.PROD && "serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     void navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`);
   });

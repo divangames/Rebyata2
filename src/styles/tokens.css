@@ -2,7 +2,7 @@
 /* Шрифты подключаются из public/fonts; Vite кладёт файлы в сборку с учётом base. */
 
 :root {
-  --black: #070707;
+  --black: #04090c;
   --white: #f7f7f5;
   --page: #f1e8e9;
   --page-white: #ffffff;
@@ -23,8 +23,8 @@
 
   --font-display: "Druk Wide", Unbounded, "Saira Extra Expanded", sans-serif;
   --font-ui: Intro, Onest, Inter, system-ui, sans-serif;
-  --font-hand: Caveat, cursive;
-  --font-slogan: Caveat, cursive;
+  --font-hand: "Caveat", cursive;
+  --font-slogan: "Caveat", cursive;
 
   --space-xs: clamp(0.4rem, 1.4vw, 0.6rem);
   --space-sm: clamp(0.7rem, 2vw, 1rem);

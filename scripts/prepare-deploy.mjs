@@ -14,6 +14,7 @@ import {
   writeFileSync,
 } from "node:fs";
 import { dirname, join } from "node:path";
+import { setTimeout as delay } from "node:timers/promises";
 import { fileURLToPath } from "node:url";
 
 const rootDir = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -30,9 +31,27 @@ function assertBuildReady() {
   }
 }
 
+/** Удаляет папку, если Проводник ещё держит файлы — несколько попыток */
+async function removeDirWithRetry(targetDir) {
+  for (let attempt = 1; attempt <= 10; attempt += 1) {
+    try {
+      rmSync(targetDir, { recursive: true, force: true });
+      return;
+    } catch (error) {
+      const code = error && typeof error === "object" && "code" in error ? error.code : "";
+      const retryable = code === "EBUSY" || code === "EPERM" || code === "ENOTEMPTY";
+      if (!retryable || attempt === 10) {
+        throw error;
+      }
+
+      await delay(300);
+    }
+  }
+}
+
 /** Копирует dist в чистую папку deploy и добавляет .htaccess */
-function copyBuildToDeploy() {
-  rmSync(deployDir, { recursive: true, force: true });
+async function copyBuildToDeploy() {
+  await removeDirWithRetry(deployDir);
   mkdirSync(deployDir, { recursive: true });
   cpSync(distDir, deployDir, { recursive: true });
   writeFileSync(join(deployDir, ".htaccess"), readFileSync(htaccessSource));
@@ -51,7 +70,7 @@ function createZipArchive() {
 }
 
 assertBuildReady();
-copyBuildToDeploy();
+await copyBuildToDeploy();
 
 try {
   createZipArchive();

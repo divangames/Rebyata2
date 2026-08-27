@@ -8,8 +8,10 @@ import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { ArrowIcon } from "../icons/Icons";
 import "./Button.css";
 
+type ButtonVariant = "primary" | "secondary" | "ghost" | "light";
+
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: "primary" | "secondary";
+  variant?: ButtonVariant;
   icon?: ReactNode;
 };
 

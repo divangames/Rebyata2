@@ -7,9 +7,11 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "prepare:deploy": "node scripts/prepare-deploy.mjs",
-    "preview": "vite preview --host --port 4173"
+    "deploy": "node scripts/deploy.mjs",
+    "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort --open http://127.0.0.1:4173/"
   },
   "dependencies": {
+    "@fontsource/caveat": "^5.3.0",
     "@fontsource/unbounded": "^5.3.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"

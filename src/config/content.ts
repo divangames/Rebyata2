@@ -6,10 +6,8 @@
 
 import serviceBackpack from "../assets/services/backpack.png";
 import serviceBags from "../assets/services/bags.png";
-import serviceOther from "../assets/services/other.png";
-import servicePuffer from "../assets/services/puffer.png";
+import serviceOther from "../assets/USLUGI/Other.png";
 import serviceShoes from "../assets/services/shoes.png";
-import serviceSuitcase from "../assets/services/suitcase.png";
 ////////////////////////////////////////////////////////
 //
 // Пары работ: *_1 / *_01 — после (превью карточки), *_2 / *_02 — до.
@@ -31,7 +29,7 @@ export const brand = {
   kicker: "ХИМЧИСТКА • РЕСТАВРАЦИЯ • РЕМОНТ",
   sloganLines: ["Чистые", "вещи —", "лучшие", "истории"],
   sloganFull: "Чистые вещи — лучшие истории",
-  heroLead: "Вернём любимым вещам вид новых",
+  heroLead: "Позаботимся о ваших любимых вещах",
   copyright: "© 2026 Свои ребята",
 } as const;
 
@@ -39,14 +37,27 @@ export const categories = [
   { id: "shoes", label: "Обувь" },
   { id: "bags", label: "Сумки" },
   { id: "backpacks", label: "Рюкзаки" },
-  { id: "suitcases", label: "Чемоданы" },
   { id: "other", label: "И другое" },
 ] as const;
 
+export const cta = {
+  estimate: "Узнать стоимость",
+  courier: "Вызвать курьера",
+  send: "Отправить",
+  writeVia: "Написать в:",
+} as const;
+
+export const evaluateCopy = {
+  lead: "Несколько фото с разных ракурсов — оценка точнее",
+  dropEmpty: "ФОТО ВЕЩИ",
+  dropMore: "ЕЩЁ ФОТО",
+  step1: "Загрузите несколько фото с разных ракурсов — оператор точнее оценит стоимость",
+} as const;
+
 export const howSteps: HowStep[] = [
   {
-    title: "Загрузите фото вещи",
-    text: "Пришлите снимок в форму оценки — мастеру хватит нескольких ракурсов",
+    title: "Загрузите несколько фото вещи",
+    text: "С разных ракурсов — оператор точнее оценит стоимость услуги",
   },
   {
     title: "Получите предварительную цену",
@@ -63,7 +74,7 @@ export const services: ServiceCard[] = [
     id: "shoes",
     title: "Обувь",
     text: "Чистка, реставрация, ремонт",
-    price: "от 1 500 ₽",
+    price: "от 1 900 ₽",
     image: serviceShoes,
   },
   {
@@ -77,27 +88,13 @@ export const services: ServiceCard[] = [
     id: "backpacks",
     title: "Рюкзаки",
     text: "Чистка, восстановление материалов",
-    price: "от 1 800 ₽",
+    price: "от 2 000 ₽",
     image: serviceBackpack,
-  },
-  {
-    id: "suitcases",
-    title: "Чемоданы",
-    text: "Чистка, ремонт корпуса, замена кодовых колес",
-    price: "от 2 500 ₽",
-    image: serviceSuitcase,
-  },
-  {
-    id: "puffer",
-    title: "Пуховики и куртки",
-    text: "Чистка, удаление пятен, восстановление наполнителя",
-    price: "от 2 500 ₽",
-    image: servicePuffer,
   },
   {
     id: "other",
     title: "Другие вещи",
-    text: "Уход, большая одежда, текстиль, головные аксессуары",
+    text: "Уход, большая одежда, текстиль",
     price: "от 1 500 ₽",
     image: serviceOther,
   },
@@ -215,7 +212,7 @@ export const faqItems: FaqItem[] = [
 export const contacts = {
   ctaTitle: "Всегда на связи",
   ctaText: "Оцените вещь по фотографии прямо сейчас и получите скидку 10% на первый заказ.",
-  ctaButton: "Оценить стоимость по фото",
+  ctaButton: "Узнать стоимость",
   phone: "+7 (___) ___-__-__",
   hours: "Ежедневно: с 10:00 до 20:00",
   address: "г. Красноярск. ул. Мичурина, 2ж",

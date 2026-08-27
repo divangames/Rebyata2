@@ -4,8 +4,8 @@
 //
 ////////////////////////////////////////////////////////
 
-import heroMain from "../../assets/HERO/main.png";
-import { brand, categories } from "../../config/content";
+import heroMain from "../../assets/HERO/main.webp";
+import { brand, categories, cta } from "../../config/content";
 import { logos } from "../../config/logos";
 import { Button } from "../button/Button";
 import { iconForCategory } from "../icons/categoryMap";
@@ -15,10 +15,11 @@ import "./Hero.css";
 
 type Props = {
   onEvaluate: () => void;
+  onCourier: () => void;
 };
 
-/** Экран 01: оффер и оценка по фото. */
-export function Hero({ onEvaluate }: Props) {
+/** Экран 01: оффер, оценка и вызов курьера. */
+export function Hero({ onEvaluate, onCourier }: Props) {
   return (
     <section className="hero band" id="hero">
       <p className="hero__kicker">{brand.kicker}</p>
@@ -48,9 +49,14 @@ export function Hero({ onEvaluate }: Props) {
           );
         })}
       </ul>
-      <Button onClick={onEvaluate} icon={<ArrowIcon />}>
-        Оценить по фото
-      </Button>
+      <div className="hero__actions">
+        <Button onClick={onEvaluate} icon={<ArrowIcon />}>
+          {cta.estimate}
+        </Button>
+        <Button variant="ghost" icon={null} onClick={onCourier}>
+          {cta.courier}
+        </Button>
+      </div>
     </section>
   );
 }

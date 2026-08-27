@@ -7,6 +7,7 @@
 import { useCallback, useState } from "react";
 import { Advantages } from "../components/advantages/Advantages";
 import { Contacts } from "../components/contacts/Contacts";
+import { CourierSheet } from "../components/courier/CourierSheet";
 import { EvaluateSheet } from "../components/evaluate/EvaluateSheet";
 import { Faq } from "../components/faq/Faq";
 import { Header } from "../components/header/Header";
@@ -28,9 +29,11 @@ export function App() {
   const [screen, setScreen] = useState<ScreenId>("home");
   const [menu, setMenu] = useState(false);
   const [evaluate, setEvaluate] = useState(false);
+  const [courier, setCourier] = useState(false);
   const [requestTitle, setRequestTitle] = useState<string | null>(null);
 
   const openEvaluate = useCallback(() => setEvaluate(true), []);
+  const openCourier = useCallback(() => setCourier(true), []);
   const openRequest = useCallback((title: string) => setRequestTitle(title), []);
 
   /** Переход к секции лендинга. */
@@ -64,9 +67,9 @@ export function App() {
       <main>
         {screen === "home" ? (
           <>
-            <Hero onEvaluate={openEvaluate} />
+            <Hero onEvaluate={openEvaluate} onCourier={openCourier} />
             <How />
-            <Services onEvaluate={openEvaluate} onRequest={openRequest} />
+            <Services onEvaluate={openEvaluate} onCourier={openCourier} onRequest={openRequest} />
             <Works onEvaluate={openEvaluate} />
             <Advantages onEvaluate={openEvaluate} />
             <Faq onAsk={openEvaluate} />
@@ -83,14 +86,17 @@ export function App() {
           window.scrollTo({ top: 0 });
         }}
         onEvaluate={openEvaluate}
+        onCourier={openCourier}
       />
       <MenuDrawer
         open={menu}
         onClose={() => setMenu(false)}
         onJump={jump}
         onEvaluate={openEvaluate}
+        onCourier={openCourier}
       />
       <EvaluateSheet open={evaluate} onClose={() => setEvaluate(false)} />
+      <CourierSheet open={courier} onClose={() => setCourier(false)} />
       <RequestModal
         open={requestTitle !== null}
         serviceTitle={requestTitle ?? ""}

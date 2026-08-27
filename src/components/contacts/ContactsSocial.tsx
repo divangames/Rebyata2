@@ -12,19 +12,31 @@ import "./Contacts.css";
 type Props = {
   /** Кружки на чёрном фоне подвала. */
   onDark?: boolean;
+  /** Заглушка без перехода, пока нет рабочих ссылок. */
+  pending?: boolean;
 };
 
+/** Не даёт якорю прокрутить страницу, пока ссылка не задана. */
+function onPendingClick(event: { preventDefault: () => void }) {
+  event.preventDefault();
+}
+
 /** Пара ссылок на мессенджеры. */
-export function ContactsSocial({ onDark = false }: Props) {
+export function ContactsSocial({ onDark = false, pending = false }: Props) {
+  const telegramHref = pending ? "#" : contacts.telegramUrl;
+  const maxHref = pending ? "#" : contacts.maxUrl;
+
   return (
     <ul className={`contacts__social${onDark ? " contacts__social--on-dark" : ""}`}>
       <li>
         <a
           className="contacts__social-link"
-          href={contacts.telegramUrl}
-          target="_blank"
-          rel="noreferrer"
+          href={telegramHref}
+          target={pending ? undefined : "_blank"}
+          rel={pending ? undefined : "noreferrer"}
           aria-label="Telegram"
+          aria-disabled={pending || undefined}
+          onClick={pending ? onPendingClick : undefined}
         >
           <TelegramIcon />
         </a>
@@ -32,10 +44,12 @@ export function ContactsSocial({ onDark = false }: Props) {
       <li>
         <a
           className="contacts__social-link"
-          href={contacts.maxUrl}
-          target="_blank"
-          rel="noreferrer"
+          href={maxHref}
+          target={pending ? undefined : "_blank"}
+          rel={pending ? undefined : "noreferrer"}
           aria-label="MAX"
+          aria-disabled={pending || undefined}
+          onClick={pending ? onPendingClick : undefined}
         >
           <img src={maxMark} alt="" width={22} height={22} />
         </a>

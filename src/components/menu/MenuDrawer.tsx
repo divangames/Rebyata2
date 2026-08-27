@@ -17,6 +17,7 @@ type Props = {
   onClose: () => void;
   onJump: (id: string) => void;
   onEvaluate: () => void;
+  onCourier: () => void;
 };
 
 const anchors = [
@@ -28,7 +29,7 @@ const anchors = [
 ];
 
 /** Выезжающая шторка навигации. */
-export function MenuDrawer({ open, onClose, onJump, onEvaluate }: Props) {
+export function MenuDrawer({ open, onClose, onJump, onEvaluate, onCourier }: Props) {
   const tier = useDeviceTier();
   const { mounted, shown, reduced, onExitComplete } = usePresence(open);
   const rich = !reduced && tier !== "low";
@@ -78,6 +79,12 @@ export function MenuDrawer({ open, onClose, onJump, onEvaluate }: Props) {
     onEvaluate();
   }
 
+  /** Закрывает меню и открывает заявку на курьера. */
+  function handleCourier() {
+    onClose();
+    onCourier();
+  }
+
   /** Снимает шторку, когда панель доехала вправо. */
   function handlePanelTransitionEnd(event: TransitionEvent<HTMLElement>) {
     if (event.target !== event.currentTarget) {
@@ -125,7 +132,7 @@ export function MenuDrawer({ open, onClose, onJump, onEvaluate }: Props) {
             </button>
           ))}
         </nav>
-        <MenuDrawerMeta onEvaluate={handleEvaluate} />
+        <MenuDrawerMeta onEvaluate={handleEvaluate} onCourier={handleCourier} />
       </aside>
     </div>
   );

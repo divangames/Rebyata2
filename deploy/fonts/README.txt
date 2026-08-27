@@ -1,15 +1,8 @@
-Положите сюда лицензионные файлы:
+Лицензионные файлы, которые уже подключены в сайте:
 
-- DrukWide-Bold.woff2 — заголовки и цены
-- Intro-Regular.woff2 — текст
-- Intro-Bold.woff2 — кнопки и акценты
+- DrukWide-Bold.otf — заголовки и цены
+- Intro-Regular.ttf — текст
+- Intro-Bold.ttf — кнопки и акценты
 
-Затем в `src/styles/tokens.css` добавьте в `@font-face` строку
-`url("/fonts/ИМЯ.woff2") format("woff2")` перед `local(...)`.
-
-Druk Wide Bold нет на Google Fonts (это шрифт Commercial Type).
-
-Пока файлов нет:
-- заголовки и цены — Unbounded;
-- текст — Onest;
-- рукописный — Caveat Bold.
+Имя `DrukWide-Bold.woff2.otf` было переименовано в `DrukWide-Bold.otf`:
+это OpenType (сигнатура OTTO), а не woff2.
