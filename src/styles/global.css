@@ -41,6 +41,13 @@ textarea {
   font: inherit;
 }
 
+/* iOS не должен увеличивать страницу при фокусе на поле телефона. */
+input,
+textarea,
+select {
+  font-size: 1rem;
+}
+
 button {
   cursor: pointer;
 }
