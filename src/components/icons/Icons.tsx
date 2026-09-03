@@ -4,6 +4,8 @@
 //
 ////////////////////////////////////////////////////////
 
+import sneakerIcon from "../../assets/icons/sneaker_ico.svg";
+
 type IconProps = {
   className?: string;
 };
@@ -20,43 +22,29 @@ export function SparkleIcon({ className }: IconProps) {
   );
 }
 
-/** Три искры — профессиональная химия. */
+/** Флакон с распылителем — профессиональная химия. */
 export function SparklesIcon({ className }: IconProps) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path
-        fill="currentColor"
-        d="M8.2 4c.28 2.4 1.22 4.45 3 5.8-1.78 1.35-2.72 3.4-3 5.8-.28-2.4-1.22-4.45-3-5.8 1.78-1.35 2.72-3.4 3-5.8Z"
+        d="M8 7.5h5.5v11H8a1.5 1.5 0 0 1-1.5-1.5V9A1.5 1.5 0 0 1 8 7.5Z"
+        stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"
       />
       <path
-        fill="currentColor"
-        d="M16.6 3c.2 1.72.88 3.18 2.16 4.16-1.28.98-1.96 2.44-2.16 4.16-.2-1.72-.88-3.18-2.16-4.16C15.72 6.18 16.4 4.72 16.6 3Z"
-      />
-      <path
-        fill="currentColor"
-        d="M16.2 13.2c.18 1.55.78 2.86 1.92 3.74-1.14.88-1.74 2.19-1.92 3.74-.18-1.55-.78-2.86-1.92-3.74 1.14-.88 1.74-2.19 1.92-3.74Z"
+        d="M9 7.5V5.8h4.5v1.7M13.5 5.8h3l1.8 1.7-1.1 1.2-1.4-1.2h-2.3M14.5 11.5h2.2M15.6 10.4v2.2"
+        stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
       />
     </svg>
   );
 }
 
-/** Мастер с галочкой — ручная работа. */
+/** Перчатка — ручная работа. */
 export function MasterIcon({ className }: IconProps) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <circle cx="10.2" cy="8.2" r="2.7" stroke="currentColor" strokeWidth="1.5" />
       <path
-        d="M5.4 18.2c.7-2.5 2.5-3.8 4.8-3.8 1.4 0 2.6.5 3.5 1.3"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <path
-        d="m14.4 14.6 1.7 1.7 3.3-3.4"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        d="M7.5 11.2V6.8a1.2 1.2 0 0 1 2.4 0v3.1V5.2a1.2 1.2 0 0 1 2.4 0v4.7V6.1a1.2 1.2 0 0 1 2.4 0v4.5l.8-1.4a1.2 1.2 0 0 1 2.1 1.1l-2.1 4.5A5 5 0 0 1 11 18h-.5a4.8 4.8 0 0 1-4.8-4.8v-1.1a1.2 1.2 0 0 1 1.8-.9Z"
+        stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
       />
     </svg>
   );
@@ -67,44 +55,14 @@ export function HandshakeIcon({ className }: IconProps) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path
-        d="M4.8 12.2 8.2 9.6a1.5 1.5 0 0 1 2 .2l1.4 1.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        d="m3.8 10.8 3.5-3.1a2 2 0 0 1 2.6-.1l1 .8 1-.8a2 2 0 0 1 2.6.1l3.5 3.1"
+        stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
       />
       <path
-        d="M19.2 12.2 15.8 9.6a1.5 1.5 0 0 0-2 .2l-1.4 1.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        d="m4 10.8 3.2 4.1a1.8 1.8 0 0 0 2.5.3l1-.8 1.1 1a1.8 1.8 0 0 0 2.5-.1l5.7-5.5"
+        stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
       />
-      <path
-        d="M9.2 13.8 10.8 15.4"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <path
-        d="M14.8 13.8 13.2 15.4"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <path
-        d="M10.8 15.4 12 16.6l1.2-1.2"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M12 16.6V18.8"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
+      <path d="m9.2 12.2 2.5 2.1 2.2-2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -168,17 +126,7 @@ export function CloseIcon({ className }: IconProps) {
 
 /** Кроссовки. */
 export function ShoeIcon({ className }: IconProps) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M4 15.5c2.2-1 4.2-4.2 7.4-4.4 1.6-.1 2.3 1 3.6 1.3 2.3.5 5 .2 5 .2v2.6H4.4c-.8 0-1.4-.7-1.2-1.4l.8-2Z"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-      <path d="M8 11.2 9.2 8.5h2.2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  );
+  return <img className={className} src={sneakerIcon} alt="" aria-hidden="true" />;
 }
 
 /** Сумка. */

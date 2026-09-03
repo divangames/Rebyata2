@@ -19,6 +19,147 @@
   color: var(--muted);
 }
 
+.pwa-screen--account {
+  gap: 0.65rem;
+  min-height: calc(100dvh - var(--header-h) - var(--nav-h));
+  align-content: center;
+}
+
+.account-eyebrow {
+  color: var(--service-price) !important;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pwa-screen--account h1 {
+  max-width: 30rem;
+}
+
+.account-muted {
+  max-width: 25rem;
+}
+
+.account-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.25rem;
+  width: 100%;
+  max-width: 30rem;
+  margin-top: 1rem;
+  padding: 0.25rem;
+  border-radius: var(--radius-pill);
+  background: var(--warm);
+}
+
+.account-tabs button {
+  min-height: 2.65rem;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.account-tabs button.is-active {
+  background: var(--white);
+  color: var(--ink);
+  box-shadow: 0 0.15rem 0.6rem rgba(20, 20, 20, 0.08);
+}
+
+.account-form {
+  display: grid;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 30rem;
+  margin-top: 0.5rem;
+}
+
+.account-form label {
+  display: grid;
+  gap: 0.3rem;
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.account-form input {
+  width: 100%;
+  min-height: 3.15rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--ink);
+  outline: none;
+}
+
+.account-form input:focus {
+  border-color: var(--service-price);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--green) 35%, transparent);
+}
+
+.account-error,
+.account-notice {
+  padding: 0.7rem 0.85rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+}
+
+.account-error {
+  background: #fff0f0;
+  color: #a22424 !important;
+}
+
+.account-notice {
+  background: #efffe4;
+  color: #276d10 !important;
+}
+
+.account-footnote {
+  max-width: 30rem;
+  margin-top: 0.35rem;
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
+.account-card {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  width: 100%;
+  max-width: 30rem;
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  background: var(--warm);
+}
+
+.account-card h1 {
+  font-size: clamp(1.3rem, 6vw, 1.8rem);
+}
+
+.account-avatar {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  background: var(--green);
+  color: var(--black);
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.account-actions {
+  display: grid;
+  gap: 0.65rem;
+  width: 100%;
+  max-width: 30rem;
+  margin-top: 0.65rem;
+}
+
 @media (min-width: 64rem) {
   .pwa-screen {
     --band-pad-top: 2.2rem;
@@ -32,5 +173,10 @@
   .pwa-screen .btn {
     width: auto;
     min-width: 16rem;
+  }
+
+  .account-actions {
+    display: flex;
+    align-items: center;
   }
 }

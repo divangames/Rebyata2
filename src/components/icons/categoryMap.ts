@@ -6,17 +6,19 @@
 
 import type { ComponentType } from "react";
 import {
+  Flask,
+  Hand,
+  Handshake,
+  Heart,
+  ShieldCheck,
+  Truck,
+} from "@phosphor-icons/react";
+import {
   BackpackIcon,
   BagIcon,
   CheckIcon,
-  HeartIcon,
-  HandshakeIcon,
-  MasterIcon,
-  ShieldIcon,
   ShirtIcon,
   ShoeIcon,
-  SparklesIcon,
-  TruckIcon,
 } from "./Icons";
 
 type IconCmp = ComponentType<{ className?: string }>;
@@ -29,12 +31,12 @@ const categoryIcons: Record<string, IconCmp> = {
 };
 
 const advantageIcons: Record<string, IconCmp> = {
-  chem: SparklesIcon,
-  hand: MasterIcon,
-  care: HeartIcon,
-  agree: HandshakeIcon,
-  delivery: TruckIcon,
-  guarantee: ShieldIcon,
+  chem: Flask,
+  hand: Hand,
+  care: Heart,
+  agree: Handshake,
+  delivery: Truck,
+  guarantee: ShieldCheck,
 };
 
 /** Иконка категории первого экрана и карточек услуг. */
