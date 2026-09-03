@@ -63,6 +63,15 @@
   gap: 0.45rem;
 }
 
+.works__rail {
+  position: relative;
+  min-width: 0;
+}
+
+.works__arrow {
+  display: none;
+}
+
 .works__kicker {
   padding-inline: var(--works-gutter);
   font-family: var(--font-display);
@@ -330,12 +339,80 @@
 
 @media (min-width: 64rem) {
   .works {
-    --works-gutter: max(2rem, calc((100% - var(--content)) / 2));
+    --works-gutter: 0;
     --works-shown: 3;
-    --works-peek: 1.85rem;
+    --works-peek: 0rem;
     --works-gap: 0.9rem;
     --band-pad-top: 2.5rem;
-    gap: 1.15rem;
+    gap: 1.35rem;
+  }
+
+  /* На широком экране ряд читается как аккуратная витрина: без
+     обрезанных карточек по краям и с единым краем у всего контента. */
+  .works__intro {
+    max-width: 42rem;
+  }
+
+  .works__rows {
+    gap: 2rem;
+  }
+
+  .works__row {
+    gap: 0.65rem;
+  }
+
+  .works__scroller {
+    scroll-padding-inline: 0;
+  }
+
+  .works__slide {
+    /* Три карточки ровно заполняют ряд: следующая не выглядывает справа. */
+    flex-basis: calc((100% - (2 * var(--works-gap))) / var(--works-shown));
+  }
+
+  .works__img {
+    /* Компактнее по высоте, чтобы два ряда помещались в десктопный экран. */
+    aspect-ratio: 4 / 3;
+  }
+
+  .works__arrow {
+    position: absolute;
+    top: -3.15rem;
+    z-index: 5;
+    display: grid;
+    place-items: center;
+    width: 2.45rem;
+    height: 2.45rem;
+    padding: 0;
+    border: 1px solid rgba(20, 20, 20, 0.16);
+    border-radius: 50%;
+    background: var(--page-white);
+    color: var(--ink);
+    font-size: 1.25rem;
+    line-height: 1;
+    box-shadow: 0 0.35rem 1rem rgba(20, 20, 20, 0.1);
+    transition:
+      background-color 0.2s var(--ease),
+      color 0.2s var(--ease),
+      transform 0.2s var(--ease);
+  }
+
+  .works__arrow--prev {
+    right: 3.2rem;
+  }
+
+  .works__arrow--next {
+    right: 0;
+  }
+
+  .works__arrow:hover {
+    background: var(--black);
+    color: var(--white);
+    transform: translateY(-2px);
+  }
+
+  .works__arrow:active {
+    transform: scale(0.94);
   }
 
   .works h2 {

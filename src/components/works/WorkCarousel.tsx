@@ -50,35 +50,54 @@ export function WorkCarousel({ items, paused, hint = false, label, onOpen }: Pro
     onOpen(item);
   }
 
+  function move(direction: -1 | 1) {
+    const scroller = ref.current;
+    const slide = scroller?.querySelector<HTMLElement>("[data-strip-slide]");
+    if (!scroller || !slide) {
+      return;
+    }
+
+    const gap = Number.parseFloat(getComputedStyle(scroller).columnGap || getComputedStyle(scroller).gap) || 0;
+    scroller.scrollBy({ left: direction * (slide.offsetWidth + gap), behavior: "smooth" });
+  }
+
   return (
-    <ul
-      ref={ref}
-      className={`works__scroller${paused ? " is-paused" : ""}${hint ? " is-hint" : ""}`}
-      aria-label={`${label}: свайпните, чтобы увидеть другие примеры`}
-      onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
-    >
-      {looped.map((item, index) => (
-        <li
-          key={`${index}-${item.id}`}
-          className="works__slide"
-          data-strip-slide=""
-          style={{ "--works-delay": `${(index % items.length) * 0.35}s` } as CSSProperties}
-        >
-          <p className="works__name">{item.title}</p>
-          <div className="works__card">
-            <WorkPreview before={item.slides[0].before} after={item.slides[0].after} />
-            <button
-              type="button"
-              className="works__open"
-              onClick={() => onCardActivate(item)}
-              aria-haspopup="dialog"
-            >
-              <span className="works__sr">Открыть сравнение: {item.title}</span>
-            </button>
-          </div>
-        </li>
-      ))}
-    </ul>
+    <div className="works__rail">
+      <button type="button" className="works__arrow works__arrow--prev" onClick={() => move(-1)} aria-label={`${label}: предыдущие примеры`}>
+        <span aria-hidden="true">←</span>
+      </button>
+      <ul
+        ref={ref}
+        className={`works__scroller${paused ? " is-paused" : ""}${hint ? " is-hint" : ""}`}
+        aria-label={`${label}: свайпните, чтобы увидеть другие примеры`}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+      >
+        {looped.map((item, index) => (
+          <li
+            key={`${index}-${item.id}`}
+            className="works__slide"
+            data-strip-slide=""
+            style={{ "--works-delay": `${(index % items.length) * 0.35}s` } as CSSProperties}
+          >
+            <p className="works__name">{item.title}</p>
+            <div className="works__card">
+              <WorkPreview before={item.slides[0].before} after={item.slides[0].after} />
+              <button
+                type="button"
+                className="works__open"
+                onClick={() => onCardActivate(item)}
+                aria-haspopup="dialog"
+              >
+                <span className="works__sr">Открыть сравнение: {item.title}</span>
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <button type="button" className="works__arrow works__arrow--next" onClick={() => move(1)} aria-label={`${label}: следующие примеры`}>
+        <span aria-hidden="true">→</span>
+      </button>
+    </div>
   );
 }
