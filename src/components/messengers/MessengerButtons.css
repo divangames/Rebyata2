@@ -15,8 +15,8 @@
   align-items: center;
   justify-content: center;
   gap: 0.55rem;
-  min-height: 3.15rem;
-  padding: 0.85rem 1rem;
+  min-height: 2.9rem;
+  padding: 0.7rem 0.9rem;
   appearance: none;
   border: 0;
   border-radius: var(--radius-pill);
@@ -66,13 +66,13 @@
 
 .messenger-buttons--choice .messenger-buttons__btn {
   border: 1px solid var(--line-dark);
-  border-radius: 0.75rem;
+  border-radius: var(--radius-pill);
   background: color-mix(in srgb, var(--black) 28%, var(--graphite));
 }
 
 .messenger-buttons--panel .messenger-buttons__btn {
   border: 1px solid color-mix(in srgb, var(--white) 14%, transparent);
-  border-radius: 0.75rem;
+  border-radius: var(--radius-pill);
   background: color-mix(in srgb, var(--black) 32%, var(--graphite));
 }
 
@@ -111,6 +111,12 @@
 
 .messenger-buttons__btn:active {
   transform: scale(0.985);
+}
+
+/* Социальные кнопки всегда остаются тёмными пилюлями, независимо от места. */
+.messenger-buttons__btn span,
+.messenger-buttons__link .btn__label {
+  white-space: nowrap;
 }
 
 @media (prefers-reduced-motion: reduce) {

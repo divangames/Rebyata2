@@ -5,11 +5,11 @@
 ////////////////////////////////////////////////////////
 
 import { useEffect, useId, useState, type ChangeEvent, type FormEvent } from "react";
-import { cta, evaluateCopy, evaluateTiming } from "../../config/content";
+import { cta, evaluateCopy } from "../../config/content";
 import { formatRuPhone, isFullRuPhone } from "../../helpers/phone";
 import { Button } from "../button/Button";
 import { CameraIcon, CloseIcon } from "../icons/Icons";
-import { MessengerButtons, type ContactChannel } from "../messengers/MessengerButtons";
+import { MessengerButtons } from "../messengers/MessengerButtons";
 import { OverlayHost } from "../overlay/OverlayHost";
 import { EvaluateThumbs } from "./EvaluateThumbs";
 import "./EvaluateSheet.css";
@@ -17,29 +17,26 @@ import "./EvaluateSheet.css";
 type Props = {
   open: boolean;
   onClose: () => void;
+  onSuccess: () => void;
 };
 
 const MAX_PHOTOS = 4;
 
 /** Нижний лист «Узнать стоимость»: фото → контакт. */
-export function EvaluateSheet({ open, onClose }: Props) {
+export function EvaluateSheet({ open, onClose, onSuccess }: Props) {
   const inputId = useId();
   const phoneId = useId();
   const [step, setStep] = useState<1 | 2>(1);
   const [files, setFiles] = useState<File[]>([]);
-  const [channel, setChannel] = useState<ContactChannel | null>(null);
   const [phone, setPhone] = useState("+7");
   const [error, setError] = useState("");
-  const [sent, setSent] = useState(false);
 
   useEffect(() => {
     if (!open) {
       setStep(1);
       setFiles([]);
-      setChannel(null);
       setPhone("+7");
       setError("");
-      setSent(false);
     }
   }, [open]);
 
@@ -50,14 +47,12 @@ export function EvaluateSheet({ open, onClose }: Props) {
       return;
     }
     setFiles((prev) => [...prev, ...Array.from(list)].slice(0, MAX_PHOTOS));
-    setSent(false);
     event.target.value = "";
   }
 
   /** Убирает одно фото из списка. */
   function onRemove(index: number) {
     setFiles((prev) => prev.filter((_, itemIndex) => itemIndex !== index));
-    setSent(false);
   }
 
   /** Переходит ко второму шагу после загрузки фото. */
@@ -69,24 +64,15 @@ export function EvaluateSheet({ open, onClose }: Props) {
     setStep(2);
   }
 
-  /** Переключает канал связи: повторный клик снимает выбор. */
-  function onSelectChannel(id: ContactChannel) {
-    setChannel((current) => (current === id ? null : id));
-  }
-
-  /** Проверяет канал и телефон, затем показывает статус отправки. */
+  /** Проверяет телефон и открывает окно благодарности с сроком оценки. */
   function onSubmit(event: FormEvent) {
     event.preventDefault();
-    if (!channel) {
-      setError(evaluateCopy.channelError);
-      return;
-    }
     if (!isFullRuPhone(phone)) {
       setError(evaluateCopy.phoneError);
       return;
     }
     setError("");
-    setSent(true);
+    onSuccess();
   }
 
   const canAddMore = files.length < MAX_PHOTOS;
@@ -113,9 +99,7 @@ export function EvaluateSheet({ open, onClose }: Props) {
 
           <h2 id="eval-title">{title}</h2>
 
-          {sent ? (
-            <p className="sheet__ok">{evaluateTiming.sent}</p>
-          ) : step === 1 ? (
+          {step === 1 ? (
             <>
               <p className="sheet__lead">{evaluateCopy.lead}</p>
 
@@ -152,8 +136,6 @@ export function EvaluateSheet({ open, onClose }: Props) {
             </>
           ) : (
             <form className="sheet__contact" onSubmit={onSubmit}>
-              <MessengerButtons withCall selected={channel} onSelect={onSelectChannel} />
-
               <label className="sheet__field" htmlFor={phoneId}>
                 {evaluateCopy.phoneLabel}
                 <input
@@ -170,6 +152,9 @@ export function EvaluateSheet({ open, onClose }: Props) {
               {error ? <p className="sheet__error">{error}</p> : null}
 
               <Button type="submit">{evaluateCopy.submit}</Button>
+
+              <p className="sheet__write">{cta.writeVia}</p>
+              <MessengerButtons onOpen={onSuccess} />
             </form>
           )}
         </section>

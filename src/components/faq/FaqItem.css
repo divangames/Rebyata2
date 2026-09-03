@@ -5,6 +5,10 @@
   gap: 0.55rem;
 }
 
+.faq__item.is-open .faq__panel-inner {
+  padding-bottom: 0.95rem;
+}
+
 .faq__panel p {
   padding: 0 0.95rem;
   margin: 0;
@@ -15,10 +19,6 @@
 
 .faq__panel p:first-child {
   padding-top: 0;
-}
-
-.faq__panel p:last-child:not(.faq__links) {
-  padding-bottom: 0;
 }
 
 .faq__links {
@@ -39,7 +39,7 @@
   gap: 0.45rem;
   width: calc(100% - 1.9rem);
   min-height: 2.85rem;
-  margin: 0.15rem 0.95rem 0.95rem;
+  margin: 0.15rem 0.95rem 0;
   padding: 0.7rem 1rem;
   border: 0;
   border-radius: var(--radius-pill);
@@ -68,6 +68,10 @@
 }
 
 @container (min-width: 28rem) {
+  .faq__item.is-open .faq__panel-inner {
+    padding-bottom: 1.1rem;
+  }
+
   .faq__panel p,
   .faq__links {
     padding-right: 1.1rem;

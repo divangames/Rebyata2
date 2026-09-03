@@ -17,14 +17,14 @@ type Props = {
   open: boolean;
   serviceTitle: string;
   onClose: () => void;
+  onSuccess: () => void;
 };
 
 /** Модальное окно заявки: перезвон или переход в мессенджер. */
-export function RequestModal({ open, serviceTitle, onClose }: Props) {
+export function RequestModal({ open, serviceTitle, onClose, onSuccess }: Props) {
   const phoneId = useId();
   const [phone, setPhone] = useState("+7");
   const [error, setError] = useState("");
-  const [sent, setSent] = useState(false);
 
   useEffect(() => {
     if (!open) {
@@ -32,10 +32,9 @@ export function RequestModal({ open, serviceTitle, onClose }: Props) {
     }
     setPhone("+7");
     setError("");
-    setSent(false);
   }, [open, serviceTitle]);
 
-  /** Проверяет телефон и показывает статус отправки. */
+  /** Проверяет телефон и открывает общее окно благодарности. */
   function onSubmit(event: FormEvent) {
     event.preventDefault();
     if (!isFullRuPhone(phone)) {
@@ -43,7 +42,7 @@ export function RequestModal({ open, serviceTitle, onClose }: Props) {
       return;
     }
     setError("");
-    setSent(true);
+    onSuccess();
   }
 
   return (
@@ -64,33 +63,27 @@ export function RequestModal({ open, serviceTitle, onClose }: Props) {
           <h2 id="request-title">{serviceTitle}</h2>
           <p className="request__hint">{requestCopy.lead}</p>
 
-          {sent ? (
-            <p className="request__ok">{requestCopy.sent}</p>
-          ) : (
-            <>
-              <label htmlFor={phoneId}>
-                {requestCopy.phoneLabel}
-                <input
-                  id={phoneId}
-                  name="tel"
-                  type="tel"
-                  autoComplete="tel"
-                  inputMode="tel"
-                  value={phone}
-                  onChange={(event) => setPhone(formatRuPhone(event.target.value))}
-                />
-              </label>
+          <label htmlFor={phoneId}>
+            {requestCopy.phoneLabel}
+            <input
+              id={phoneId}
+              name="tel"
+              type="tel"
+              autoComplete="tel"
+              inputMode="tel"
+              value={phone}
+              onChange={(event) => setPhone(formatRuPhone(event.target.value))}
+            />
+          </label>
 
-              {error ? <p className="request__error">{error}</p> : null}
+          {error ? <p className="request__error">{error}</p> : null}
 
-              <Button type="submit">{requestCopy.callback}</Button>
+          <Button type="submit">{requestCopy.callback}</Button>
 
-              <p className="request__messengers-lead">{requestCopy.messengersLead}</p>
-              <MessengerButtons pending className="request__messengers" />
+          <p className="request__messengers-lead">{requestCopy.messengersLead}</p>
+          <MessengerButtons className="request__messengers" onOpen={onSuccess} />
 
-              <p className="request__consent">{requestCopy.consent}</p>
-            </>
-          )}
+          <p className="request__consent">{requestCopy.consent}</p>
         </form>
       </div>
     </OverlayHost>

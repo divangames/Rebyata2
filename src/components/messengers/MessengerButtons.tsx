@@ -29,6 +29,8 @@ type Props = {
   selected?: ContactChannel | null;
   /** Включает режим выбора вместо перехода по ссылке. */
   onSelect?: (id: ContactChannel) => void;
+  /** Сообщает родителю, что пользователь ушёл в мессенджер. */
+  onOpen?: (id: MessengerId) => void;
 };
 
 const messengerItems: { id: MessengerId; label: string }[] = [
@@ -113,6 +115,20 @@ function LightLinkContent({ id, label }: { id: MessengerId; label: string }) {
   );
 }
 
+/** Открывает мессенджер и сообщает родителю. */
+function onMessengerClick(
+  id: MessengerId,
+  pending: boolean,
+  onOpen: ((id: MessengerId) => void) | undefined,
+  event: { preventDefault: () => void },
+) {
+  if (pending) {
+    onPendingClick(event);
+    return;
+  }
+  onOpen?.(id);
+}
+
 /** Тёмные или светлые пилюли: переход в мессенджер или выбор канала связи. */
 export function MessengerButtons({
   pending = false,
@@ -121,6 +137,7 @@ export function MessengerButtons({
   withCall = false,
   selected = null,
   onSelect,
+  onOpen,
 }: Props) {
   const choice = Boolean(onSelect);
   const rootClass = `messenger-buttons messenger-buttons--${variant}${choice ? " messenger-buttons--choice" : ""}${
@@ -158,9 +175,9 @@ export function MessengerButtons({
             className="btn btn--light messenger-buttons__link"
             href={messengerHref(item.id, pending)}
             target={pending ? undefined : "_blank"}
-            rel={pending ? undefined : "noreferrer"}
+            rel={pending ? undefined : "noopener noreferrer"}
             aria-disabled={pending || undefined}
-            onClick={pending ? onPendingClick : undefined}
+            onClick={(event) => onMessengerClick(item.id, pending, onOpen, event)}
           >
             <span className="btn__idle">
               <LightLinkContent id={item.id} label={item.label} />
@@ -175,9 +192,9 @@ export function MessengerButtons({
             className="messenger-buttons__btn"
             href={messengerHref(item.id, pending)}
             target={pending ? undefined : "_blank"}
-            rel={pending ? undefined : "noreferrer"}
+            rel={pending ? undefined : "noopener noreferrer"}
             aria-disabled={pending || undefined}
-            onClick={pending ? onPendingClick : undefined}
+            onClick={(event) => onMessengerClick(item.id, pending, onOpen, event)}
           >
             <ChannelMark id={item.id} />
             <span>{item.label}</span>

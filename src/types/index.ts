@@ -63,3 +63,6 @@ export type DeviceTier = "low" | "high";
 
 /** Мобильная ОС для инструкции установки PWA. */
 export type MobileOs = "ios" | "android";
+
+/** Вариант общего окна благодарности после заявки. */
+export type ThanksKind = "request" | "evaluate";

@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////
 //
-// Кружки мессенджеров: Telegram и MAX.
+// Кнопки мессенджеров: Telegram и MAX.
 //
 ////////////////////////////////////////////////////////
 
@@ -10,7 +10,7 @@ import { TelegramIcon } from "./ContactIcons";
 import "./Contacts.css";
 
 type Props = {
-  /** Кружки на чёрном фоне подвала. */
+  /** Кнопки на светлом или чёрном фоне. */
   onDark?: boolean;
   /** Заглушка без перехода, пока нет рабочих ссылок. */
   pending?: boolean;
@@ -33,12 +33,13 @@ export function ContactsSocial({ onDark = false, pending = false }: Props) {
           className="contacts__social-link"
           href={telegramHref}
           target={pending ? undefined : "_blank"}
-          rel={pending ? undefined : "noreferrer"}
+          rel={pending ? undefined : "noopener noreferrer"}
           aria-label="Telegram"
           aria-disabled={pending || undefined}
           onClick={pending ? onPendingClick : undefined}
         >
           <TelegramIcon />
+          <span>Telegram</span>
         </a>
       </li>
       <li>
@@ -46,12 +47,13 @@ export function ContactsSocial({ onDark = false, pending = false }: Props) {
           className="contacts__social-link"
           href={maxHref}
           target={pending ? undefined : "_blank"}
-          rel={pending ? undefined : "noreferrer"}
+          rel={pending ? undefined : "noopener noreferrer"}
           aria-label="MAX"
           aria-disabled={pending || undefined}
           onClick={pending ? onPendingClick : undefined}
         >
           <img src={maxMark} alt="" width={22} height={22} />
+          <span>MAX</span>
         </a>
       </li>
     </ul>

@@ -164,14 +164,19 @@
 }
 
 .contacts__social-link {
-  display: grid;
-  width: 3rem;
-  height: 3rem;
-  place-items: center;
+  display: inline-flex;
+  min-width: 9.5rem;
+  min-height: 2.9rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.7rem 0.9rem;
   border: 1px solid var(--line);
-  border-radius: 50%;
+  border-radius: var(--radius-pill);
   background: var(--black);
   color: var(--white);
+  font-weight: 700;
+  text-decoration: none;
   transition: transform 0.28s var(--ease), background 0.28s var(--ease);
 }
 

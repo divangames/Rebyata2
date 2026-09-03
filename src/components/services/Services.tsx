@@ -7,6 +7,7 @@
 import { cta, services, servicesCopy } from "../../config/content";
 import { Button } from "../button/Button";
 import { ArrowIcon } from "../icons/Icons";
+import { MessengerButtons } from "../messengers/MessengerButtons";
 import "./Services.css";
 
 type Props = {
@@ -54,6 +55,8 @@ export function Services({ onEvaluate, onCourier, onRequest }: Props) {
         <Button variant="secondary" onClick={onCourier}>
           {cta.courier}
         </Button>
+        <p className="services__write">{cta.writeVia}</p>
+        <MessengerButtons className="services__messengers" />
       </div>
     </section>
   );

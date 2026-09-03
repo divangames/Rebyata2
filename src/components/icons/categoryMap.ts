@@ -10,7 +10,7 @@ import {
   BagIcon,
   CheckIcon,
   HeartIcon,
-  MailIcon,
+  HandshakeIcon,
   MasterIcon,
   ShieldIcon,
   ShirtIcon,
@@ -32,7 +32,7 @@ const advantageIcons: Record<string, IconCmp> = {
   chem: SparklesIcon,
   hand: MasterIcon,
   care: HeartIcon,
-  agree: MailIcon,
+  agree: HandshakeIcon,
   delivery: TruckIcon,
   guarantee: ShieldIcon,
 };

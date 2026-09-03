@@ -62,17 +62,48 @@ export function MasterIcon({ className }: IconProps) {
   );
 }
 
-/** Конверт — согласованные работы. */
-export function MailIcon({ className }: IconProps) {
+/** Рукопожатие — согласование работы. */
+export function HandshakeIcon({ className }: IconProps) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <rect x="3.5" y="6" width="17" height="12" rx="1.8" stroke="currentColor" strokeWidth="1.5" />
       <path
-        d="m4.4 7.4 7.6 5.4 7.6-5.4"
+        d="M4.8 12.2 8.2 9.6a1.5 1.5 0 0 1 2 .2l1.4 1.5"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
+      />
+      <path
+        d="M19.2 12.2 15.8 9.6a1.5 1.5 0 0 0-2 .2l-1.4 1.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9.2 13.8 10.8 15.4"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M14.8 13.8 13.2 15.4"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M10.8 15.4 12 16.6l1.2-1.2"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12 16.6V18.8"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
       />
     </svg>
   );

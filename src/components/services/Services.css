@@ -125,6 +125,19 @@
   color: var(--white);
 }
 
+.services__write {
+  margin: 0.15rem 0 0;
+  color: var(--muted);
+  font-size: clamp(0.86rem, 3vw, 0.95rem);
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.services__messengers {
+  width: 100%;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .services__card:hover {
     transform: translateY(-3px);
@@ -279,5 +292,19 @@
     width: auto;
     flex: 1 1 14rem;
     max-width: 18rem;
+  }
+
+  .services__write,
+  .services__messengers {
+    flex: 1 1 100%;
+  }
+
+  .services__write {
+    margin-top: 0.35rem;
+    text-align: left;
+  }
+
+  .services__messengers {
+    max-width: 22rem;
   }
 }

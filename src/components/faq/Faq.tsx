@@ -47,7 +47,7 @@ export function Faq({ onEvaluate, onCourier }: Props) {
         <p>Напишите нам — ответим в мессенджерах</p>
       </div>
       <p className="faq__write">{cta.writeVia}</p>
-      <MessengerButtons pending className="faq__messengers" />
+      <MessengerButtons className="faq__messengers" />
     </section>
   );
 }

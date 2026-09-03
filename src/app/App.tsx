@@ -19,10 +19,11 @@ import { PwaInstallSheet } from "../components/pwa/PwaInstallSheet";
 import { RequestModal } from "../components/request/RequestModal";
 import { AccountScreen, OrdersScreen } from "../components/screens/PwaScreens";
 import { Services } from "../components/services/Services";
+import { ThanksModal } from "../components/thanks/ThanksModal";
 import { Works } from "../components/works/Works";
 import { useDeviceTier } from "../hooks/useDeviceTier";
 import { usePwaInstallPrompt } from "../hooks/usePwaInstallPrompt";
-import type { ScreenId } from "../types";
+import type { ScreenId, ThanksKind } from "../types";
 import "./App.css";
 
 /** Собирает посадочник и оболочки PWA. */
@@ -34,10 +35,24 @@ export function App() {
   const [evaluate, setEvaluate] = useState(false);
   const [courier, setCourier] = useState(false);
   const [requestTitle, setRequestTitle] = useState<string | null>(null);
+  const [thanks, setThanks] = useState<ThanksKind | null>(null);
 
   const openEvaluate = useCallback(() => setEvaluate(true), []);
   const openCourier = useCallback(() => setCourier(true), []);
   const openRequest = useCallback((title: string) => setRequestTitle(title), []);
+
+  /** Закрывает формы и показывает благодарность за обычную заявку. */
+  const finishRequest = useCallback(() => {
+    setRequestTitle(null);
+    setCourier(false);
+    setThanks("request");
+  }, []);
+
+  /** Закрывает оценку и показывает благодарность со сроком 15 минут. */
+  const finishEvaluate = useCallback(() => {
+    setEvaluate(false);
+    setThanks("evaluate");
+  }, []);
 
   /** Переход к секции лендинга. */
   const jump = useCallback((id: string) => {
@@ -99,13 +114,19 @@ export function App() {
         onEvaluate={openEvaluate}
         onCourier={openCourier}
       />
-      <EvaluateSheet open={evaluate} onClose={() => setEvaluate(false)} />
-      <CourierSheet open={courier} onClose={() => setCourier(false)} />
+      <EvaluateSheet
+        open={evaluate}
+        onClose={() => setEvaluate(false)}
+        onSuccess={finishEvaluate}
+      />
+      <CourierSheet open={courier} onClose={() => setCourier(false)} onSuccess={finishRequest} />
       <RequestModal
         open={requestTitle !== null}
         serviceTitle={requestTitle ?? ""}
         onClose={() => setRequestTitle(null)}
+        onSuccess={finishRequest}
       />
+      <ThanksModal open={thanks !== null} kind={thanks ?? "request"} onClose={() => setThanks(null)} />
       <PwaInstallSheet
         open={pwaInstall.open}
         os={pwaInstall.os}
