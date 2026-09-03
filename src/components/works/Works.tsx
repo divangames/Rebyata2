@@ -5,7 +5,7 @@
 ////////////////////////////////////////////////////////
 
 import { useEffect, useState } from "react";
-import { workRows } from "../../config/content";
+import { workRows, worksSection } from "../../config/content";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
 import { useRepeatInView } from "../../hooks/useRepeatInView";
 import type { WorkExample } from "../../types";
@@ -54,8 +54,14 @@ export function Works({ onEvaluate, onCourier }: Props) {
   return (
     <section ref={ref} className="works band" id="works">
       <header className="works__intro">
-        <h2>Примеры работ</h2>
-        <p className="works__sub">до и после наших забот</p>
+        <h2>{worksSection.title}</h2>
+        <p className="works__sub">{worksSection.lead}</p>
+        <p className="works__slider-hint">
+          <span className="works__slider-hint-icon" aria-hidden="true">
+            ↔
+          </span>
+          {worksSection.sliderHint}
+        </p>
       </header>
       <div className="works__rows">
         {workRows.map((row, index) => (

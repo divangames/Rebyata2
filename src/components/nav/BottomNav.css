@@ -16,6 +16,11 @@
   border-radius: 1.15rem 1.15rem 0 0;
 }
 
+/* Поверх оверлея выпадашки, чтобы «×» закрывал меню. */
+.dock.is-fab-open {
+  z-index: 90;
+}
+
 .dock__item {
   display: flex;
   flex-direction: column;

@@ -59,11 +59,6 @@
   font-weight: 600;
 }
 
-.dock-fab .contacts__social {
-  justify-content: flex-start;
-  margin: 0;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .dock-fab__scrim,
   .dock-fab__card {

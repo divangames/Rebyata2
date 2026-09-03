@@ -8,7 +8,7 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { footerCue } from "../../config/content";
 import { useDeviceTier } from "../../hooks/useDeviceTier";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
-import { ContactsSocial } from "../contacts/ContactsSocial";
+import { MessengerButtons } from "../messengers/MessengerButtons";
 import { AnimatedSlogan, getSloganStrokeDelayMs } from "../slogan/AnimatedSlogan";
 import "./FooterCue.css";
 
@@ -103,7 +103,7 @@ export function FooterCue() {
         label={footerCue.handFull}
       />
       <CueArrow alive={alive} />
-      <ContactsSocial onDark />
+      <MessengerButtons className="footer-cue__messengers messenger-buttons--panel" />
     </div>
   );
 }

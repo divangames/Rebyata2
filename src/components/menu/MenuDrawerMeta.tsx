@@ -9,7 +9,7 @@ import { yandexMapsUrl } from "../../helpers/maps";
 import { Button } from "../button/Button";
 import { ClockIcon, PhoneIcon } from "../contacts/ContactIcons";
 import { ContactPhone } from "../contacts/ContactPhone";
-import { ContactsSocial } from "../contacts/ContactsSocial";
+import { MessengerButtons } from "../messengers/MessengerButtons";
 import { PinIcon } from "../icons/Icons";
 
 type Props = {
@@ -45,7 +45,8 @@ export function MenuDrawerMeta({ onEvaluate, onCourier }: Props) {
           <span>{contacts.hours}</span>
         </li>
       </ul>
-      <ContactsSocial onDark />
+      <p className="drawer__write">{cta.writeVia}</p>
+      <MessengerButtons className="drawer__messengers messenger-buttons--panel" />
       <div className="drawer__cta">
         <Button onClick={onEvaluate}>{cta.estimate}</Button>
         <Button variant="light" onClick={onCourier}>

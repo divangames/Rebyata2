@@ -8,7 +8,7 @@ import { useEffect, type TransitionEvent } from "react";
 import { cta } from "../../config/content";
 import { usePresence } from "../../hooks/usePresence";
 import { Button } from "../button/Button";
-import { ContactsSocial } from "../contacts/ContactsSocial";
+import { MessengerButtons } from "../messengers/MessengerButtons";
 import { OverlayHost } from "../overlay/OverlayHost";
 import "./DockFab.css";
 
@@ -83,7 +83,7 @@ export function DockFab({ open, onClose, onEvaluate, onCourier }: Props) {
           {cta.courier}
         </Button>
         <p className="dock-fab__write">{cta.writeVia}</p>
-        <ContactsSocial onDark />
+        <MessengerButtons className="messenger-buttons--panel" />
       </div>
     </div>
     </OverlayHost>

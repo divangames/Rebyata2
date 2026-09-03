@@ -71,23 +71,26 @@
   animation-play-state: running;
 }
 
-.footer-cue .contacts__social {
+.footer-cue .footer-cue__messengers {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem;
   justify-self: start;
-  gap: 0.6rem;
+  width: min(100%, 11.5rem);
   margin: 0 0 0 0.15rem;
 }
 
-.footer-cue .contacts__social-link {
-  width: 4.25rem;
-  height: 4.25rem;
-  min-width: 4.25rem;
-  min-height: 4.25rem;
+.footer-cue .footer-cue__messengers .messenger-buttons__btn {
+  min-height: 2.85rem;
+  padding: 0.6rem 0.75rem;
+  gap: 0.4rem;
+  font-size: clamp(0.74rem, 3vw, 0.82rem);
 }
 
-.footer-cue .contacts__social-link svg,
-.footer-cue .contacts__social-link img {
-  width: 1.7rem;
-  height: 1.7rem;
+.footer-cue .footer-cue__messengers .messenger-buttons__btn svg,
+.footer-cue .footer-cue__messengers .messenger-buttons__btn img {
+  width: 1.15rem;
+  height: 1.15rem;
 }
 
 @keyframes footer-cue-draw {
@@ -124,6 +127,16 @@
 
   .footer-cue__arrow {
     width: 5.4rem;
+  }
+
+  .footer-cue .footer-cue__messengers {
+    width: min(100%, 13rem);
+  }
+
+  .footer-cue .footer-cue__messengers .messenger-buttons__btn {
+    min-height: 3.15rem;
+    padding: 0.75rem 0.9rem;
+    font-size: 0.86rem;
   }
 }
 

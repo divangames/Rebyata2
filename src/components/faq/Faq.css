@@ -88,13 +88,6 @@
   overflow: hidden;
 }
 
-.faq__panel p {
-  padding: 0 0.95rem 0.95rem;
-  color: var(--muted);
-  font-size: clamp(0.84rem, 3vw, 0.94rem);
-  line-height: 1.45;
-}
-
 .faq__help {
   display: grid;
   gap: 0.28rem;
@@ -116,13 +109,16 @@
   line-height: 1.4;
 }
 
-.faq__social {
-  margin-top: 0.15rem;
+.faq__write {
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(0.86rem, 3vw, 0.95rem);
+  font-weight: 600;
+  line-height: 1.4;
 }
 
-.faq__social .contacts__social {
-  justify-content: flex-start;
-  margin: 0;
+.faq__messengers {
+  margin-top: 0.15rem;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -185,7 +181,7 @@
 
   .faq__list {
     grid-column: 2;
-    grid-row: 1 / span 3;
+    grid-row: 1 / span 4;
   }
 
   .faq__help {
@@ -194,10 +190,15 @@
     margin-top: 1rem;
   }
 
-  .faq__social {
+  .faq__write {
     grid-column: 1;
     grid-row: 3;
-    justify-self: start;
+  }
+
+  .faq__messengers {
+    grid-column: 1;
+    grid-row: 4;
+    justify-self: stretch;
     align-self: start;
   }
 }

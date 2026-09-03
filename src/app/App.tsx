@@ -75,7 +75,7 @@ export function App() {
             <Services onEvaluate={openEvaluate} onCourier={openCourier} onRequest={openRequest} />
             <Works onEvaluate={openEvaluate} onCourier={openCourier} />
             <Advantages onEvaluate={openEvaluate} onCourier={openCourier} />
-            <Faq />
+            <Faq onEvaluate={openEvaluate} onCourier={openCourier} />
             <Contacts onEvaluate={openEvaluate} onCourier={openCourier} onJump={jump} />
           </>
         ) : null}

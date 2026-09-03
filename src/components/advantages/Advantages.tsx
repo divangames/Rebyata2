@@ -1,10 +1,10 @@
 ////////////////////////////////////////////////////////
 //
-// Блок «Больше, чем просто чистка»: список преимуществ.
+// Блок «Почему выбирают «Своих ребят»»: список преимуществ.
 //
 ////////////////////////////////////////////////////////
 
-import { advantages, cta } from "../../config/content";
+import { advantages, advantagesSection, cta } from "../../config/content";
 import { Button } from "../button/Button";
 import { iconForAdvantage } from "../icons/categoryMap";
 import "./Advantages.css";
@@ -18,7 +18,7 @@ type Props = {
 export function Advantages({ onEvaluate, onCourier }: Props) {
   return (
     <section className="adv band" id="about" aria-labelledby="adv-title">
-      <h2 id="adv-title">Больше, чем просто чистка</h2>
+      <h2 id="adv-title">{advantagesSection.title}</h2>
       <ul className="adv__list">
         {advantages.map((item) => {
           const Icon = iconForAdvantage(item.id);
@@ -35,7 +35,7 @@ export function Advantages({ onEvaluate, onCourier }: Props) {
           );
         })}
       </ul>
-      <p className="adv__note">Фото до/после + регистрация в журнале</p>
+      <p className="adv__note">{advantagesSection.note}</p>
       <div className="adv__actions">
         <Button onClick={onEvaluate}>Получить оценку мастера</Button>
         <Button variant="secondary" onClick={onCourier}>

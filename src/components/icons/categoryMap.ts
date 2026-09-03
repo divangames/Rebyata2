@@ -42,7 +42,7 @@ export function iconForCategory(id: string): IconCmp {
   return categoryIcons[id] ?? ShirtIcon;
 }
 
-/** Иконка пункта «Больше, чем просто чистка». */
+/** Иконка пункта «Почему выбирают «Своих ребят»». */
 export function iconForAdvantage(id: string): IconCmp {
   return advantageIcons[id] ?? CheckIcon;
 }

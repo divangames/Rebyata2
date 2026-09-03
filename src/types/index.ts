@@ -41,10 +41,22 @@ export type HowStep = {
   text: string;
 };
 
+export type FaqAction = {
+  kind: "evaluate" | "courier";
+  label: string;
+};
+
+export type FaqLink = {
+  label: string;
+  href: string;
+};
+
 export type FaqItem = {
   id: string;
   question: string;
-  answer: string;
+  paragraphs: string[];
+  action?: FaqAction;
+  links?: FaqLink[];
 };
 
 export type DeviceTier = "low" | "high";

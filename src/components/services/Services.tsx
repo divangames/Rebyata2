@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////
 
-import { cta, services } from "../../config/content";
+import { cta, services, servicesCopy } from "../../config/content";
 import { Button } from "../button/Button";
 import { ArrowIcon } from "../icons/Icons";
 import "./Services.css";
@@ -20,8 +20,8 @@ export function Services({ onEvaluate, onCourier, onRequest }: Props) {
   return (
     <section className="services band" id="services" aria-labelledby="services-title">
       <header className="services__head">
-        <h2 id="services-title">Услуги и цены</h2>
-        <p>Прозрачная стоимость. Итоговая цена — после осмотра</p>
+        <h2 id="services-title">{servicesCopy.title}</h2>
+        <p>{servicesCopy.lead}</p>
       </header>
 
       <div className="services__grid">

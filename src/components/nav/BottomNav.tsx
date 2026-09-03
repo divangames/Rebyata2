@@ -38,7 +38,7 @@ export function BottomNav({ active, onNavigate, onEvaluate, onCourier }: Props) 
 
   return (
     <>
-      <nav className="dock" aria-label="Основная навигация">
+      <nav className={`dock${fabOpen ? " is-fab-open" : ""}`} aria-label="Основная навигация">
         <button
           type="button"
           className={`dock__item${active === "home" ? " is-active" : ""}`}
@@ -59,7 +59,7 @@ export function BottomNav({ active, onNavigate, onEvaluate, onCourier }: Props) 
           type="button"
           className={`dock__item dock__item--cta${fabOpen ? " is-open" : ""}`}
           onClick={toggleFab}
-          aria-label="Открыть действия"
+          aria-label={fabOpen ? "Закрыть меню" : "Открыть действия"}
           aria-expanded={fabOpen}
           aria-haspopup="dialog"
         >
