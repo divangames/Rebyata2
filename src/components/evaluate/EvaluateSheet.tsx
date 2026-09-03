@@ -130,7 +130,6 @@ export function EvaluateSheet({ open, onClose }: Props) {
                     className="sheet__file"
                     type="file"
                     accept="image/*"
-                    capture="environment"
                     multiple
                     onChange={onPick}
                   />

@@ -184,6 +184,21 @@
   }
 }
 
+@media (min-width: 48rem) and (max-width: 63.99rem) {
+  .services__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .services__photo {
+    aspect-ratio: 5 / 4;
+    padding: 0.45rem;
+  }
+
+  .services__photo img {
+    object-fit: contain;
+  }
+}
+
 @media (min-width: 64rem) {
   .services {
     --band-pad-top: 2.5rem;
@@ -192,10 +207,9 @@
   }
 
   .services__head {
-    display: flex;
-    align-items: end;
-    justify-content: space-between;
-    gap: 1.5rem;
+    display: grid;
+    gap: 0.4rem;
+    max-width: 40rem;
   }
 
   .services h2 {
@@ -203,32 +217,67 @@
   }
 
   .services__head p {
-    max-width: 22rem;
+    max-width: none;
     margin: 0;
     font-size: 1rem;
   }
 
-  /* Четыре карточки: сетка 2×2, без висящей третьей колонки. */
+  /* Четыре услуги в один ряд на всю колонку --content. */
   .services__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    max-width: 52rem;
-    gap: 1.15rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(0.85rem, 1.2vw, 1.35rem);
+    width: 100%;
+    max-width: none;
+  }
+
+  .services__card {
+    border-radius: 1.2rem;
+  }
+
+  .services__photo {
+    aspect-ratio: 1 / 1;
+    padding: clamp(0.55rem, 1vw, 0.85rem);
+    background: linear-gradient(180deg, #fafafa 0%, #fff 100%);
+  }
+
+  .services__photo img {
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .services__body {
+    padding: 0.55rem 1rem 1.2rem;
+    gap: 0.32rem;
+    min-height: 6.75rem;
   }
 
   .services__card h3 {
-    font-size: 1.12rem;
+    font-size: clamp(0.92rem, 1vw, 1.05rem);
   }
 
   .services__card p {
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 0.9vw, 0.88rem);
+    line-height: 1.4;
   }
 
   .services__price {
-    font-size: 1.02rem;
+    font-size: clamp(0.92rem, 1vw, 1rem);
+    padding-top: 0.65rem;
   }
 
   .services__actions {
-    width: min(100%, 20rem);
-    justify-self: start;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 0.75rem 1rem;
+    width: 100%;
+    max-width: none;
+    justify-self: stretch;
+  }
+
+  .services__actions .btn {
+    width: auto;
+    flex: 1 1 14rem;
+    max-width: 18rem;
   }
 }
