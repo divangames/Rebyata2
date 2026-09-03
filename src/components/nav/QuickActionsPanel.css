@@ -1,0 +1,18 @@
+/* Карточка быстрых действий: тёмный фон и крупные зоны нажатия. */
+
+.quick-actions {
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.95rem 0.9rem 1rem;
+  border-radius: var(--radius-lg);
+  background: var(--black);
+  color: var(--white);
+  box-shadow: 0 18px 40px color-mix(in srgb, var(--black) 38%, transparent);
+}
+
+.quick-actions__write {
+  margin: 0.35rem 0 0;
+  color: var(--muted-dark);
+  font-size: 0.78rem;
+  font-weight: 600;
+}

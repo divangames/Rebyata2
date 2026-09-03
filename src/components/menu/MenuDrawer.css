@@ -299,3 +299,9 @@
     background: color-mix(in srgb, var(--black) 42%, transparent);
   }
 }
+
+@media (min-width: 64rem) {
+  .drawer {
+    display: none;
+  }
+}

@@ -62,6 +62,7 @@ export function App() {
         onHome={goHome}
         onJump={jump}
         onEvaluate={openEvaluate}
+        onCourier={openCourier}
         onNavigate={(next) => {
           setScreen(next);
           window.scrollTo({ top: 0 });

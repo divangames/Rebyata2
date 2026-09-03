@@ -5,11 +5,9 @@
 ////////////////////////////////////////////////////////
 
 import { useEffect, type TransitionEvent } from "react";
-import { cta } from "../../config/content";
 import { usePresence } from "../../hooks/usePresence";
-import { Button } from "../button/Button";
-import { MessengerButtons } from "../messengers/MessengerButtons";
 import { OverlayHost } from "../overlay/OverlayHost";
+import { QuickActionsPanel } from "./QuickActionsPanel";
 import "./DockFab.css";
 
 type Props = {
@@ -70,22 +68,17 @@ export function DockFab({ open, onClose, onEvaluate, onCourier }: Props) {
 
   return (
     <OverlayHost open={mounted}>
-    <div className={`dock-fab${shown ? " is-shown" : ""}`} aria-hidden={!shown}>
-      <button type="button" className="dock-fab__scrim" aria-label="Закрыть меню" onClick={onClose} />
-      <div
-        className="dock-fab__card"
-        role="dialog"
-        aria-label="Быстрые действия"
-        onTransitionEnd={handleCardTransitionEnd}
-      >
-        <Button onClick={() => pick(onEvaluate)}>{cta.estimate}</Button>
-        <Button variant="light" onClick={() => pick(onCourier)}>
-          {cta.courier}
-        </Button>
-        <p className="dock-fab__write">{cta.writeVia}</p>
-        <MessengerButtons className="messenger-buttons--panel" />
+      <div className={`dock-fab${shown ? " is-shown" : ""}`} aria-hidden={!shown}>
+        <button type="button" className="dock-fab__scrim" aria-label="Закрыть меню" onClick={onClose} />
+        <div
+          className="dock-fab__card"
+          role="dialog"
+          aria-label="Быстрые действия"
+          onTransitionEnd={handleCardTransitionEnd}
+        >
+          <QuickActionsPanel onEvaluate={() => pick(onEvaluate)} onCourier={() => pick(onCourier)} />
+        </div>
       </div>
-    </div>
     </OverlayHost>
   );
 }

@@ -1,0 +1,78 @@
+/* Десктопное меню «+» в шапке. */
+
+.header-quick {
+  position: relative;
+  display: none;
+}
+
+.header-quick__trigger {
+  display: grid;
+  place-items: center;
+  width: 2.65rem;
+  height: 2.65rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--white);
+  cursor: pointer;
+}
+
+.header-quick__trigger svg {
+  width: 2.35rem;
+  height: 2.35rem;
+  transition: transform 0.22s var(--ease);
+}
+
+.header-quick.is-open .header-quick__trigger svg {
+  transform: rotate(45deg);
+}
+
+.header-quick__panel {
+  position: absolute;
+  top: calc(100% + 0.55rem);
+  right: 0;
+  z-index: 2;
+  width: min(20.5rem, calc(100vw - 2rem));
+  animation: header-quick-in 0.24s var(--ease);
+}
+
+@keyframes header-quick-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -0.35rem, 0) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .header-quick__trigger:hover svg {
+    transform: scale(1.05);
+  }
+
+  .header-quick.is-open .header-quick__trigger:hover svg {
+    transform: rotate(45deg) scale(1.05);
+  }
+}
+
+@media (min-width: 64rem) {
+  .header-quick {
+    display: block;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-quick__trigger svg,
+  .header-quick__panel {
+    animation: none;
+    transition: none;
+  }
+
+  .header-quick.is-open .header-quick__trigger svg {
+    transform: rotate(45deg);
+  }
+}
