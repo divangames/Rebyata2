@@ -14,7 +14,8 @@
   border: 0;
   border-radius: 50%;
   background: none;
-  color: var(--white);
+  color: var(--green);
+  --evaluate-plus: var(--black);
   cursor: pointer;
 }
 

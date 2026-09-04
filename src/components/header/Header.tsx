@@ -10,6 +10,7 @@ import type { DemoUser } from "../../hooks/useDemoAuth";
 import type { ScreenId } from "../../types";
 import { MenuIcon } from "../icons/Icons";
 import { HeaderProfileMenu } from "./HeaderProfileMenu";
+import { HeaderQuickMenu } from "./HeaderQuickMenu";
 import "./Header.css";
 import "./HeaderProfileMenu.css";
 
@@ -80,10 +81,9 @@ export function Header({
             user={user}
             onLogin={onAccountLogin}
             onRegister={onAccountRegister}
-            onEvaluate={onEvaluate}
-            onCourier={onCourier}
             onLogout={onLogout}
           />
+          <HeaderQuickMenu onEvaluate={onEvaluate} onCourier={onCourier} />
         </div>
         <button type="button" className="header__menu" onClick={onMenu} aria-label="Меню">
           <MenuIcon />

@@ -284,12 +284,12 @@ export function ArrowIcon({ className }: IconProps) {
   );
 }
 
-/** Чёрный круг с лаймовым плюсом — главное действие «Оценить». */
+/** Круг с плюсом — главное действие «Оценить»; цвета через currentColor и --evaluate-plus. */
 export function EvaluateIcon({ className }: IconProps) {
   return (
     <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
       <circle cx="12" cy="12" r="12" fill="currentColor" />
-      <path d="M12 7v10M7 12h10" stroke="var(--green)" strokeWidth="1.35" strokeLinecap="round" />
+      <path d="M12 7v10M7 12h10" stroke="var(--evaluate-plus, var(--green))" strokeWidth="1.35" strokeLinecap="round" />
     </svg>
   );
 }

@@ -160,6 +160,28 @@
   margin-top: 0.65rem;
 }
 
+.account-cabinet-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 3.15rem;
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius-pill);
+  background: var(--green);
+  color: var(--black);
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  transition: filter 0.2s var(--ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .account-cabinet-link:hover {
+    filter: brightness(1.05);
+  }
+}
+
 @media (min-width: 64rem) {
   .pwa-screen {
     --band-pad-top: 2.2rem;

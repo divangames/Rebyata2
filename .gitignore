@@ -13,6 +13,7 @@ dist-ssr
 deploy.zip
 *.local
 src/assets/work/НЕ ТРОГАТЬ!/
+src/assets/НЕ ТРОГАТЬ!/
 
 # Editor directories and files
 .vscode/*

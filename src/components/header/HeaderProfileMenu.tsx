@@ -5,27 +5,23 @@
 ////////////////////////////////////////////////////////
 
 import { useEffect, useRef, useState } from "react";
-import { cta } from "../../config/content";
 import type { DemoUser } from "../../hooks/useDemoAuth";
 import { UserIcon } from "../icons/Icons";
+import { ProfileMenuPanel } from "../profile/ProfileMenuPanel";
 import "./HeaderProfileMenu.css";
 
 type Props = {
   user: DemoUser | null;
   onLogin: () => void;
   onRegister: () => void;
-  onEvaluate: () => void;
-  onCourier: () => void;
   onLogout: () => void;
 };
 
-/** Круглая кнопка профиля с меню входа или быстрых действий. */
+/** Круглая кнопка профиля с меню входа или действий аккаунта. */
 export function HeaderProfileMenu({
   user,
   onLogin,
   onRegister,
-  onEvaluate,
-  onCourier,
   onLogout,
 }: Props) {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -88,35 +84,14 @@ export function HeaderProfileMenu({
       </button>
 
       {open ? (
-        <div className="header-profile__panel" role="menu" aria-label="Меню профиля">
-          {isLoggedIn ? (
-            <>
-              <p className="header-profile__name">{user.name}</p>
-              <button type="button" className="header-profile__item" role="menuitem" onClick={() => pick(onEvaluate)}>
-                {cta.estimate}
-              </button>
-              <button type="button" className="header-profile__item" role="menuitem" onClick={() => pick(onCourier)}>
-                {cta.courier}
-              </button>
-              <button
-                type="button"
-                className="header-profile__item header-profile__item--muted"
-                role="menuitem"
-                onClick={() => pick(onLogout)}
-              >
-                Выйти
-              </button>
-            </>
-          ) : (
-            <>
-              <button type="button" className="header-profile__item" role="menuitem" onClick={() => pick(onLogin)}>
-                Войти
-              </button>
-              <button type="button" className="header-profile__item" role="menuitem" onClick={() => pick(onRegister)}>
-                Регистрация
-              </button>
-            </>
-          )}
+        <div className="header-profile__panel">
+          <ProfileMenuPanel
+            user={user}
+            onLogin={() => pick(onLogin)}
+            onRegister={() => pick(onRegister)}
+            onLogout={() => pick(onLogout)}
+            className="profile-menu--header"
+          />
         </div>
       ) : null}
     </div>

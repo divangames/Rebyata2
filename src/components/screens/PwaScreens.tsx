@@ -5,7 +5,7 @@
 ////////////////////////////////////////////////////////
 
 import { useEffect, useState, type FormEvent } from "react";
-import { cta } from "../../config/content";
+import { accountCabinetHref, cta } from "../../config/content";
 import type { DemoUser } from "../../hooks/useDemoAuth";
 import { Button } from "../button/Button";
 import "./PwaScreens.css";
@@ -24,7 +24,6 @@ type OrdersProps = {
 type AccountProps = {
   auth: AuthApi;
   initialMode: "login" | "register";
-  onEvaluate: () => void;
 };
 
 /** Список заказов: пустое состояние до первой оценки. */
@@ -39,7 +38,7 @@ export function OrdersScreen({ onEvaluate }: OrdersProps) {
 }
 
 /** Демо-личный кабинет: авторизация работает локально, без сервера. */
-export function AccountScreen({ auth, initialMode, onEvaluate }: AccountProps) {
+export function AccountScreen({ auth, initialMode }: AccountProps) {
   const { user, login, register, logout } = auth;
   const [mode, setMode] = useState<"login" | "register">(initialMode);
   const [form, setForm] = useState({ name: "", phone: "", password: "" });
@@ -112,7 +111,7 @@ export function AccountScreen({ auth, initialMode, onEvaluate }: AccountProps) {
         </div>
         {notice ? <p className="account-notice" role="status">{notice}</p> : null}
         <div className="account-actions">
-          <Button onClick={onEvaluate}>Оценить вещь</Button>
+          <a href={accountCabinetHref} className="account-cabinet-link">Войти в ЛК</a>
           <Button variant="light" onClick={handleLogout}>Выйти</Button>
         </div>
       </section>

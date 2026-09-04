@@ -102,9 +102,7 @@
   aspect-ratio: 16 / 10;
   min-height: 11.5rem;
   border-radius: var(--radius-md);
-  background:
-    radial-gradient(circle at 48% 42%, rgba(124, 251, 10, 0.18), transparent 28%),
-    linear-gradient(180deg, #eceae8, #e3e0dc);
+  background: linear-gradient(180deg, #eceae8, #e3e0dc);
 }
 
 .contacts__map-frame {
@@ -117,6 +115,8 @@
   border: 0;
   pointer-events: none;
   transform: translate(-50%, -50%);
+  /* Виджет Яндекса остаётся цветным — обесцвечиваем кадр, кнопка сверху без фильтра. */
+  filter: grayscale(1) contrast(1.08);
 }
 
 .contacts__map-cover {

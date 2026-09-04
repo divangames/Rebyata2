@@ -1,0 +1,69 @@
+/* Выпадашка профиля над доком: затемнение и карточка справа. */
+
+.dock-profile {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: calc(var(--nav-h) + env(safe-area-inset-bottom));
+  z-index: 32;
+  pointer-events: none;
+}
+
+.dock-profile.is-shown {
+  pointer-events: auto;
+}
+
+.dock-profile__scrim {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: color-mix(in srgb, var(--black) 42%, transparent);
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+
+.dock-profile.is-shown .dock-profile__scrim {
+  opacity: 1;
+}
+
+.dock-profile__card {
+  position: absolute;
+  right: 0.7rem;
+  bottom: 0.45rem;
+  width: min(13.5rem, calc(100% - 1.4rem));
+  opacity: 0;
+  transform: translate3d(0, 0.85rem, 0) scale(0.96);
+  transform-origin: 90% 100%;
+  transition:
+    opacity 0.2s ease,
+    transform 0.28s var(--ease);
+}
+
+.dock-profile.is-shown .dock-profile__card {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dock-profile__scrim,
+  .dock-profile__card {
+    transition: none;
+  }
+
+  .dock-profile:not(.is-shown) .dock-profile__card {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .dock-profile__scrim {
+    background: color-mix(in srgb, var(--black) 58%, transparent);
+  }
+}
+
+@media (min-width: 64rem) {
+  .dock-profile {
+    display: none;
+  }
+}

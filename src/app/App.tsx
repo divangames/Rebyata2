@@ -111,15 +111,19 @@ export function App() {
         ) : null}
         {screen === "orders" ? <OrdersScreen onEvaluate={openEvaluate} /> : null}
         {screen === "account" ? (
-          <AccountScreen auth={auth} initialMode={accountMode} onEvaluate={openEvaluate} />
+          <AccountScreen auth={auth} initialMode={accountMode} />
         ) : null}
       </main>
       <BottomNav
         active={screen}
+        user={auth.user}
         onNavigate={(next) => {
           setScreen(next);
           window.scrollTo({ top: 0 });
         }}
+        onAccountLogin={() => openAccount("login")}
+        onAccountRegister={() => openAccount("register")}
+        onLogout={auth.logout}
         onEvaluate={openEvaluate}
         onCourier={openCourier}
       />
