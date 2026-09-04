@@ -74,6 +74,15 @@
   list-style: none;
 }
 
+.work-modal__single {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 0.95rem;
+}
+
 .work-modal__thumbs button {
   display: block;
   width: 3.35rem;

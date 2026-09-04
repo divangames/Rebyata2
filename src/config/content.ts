@@ -8,18 +8,65 @@ import serviceBackpack from "../assets/services/backpack.png";
 import serviceBags from "../assets/services/bags.png";
 import serviceOther from "../assets/USLUGI/Other.png";
 import serviceShoes from "../assets/services/shoes.png";
-////////////////////////////////////////////////////////
-//
-// Пары работ: *_1 / *_01 — после (превью карточки), *_2 / *_02 — до.
-//
-////////////////////////////////////////////////////////
-import workBackpackAfter from "../assets/work/backpack_01.png";
-import workBackpackBefore from "../assets/work/backpack_02.png";
-import workBagAfter from "../assets/work/bag_01.png";
-import workBagBefore from "../assets/work/bag_02.png";
-import workSneakersAfter from "../assets/work/sneakers_1.png";
-import workSneakersBefore from "../assets/work/sneakers_2.png";
+import work01After from "../assets/work/shoes/01/intro/1a.webp";
+import work01Before from "../assets/work/shoes/01/intro/1b.webp";
+import work01OtherAfter from "../assets/work/shoes/01/other/2a.webp";
+import work01OtherBefore from "../assets/work/shoes/01/other/2b.webp";
+import work01Info from "../assets/work/shoes/01/info.md?raw";
+import work02After from "../assets/work/shoes/02/intro/1a.webp";
+import work02Before from "../assets/work/shoes/02/intro/1b.webp";
+import work02_1After from "../assets/work/shoes/02/other/1a.webp";
+import work02_1Before from "../assets/work/shoes/02/other/1b.webp";
+import work02_2After from "../assets/work/shoes/02/other/2a.webp";
+import work02_2Before from "../assets/work/shoes/02/other/2b.webp";
+import work02_3After from "../assets/work/shoes/02/other/3a.webp";
+import work02_3Before from "../assets/work/shoes/02/other/3b.webp";
+import work02Info from "../assets/work/shoes/02/info.md?raw";
+import work03After from "../assets/work/shoes/03/intro/1a.webp";
+import work03Before from "../assets/work/shoes/03/intro/2b.webp";
+import work03_1After from "../assets/work/shoes/03/other/1a.webp";
+import work03_1Before from "../assets/work/shoes/03/other/2b.webp";
+import work03Info from "../assets/work/shoes/03/info.md?raw";
+import work05After from "../assets/work/shoes/05/intro/1a.webp";
+import work05Before from "../assets/work/shoes/05/intro/1b.webp";
+import work05_1After from "../assets/work/shoes/05/other/1a.webp";
+import work05_1Before from "../assets/work/shoes/05/other/1b.webp";
+import work05_2After from "../assets/work/shoes/05/other/2a.webp";
+import work05_2Before from "../assets/work/shoes/05/other/2b.webp";
+import work05_3After from "../assets/work/shoes/05/other/3a.webp";
+import work05_3Before from "../assets/work/shoes/05/other/3b.webp";
+import work05_4After from "../assets/work/shoes/05/other/4a.webp";
+import work05_4Before from "../assets/work/shoes/05/other/4b.webp";
+import work05Info from "../assets/work/shoes/05/info.md?raw";
+import work06After from "../assets/work/shoes/06/intro/1a.webp";
+import work06Before from "../assets/work/shoes/06/intro/2b.webp";
+import work06_1After from "../assets/work/shoes/06/other/1a.webp";
+import work06_1Before from "../assets/work/shoes/06/other/1b.webp";
+import work06_2After from "../assets/work/shoes/06/other/2a.webp";
+import work06_2Before from "../assets/work/shoes/06/other/2b.webp";
+import work06_3After from "../assets/work/shoes/06/other/3a.webp";
+import work06_3Before from "../assets/work/shoes/06/other/3b.webp";
+import work06Info from "../assets/work/shoes/06/info.md?raw";
 import type { FaqItem, HowStep, ServiceCard, WorkExample, WorkRow, WorkService, WorkSlide } from "../types";
+
+type WorkInfo = Pick<WorkExample, "title" | "service" | "description">;
+
+function parseWorkInfo(source: string): WorkInfo {
+  const lines = source.split(/\r?\n/).map((line) => line.trim());
+  const title = lines.find((line) => line.startsWith("## "))?.slice(3).trim() ?? "Пример работы";
+  const service = lines.find((line) => line.startsWith("# "))?.slice(2).trim() as WorkService;
+  const description = lines
+    .filter((line) => line && !line.startsWith("#"))
+    .join(" ");
+
+  return { title, service, description };
+}
+
+const work01Copy = parseWorkInfo(work01Info);
+const work02Copy = parseWorkInfo(work02Info);
+const work03Copy = parseWorkInfo(work03Info);
+const work05Copy = parseWorkInfo(work05Info);
+const work06Copy = parseWorkInfo(work06Info);
 
 export const brand = {
   name: "Свои ребята",
@@ -165,38 +212,67 @@ export const workKinds: { service: WorkService; description: string }[] = [
   },
 ];
 
-/** Три кадра сравнения из одной пары — заглушка миниатюр. */
-function workSlides(prefix: string, before: string, after: string): WorkSlide[] {
-  return [1, 2, 3].map((index) => ({
-    id: `${prefix}-slide-${index}`,
-    before,
-    after,
-  }));
-}
-
-/** В ряду всегда химчистка, реставрация и ремонт — фото пока одно на три карточки. */
-function workTrio(id: string, before: string, after: string): WorkExample[] {
-  return workKinds.map((kind, index) => ({
-    id: `${id}-${index + 1}`,
-    title: kind.service,
-    service: kind.service,
-    description: kind.description,
-    slides: workSlides(`${id}-${index + 1}`, before, after),
-  }));
+function compareSlide(id: string, before: string, after: string): WorkSlide {
+  return { id, before, after };
 }
 
 export const workRows: WorkRow[] = [
   {
-    id: "shoes",
+    id: "portfolio",
     title: "Обувь",
-    items: workTrio("sneakers", workSneakersBefore, workSneakersAfter),
-  },
-  {
-    id: "bags",
-    title: "Сумки и рюкзаки",
     items: [
-      ...workTrio("bag", workBagBefore, workBagAfter),
-      ...workTrio("backpack", workBackpackBefore, workBackpackAfter),
+      {
+        id: "work-01",
+        ...work01Copy,
+        preview: { before: work01Before, after: work01After },
+        slides: [
+          compareSlide("work-01-intro", work01Before, work01After),
+          compareSlide("work-01-01", work01OtherBefore, work01OtherAfter),
+        ],
+      },
+      {
+        id: "work-02",
+        ...work02Copy,
+        preview: { before: work02Before, after: work02After },
+        slides: [
+          compareSlide("work-02-intro", work02Before, work02After),
+          compareSlide("work-02-01", work02_1Before, work02_1After),
+          compareSlide("work-02-02", work02_2Before, work02_2After),
+          compareSlide("work-02-03", work02_3Before, work02_3After),
+        ],
+      },
+      {
+        id: "work-03",
+        ...work03Copy,
+        preview: { before: work03Before, after: work03After },
+        slides: [
+          compareSlide("work-03-intro", work03Before, work03After),
+          compareSlide("work-03-01", work03_1Before, work03_1After),
+        ],
+      },
+      {
+        id: "work-05",
+        ...work05Copy,
+        preview: { before: work05Before, after: work05After },
+        slides: [
+          compareSlide("work-05-intro", work05Before, work05After),
+          compareSlide("work-05-01", work05_1Before, work05_1After),
+          compareSlide("work-05-02", work05_2Before, work05_2After),
+          compareSlide("work-05-03", work05_3Before, work05_3After),
+          compareSlide("work-05-04", work05_4Before, work05_4After),
+        ],
+      },
+      {
+        id: "work-06",
+        ...work06Copy,
+        preview: { before: work06Before, after: work06After },
+        slides: [
+          compareSlide("work-06-intro", work06Before, work06After),
+          compareSlide("work-06-01", work06_1Before, work06_1After),
+          compareSlide("work-06-02", work06_2Before, work06_2After),
+          compareSlide("work-06-03", work06_3Before, work06_3After),
+        ],
+      },
     ],
   },
 ];

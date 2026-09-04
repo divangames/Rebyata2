@@ -82,7 +82,11 @@ export function WorkModal({ item, onClose, onEvaluate, onCourier }: Props) {
             <CloseIcon />
           </button>
           <h2 id="work-modal-title">{item.title}</h2>
-          <BeforeAfterSlider key={slide.id} before={slide.before} after={slide.after} title={item.title} />
+          {slide.before === slide.after ? (
+            <img className="work-modal__single" src={slide.after} alt={item.title} />
+          ) : (
+            <BeforeAfterSlider key={slide.id} before={slide.before} after={slide.after} title={item.title} />
+          )}
           <ul className="work-modal__thumbs" aria-label="Другие кадры">
             {item.slides.map((entry, index) => (
               <li key={entry.id}>

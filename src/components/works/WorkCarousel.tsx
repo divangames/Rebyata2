@@ -82,7 +82,7 @@ export function WorkCarousel({ items, paused, hint = false, label, onOpen }: Pro
           >
             <p className="works__name">{item.title}</p>
             <div className="works__card">
-              <WorkPreview before={item.slides[0].before} after={item.slides[0].after} />
+              <WorkPreview {...(item.preview ?? item.slides[0])} />
               <button
                 type="button"
                 className="works__open"

@@ -27,6 +27,11 @@ export type WorkExample = {
   title: string;
   service: WorkService;
   description: string;
+  preview?: {
+    image?: string;
+    before?: string;
+    after?: string;
+  };
   slides: WorkSlide[];
 };
 

@@ -5,16 +5,25 @@
 ////////////////////////////////////////////////////////
 
 type Props = {
-  before: string;
-  after: string;
+  image?: string;
+  before?: string;
+  after?: string;
 };
 
 /** Кадр превью: чистый слой снизу, «до» сверху по clip-path. */
-export function WorkPreview({ before, after }: Props) {
+export function WorkPreview({ image, before, after }: Props) {
+  if (image) {
+    return (
+      <span className="works__shot">
+        <img className="works__img" src={image} alt="" loading="lazy" decoding="async" />
+      </span>
+    );
+  }
+
   return (
     <span className="works__shot">
-      <img className="works__img works__img--after" src={after} alt="" loading="lazy" decoding="async" />
-      <img className="works__img works__img--before" src={before} alt="" loading="lazy" decoding="async" />
+      <img className="works__img works__img--after" src={after ?? before ?? ""} alt="" loading="lazy" decoding="async" />
+      <img className="works__img works__img--before" src={before ?? after ?? ""} alt="" loading="lazy" decoding="async" />
       <span className="works__rule" aria-hidden="true">
         <span className="works__line" />
         <span className="works__knob">
