@@ -8,46 +8,18 @@ import serviceBackpack from "../assets/services/backpack.png";
 import serviceBags from "../assets/services/bags.png";
 import serviceOther from "../assets/USLUGI/Other.png";
 import serviceShoes from "../assets/services/shoes.png";
-import work01After from "../assets/work/shoes/01/intro/1a.webp";
-import work01Before from "../assets/work/shoes/01/intro/1b.webp";
-import work01OtherAfter from "../assets/work/shoes/01/other/2a.webp";
-import work01OtherBefore from "../assets/work/shoes/01/other/2b.webp";
-import work01Info from "../assets/work/shoes/01/info.md?raw";
-import work02After from "../assets/work/shoes/02/intro/1a.webp";
-import work02Before from "../assets/work/shoes/02/intro/1b.webp";
-import work02_1After from "../assets/work/shoes/02/other/1a.webp";
-import work02_1Before from "../assets/work/shoes/02/other/1b.webp";
-import work02_2After from "../assets/work/shoes/02/other/2a.webp";
-import work02_2Before from "../assets/work/shoes/02/other/2b.webp";
-import work02_3After from "../assets/work/shoes/02/other/3a.webp";
-import work02_3Before from "../assets/work/shoes/02/other/3b.webp";
-import work02Info from "../assets/work/shoes/02/info.md?raw";
-import work03After from "../assets/work/shoes/03/intro/1a.webp";
-import work03Before from "../assets/work/shoes/03/intro/2b.webp";
-import work03_1After from "../assets/work/shoes/03/other/1a.webp";
-import work03_1Before from "../assets/work/shoes/03/other/2b.webp";
-import work03Info from "../assets/work/shoes/03/info.md?raw";
-import work05After from "../assets/work/shoes/05/intro/1a.webp";
-import work05Before from "../assets/work/shoes/05/intro/1b.webp";
-import work05_1After from "../assets/work/shoes/05/other/1a.webp";
-import work05_1Before from "../assets/work/shoes/05/other/1b.webp";
-import work05_2After from "../assets/work/shoes/05/other/2a.webp";
-import work05_2Before from "../assets/work/shoes/05/other/2b.webp";
-import work05_3After from "../assets/work/shoes/05/other/3a.webp";
-import work05_3Before from "../assets/work/shoes/05/other/3b.webp";
-import work05_4After from "../assets/work/shoes/05/other/4a.webp";
-import work05_4Before from "../assets/work/shoes/05/other/4b.webp";
-import work05Info from "../assets/work/shoes/05/info.md?raw";
-import work06After from "../assets/work/shoes/06/intro/1a.webp";
-import work06Before from "../assets/work/shoes/06/intro/2b.webp";
-import work06_1After from "../assets/work/shoes/06/other/1a.webp";
-import work06_1Before from "../assets/work/shoes/06/other/1b.webp";
-import work06_2After from "../assets/work/shoes/06/other/2a.webp";
-import work06_2Before from "../assets/work/shoes/06/other/2b.webp";
-import work06_3After from "../assets/work/shoes/06/other/3a.webp";
-import work06_3Before from "../assets/work/shoes/06/other/3b.webp";
-import work06Info from "../assets/work/shoes/06/info.md?raw";
 import type { FaqItem, HowStep, ServiceCard, WorkExample, WorkRow, WorkService, WorkSlide } from "../types";
+
+const workInfoFiles = import.meta.glob("../assets/work/*/*/info.md", {
+  eager: true,
+  import: "default",
+  query: "?raw",
+}) as Record<string, string>;
+const workImageFiles = import.meta.glob("../assets/work/*/*/{intro,other}/*", {
+  eager: true,
+  import: "default",
+  query: "?url",
+}) as Record<string, string>;
 
 type WorkInfo = Pick<WorkExample, "title" | "service" | "description">;
 
@@ -61,12 +33,6 @@ function parseWorkInfo(source: string): WorkInfo {
 
   return { title, service, description };
 }
-
-const work01Copy = parseWorkInfo(work01Info);
-const work02Copy = parseWorkInfo(work02Info);
-const work03Copy = parseWorkInfo(work03Info);
-const work05Copy = parseWorkInfo(work05Info);
-const work06Copy = parseWorkInfo(work06Info);
 
 export const brand = {
   name: "Свои ребята",
@@ -212,70 +178,79 @@ export const workKinds: { service: WorkService; description: string }[] = [
   },
 ];
 
-function compareSlide(id: string, before: string, after: string): WorkSlide {
-  return { id, before, after };
+function numericOrder(path: string): number {
+  return Number(path.match(/(?:^|\/)(\d+)/)?.[1] ?? Number.MAX_SAFE_INTEGER);
 }
 
-export const workRows: WorkRow[] = [
-  {
-    id: "portfolio",
-    title: "Обувь",
-    items: [
-      {
-        id: "work-01",
-        ...work01Copy,
-        preview: { before: work01Before, after: work01After },
-        slides: [
-          compareSlide("work-01-intro", work01Before, work01After),
-          compareSlide("work-01-01", work01OtherBefore, work01OtherAfter),
-        ],
-      },
-      {
-        id: "work-02",
-        ...work02Copy,
-        preview: { before: work02Before, after: work02After },
-        slides: [
-          compareSlide("work-02-intro", work02Before, work02After),
-          compareSlide("work-02-01", work02_1Before, work02_1After),
-          compareSlide("work-02-02", work02_2Before, work02_2After),
-          compareSlide("work-02-03", work02_3Before, work02_3After),
-        ],
-      },
-      {
-        id: "work-03",
-        ...work03Copy,
-        preview: { before: work03Before, after: work03After },
-        slides: [
-          compareSlide("work-03-intro", work03Before, work03After),
-          compareSlide("work-03-01", work03_1Before, work03_1After),
-        ],
-      },
-      {
-        id: "work-05",
-        ...work05Copy,
-        preview: { before: work05Before, after: work05After },
-        slides: [
-          compareSlide("work-05-intro", work05Before, work05After),
-          compareSlide("work-05-01", work05_1Before, work05_1After),
-          compareSlide("work-05-02", work05_2Before, work05_2After),
-          compareSlide("work-05-03", work05_3Before, work05_3After),
-          compareSlide("work-05-04", work05_4Before, work05_4After),
-        ],
-      },
-      {
-        id: "work-06",
-        ...work06Copy,
-        preview: { before: work06Before, after: work06After },
-        slides: [
-          compareSlide("work-06-intro", work06Before, work06After),
-          compareSlide("work-06-01", work06_1Before, work06_1After),
-          compareSlide("work-06-02", work06_2Before, work06_2After),
-          compareSlide("work-06-03", work06_3Before, work06_3After),
-        ],
-      },
-    ],
-  },
-];
+function createSlides(paths: string[], prefix: string): WorkSlide[] {
+  const sorted = [...paths].sort((a, b) => numericOrder(a) - numericOrder(b) || a.localeCompare(b));
+  const groups = new Map<string, { a?: string; b?: string; image?: string }>();
+
+  for (const path of sorted) {
+    const file = path.split("/").pop() ?? path;
+    const image = workImageFiles[path];
+    const match = file.match(/^(.+?)([ab])\.[^.]+$/i);
+    const key = match?.[1] ?? file;
+    const group = groups.get(key) ?? {};
+    if (match?.[2].toLowerCase() === "a") group.a = image;
+    else if (match?.[2].toLowerCase() === "b") group.b = image;
+    else group.image = image;
+    groups.set(key, group);
+  }
+
+  const slides: WorkSlide[] = [];
+  const unmatchedA: string[] = [];
+  const unmatchedB: string[] = [];
+  for (const [key, group] of groups) {
+    if (group.a && group.b) slides.push({ id: `${prefix}-${key}`, before: group.b, after: group.a });
+    else if (group.image) slides.push({ id: `${prefix}-${key}`, before: group.image, after: group.image });
+    else if (group.a) unmatchedA.push(group.a);
+    else if (group.b) unmatchedB.push(group.b);
+  }
+  const pairCount = Math.min(unmatchedA.length, unmatchedB.length);
+  for (let index = 0; index < pairCount; index += 1) {
+    slides.push({ id: `${prefix}-pair-${index + 1}`, before: unmatchedB[index], after: unmatchedA[index] });
+  }
+  for (const image of unmatchedA.slice(pairCount).concat(unmatchedB.slice(pairCount))) {
+    slides.push({ id: `${prefix}-single-${slides.length + 1}`, before: image, after: image });
+  }
+  return slides;
+}
+
+function buildWorkRows(): WorkRow[] {
+  const categoryTitles: Record<string, string> = {
+    shoes: "Обувь",
+    bags: "Сумки и рюкзаки",
+  };
+  const worksByCategory = new Map<string, WorkExample[]>();
+
+  for (const [infoPath, info] of Object.entries(workInfoFiles)) {
+    const match = infoPath.match(/assets\/work\/([^/]+)\/([^/]+)\/info\.md$/);
+    if (!match) continue;
+    const [, category, workId] = match;
+    const introPaths = Object.keys(workImageFiles).filter((path) => path.includes(`/work/${category}/${workId}/intro/`));
+    const otherPaths = Object.keys(workImageFiles).filter((path) => path.includes(`/work/${category}/${workId}/other/`));
+    if (!introPaths.length || !otherPaths.length) continue;
+
+    const introSlides = createSlides(introPaths, `${category}-${workId}-intro`);
+    const slides = [...introSlides, ...createSlides(otherPaths, `${category}-${workId}-other`)];
+    if (!slides.length) continue;
+    const items = worksByCategory.get(category) ?? [];
+    items.push({ id: `${category}-${workId}`, ...parseWorkInfo(info), preview: introSlides[0], slides });
+    worksByCategory.set(category, items);
+  }
+
+  const categoryOrder = ["shoes", "bags"];
+  return [...worksByCategory.entries()]
+    .sort(([a], [b]) => (categoryOrder.indexOf(a) + 1 || 99) - (categoryOrder.indexOf(b) + 1 || 99))
+    .map(([id, items]) => ({
+      id,
+      title: categoryTitles[id] ?? id,
+      items: items.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true })),
+    }));
+}
+
+export const workRows: WorkRow[] = buildWorkRows();
 
 /** Заголовок секции «Примеры работ». */
 export const worksSection = {
