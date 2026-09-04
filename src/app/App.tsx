@@ -21,6 +21,7 @@ import { AccountScreen, OrdersScreen } from "../components/screens/PwaScreens";
 import { Services } from "../components/services/Services";
 import { ThanksModal } from "../components/thanks/ThanksModal";
 import { Works } from "../components/works/Works";
+import { useDemoAuth } from "../hooks/useDemoAuth";
 import { useDeviceTier } from "../hooks/useDeviceTier";
 import { usePwaInstallPrompt } from "../hooks/usePwaInstallPrompt";
 import type { ScreenId, ThanksKind } from "../types";
@@ -30,7 +31,9 @@ import "./App.css";
 export function App() {
   const tier = useDeviceTier();
   const pwaInstall = usePwaInstallPrompt();
+  const auth = useDemoAuth();
   const [screen, setScreen] = useState<ScreenId>("home");
+  const [accountMode, setAccountMode] = useState<"login" | "register">("login");
   const [menu, setMenu] = useState(false);
   const [evaluate, setEvaluate] = useState(false);
   const [courier, setCourier] = useState(false);
@@ -69,10 +72,18 @@ export function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
+  /** Переход в профиль с выбранным режимом авторизации. */
+  const openAccount = useCallback((mode: "login" | "register") => {
+    setAccountMode(mode);
+    setScreen("account");
+    window.scrollTo({ top: 0 });
+  }, []);
+
   return (
     <div className={`app app--${tier}`}>
       <Header
         active={screen}
+        user={auth.user}
         onMenu={() => setMenu(true)}
         onHome={goHome}
         onJump={jump}
@@ -82,6 +93,9 @@ export function App() {
           setScreen(next);
           window.scrollTo({ top: 0 });
         }}
+        onAccountLogin={() => openAccount("login")}
+        onAccountRegister={() => openAccount("register")}
+        onLogout={auth.logout}
       />
       <main>
         {screen === "home" ? (
@@ -96,7 +110,9 @@ export function App() {
           </>
         ) : null}
         {screen === "orders" ? <OrdersScreen onEvaluate={openEvaluate} /> : null}
-        {screen === "account" ? <AccountScreen onEvaluate={openEvaluate} /> : null}
+        {screen === "account" ? (
+          <AccountScreen auth={auth} initialMode={accountMode} onEvaluate={openEvaluate} />
+        ) : null}
       </main>
       <BottomNav
         active={screen}

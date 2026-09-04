@@ -109,20 +109,15 @@
     color: var(--white);
   }
 
+  .header__link--profile {
+    display: none;
+  }
+
   .header__actions {
     display: flex;
     align-items: center;
     gap: 0.45rem;
     justify-self: end;
-  }
-
-  .header__cta {
-    display: inline-flex;
-    flex: 0 0 auto;
-    width: auto;
-    min-height: 2.65rem;
-    padding: 0.45rem 1.05rem;
-    font-size: 0.86rem;
   }
 
   .header__menu {
@@ -134,10 +129,5 @@
   .header__link {
     padding-inline: 0.55rem;
     font-size: 0.82rem;
-  }
-
-  .header__cta {
-    padding-inline: 0.85rem;
-    font-size: 0.8rem;
   }
 }

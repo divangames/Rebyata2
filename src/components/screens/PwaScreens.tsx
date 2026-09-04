@@ -6,32 +6,29 @@
 
 import { useEffect, useState, type FormEvent } from "react";
 import { cta } from "../../config/content";
+import type { DemoUser } from "../../hooks/useDemoAuth";
 import { Button } from "../button/Button";
 import "./PwaScreens.css";
 
-type Props = {
+type AuthApi = {
+  user: DemoUser | null;
+  login: (phone: string, password: string) => string | null;
+  register: (user: DemoUser) => string | null;
+  logout: () => void;
+};
+
+type OrdersProps = {
   onEvaluate: () => void;
 };
 
-type DemoUser = {
-  name: string;
-  phone: string;
-  password: string;
+type AccountProps = {
+  auth: AuthApi;
+  initialMode: "login" | "register";
+  onEvaluate: () => void;
 };
 
-const demoUserKey = "svoi-rebyata-demo-user";
-
-function readDemoUser(): DemoUser | null {
-  try {
-    const saved = localStorage.getItem(demoUserKey);
-    return saved ? (JSON.parse(saved) as DemoUser) : null;
-  } catch {
-    return null;
-  }
-}
-
 /** Список заказов: пустое состояние до первой оценки. */
-export function OrdersScreen({ onEvaluate }: Props) {
+export function OrdersScreen({ onEvaluate }: OrdersProps) {
   return (
     <section className="pwa-screen band">
       <h1>Заказы</h1>
@@ -42,16 +39,16 @@ export function OrdersScreen({ onEvaluate }: Props) {
 }
 
 /** Демо-личный кабинет: авторизация работает локально, без сервера. */
-export function AccountScreen({ onEvaluate }: Props) {
-  const [mode, setMode] = useState<"login" | "register">("login");
-  const [user, setUser] = useState<DemoUser | null>(null);
+export function AccountScreen({ auth, initialMode, onEvaluate }: AccountProps) {
+  const { user, login, register, logout } = auth;
+  const [mode, setMode] = useState<"login" | "register">(initialMode);
   const [form, setForm] = useState({ name: "", phone: "", password: "" });
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
 
   useEffect(() => {
-    setUser(readDemoUser());
-  }, []);
+    setMode(initialMode);
+  }, [initialMode]);
 
   const changeMode = (next: "login" | "register") => {
     setMode(next);
@@ -75,32 +72,29 @@ export function AccountScreen({ onEvaluate }: Props) {
     }
 
     if (mode === "register") {
-      if (!form.name.trim()) {
-        setError("Введите имя.");
+      const registerError = register({
+        name: form.name.trim(),
+        phone,
+        password: form.password,
+      });
+      if (registerError) {
+        setError(registerError);
         return;
       }
-      const created = { name: form.name.trim(), phone, password: form.password };
-      localStorage.setItem(demoUserKey, JSON.stringify(created));
-      setUser(created);
       setNotice("Профиль создан. Данные сохранены только в этом браузере.");
       return;
     }
 
-    const saved = readDemoUser();
-    if (!saved) {
-      setError("Сначала зарегистрируйте демо-профиль.");
+    const loginError = login(phone, form.password);
+    if (loginError) {
+      setError(loginError);
       return;
     }
-    if (saved.phone !== phone || saved.password !== form.password) {
-      setError("Телефон или пароль не подошли.");
-      return;
-    }
-    setUser(saved);
     setNotice("Вы вошли в профиль.");
   };
 
-  const logout = () => {
-    setUser(null);
+  const handleLogout = () => {
+    logout();
     setForm({ name: "", phone: "", password: "" });
     setNotice("Вы вышли из профиля.");
   };
@@ -119,7 +113,7 @@ export function AccountScreen({ onEvaluate }: Props) {
         {notice ? <p className="account-notice" role="status">{notice}</p> : null}
         <div className="account-actions">
           <Button onClick={onEvaluate}>Оценить вещь</Button>
-          <Button variant="light" onClick={logout}>Выйти</Button>
+          <Button variant="light" onClick={handleLogout}>Выйти</Button>
         </div>
       </section>
     );

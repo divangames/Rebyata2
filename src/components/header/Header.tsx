@@ -1,26 +1,30 @@
 ////////////////////////////////////////////////////////
 //
-// Шапка: на телефоне логотип и бургер, на десктопе — якоря и меню «+».
+// Шапка: на телефоне логотип и бургер, на десктопе — якоря и профиль.
 //
 ////////////////////////////////////////////////////////
 
-import { brand, cta } from "../../config/content";
+import { brand } from "../../config/content";
 import { logos } from "../../config/logos";
+import type { DemoUser } from "../../hooks/useDemoAuth";
 import type { ScreenId } from "../../types";
-import { Button } from "../button/Button";
 import { MenuIcon } from "../icons/Icons";
-import { HeaderQuickMenu } from "./HeaderQuickMenu";
+import { HeaderProfileMenu } from "./HeaderProfileMenu";
 import "./Header.css";
-import "./HeaderQuickMenu.css";
+import "./HeaderProfileMenu.css";
 
 type Props = {
   active: ScreenId;
+  user: DemoUser | null;
   onMenu: () => void;
   onHome: () => void;
   onJump: (id: string) => void;
   onEvaluate: () => void;
   onCourier: () => void;
   onNavigate: (screen: ScreenId) => void;
+  onAccountLogin: () => void;
+  onAccountRegister: () => void;
+  onLogout: () => void;
 };
 
 const desktopAnchors = [
@@ -33,12 +37,16 @@ const desktopAnchors = [
 /** Фиксированная чёрная шапка: мобильный и десктопный режимы. */
 export function Header({
   active,
+  user,
   onMenu,
   onHome,
   onJump,
   onEvaluate,
   onCourier,
   onNavigate,
+  onAccountLogin,
+  onAccountRegister,
+  onLogout,
 }: Props) {
   return (
     <header className="header">
@@ -61,17 +69,21 @@ export function Header({
           </button>
           <button
             type="button"
-            className={`header__link${active === "account" ? " is-active" : ""}`}
+            className={`header__link header__link--profile${active === "account" ? " is-active" : ""}`}
             onClick={() => onNavigate("account")}
           >
             Профиль
           </button>
         </nav>
         <div className="header__actions">
-          <Button className="header__cta" onClick={onEvaluate}>
-            {cta.estimate}
-          </Button>
-          <HeaderQuickMenu onEvaluate={onEvaluate} onCourier={onCourier} />
+          <HeaderProfileMenu
+            user={user}
+            onLogin={onAccountLogin}
+            onRegister={onAccountRegister}
+            onEvaluate={onEvaluate}
+            onCourier={onCourier}
+            onLogout={onLogout}
+          />
         </div>
         <button type="button" className="header__menu" onClick={onMenu} aria-label="Меню">
           <MenuIcon />
