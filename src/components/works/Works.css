@@ -1,17 +1,17 @@
 /* Примеры работ: заголовок секции и бесконечные ряды без фильтра. */
 
-.works {
-  --works-gutter: 1.05rem;
-  --works-gap: 0.5rem;
+.works.band {
+  --works-gutter: var(--gutter);
+  --works-gap: 0.7rem;
   --works-peek: 1.85rem;
   --works-shown: 2;
   --works-card: calc(
     (100% - (2 * var(--works-peek)) - (var(--works-shown) * var(--works-gap))) / var(--works-shown)
   );
-  --band-pad-top: clamp(1.15rem, 4vw, 1.7rem);
-  --band-pad-bottom: 0.85rem;
+  --band-pad-top: clamp(1.7rem, 5vw, 2.2rem);
+  --band-pad-bottom: 1.4rem;
   display: grid;
-  gap: 0.85rem;
+  gap: 1.2rem;
   padding-right: 0;
   padding-left: 0;
   background: var(--page-white);
@@ -19,7 +19,7 @@
 
 .works__intro {
   display: grid;
-  gap: 0.35rem;
+  gap: 0.55rem;
   padding-inline: var(--works-gutter);
 }
 
@@ -55,12 +55,12 @@
 
 .works__rows {
   display: grid;
-  gap: 1.1rem;
+  gap: 1.5rem;
 }
 
 .works__row {
   display: grid;
-  gap: 0.45rem;
+  gap: 0.6rem;
 }
 
 .works__rail {
@@ -331,20 +331,22 @@
 }
 
 @media (min-width: 48rem) {
-  .works {
+  .works.band {
     --works-peek: 1.7rem;
-    --works-gap: 0.65rem;
+    --works-gap: 0.85rem;
   }
 }
 
 @media (min-width: 64rem) {
-  .works {
+  .works.band {
     --works-gutter: 0;
     --works-shown: 3;
     --works-peek: 0rem;
-    --works-gap: 0.9rem;
-    --band-pad-top: 2.5rem;
-    gap: 1.35rem;
+    --works-gap: 1.15rem;
+    --band-pad-top: 3.2rem;
+    gap: 1.75rem;
+    padding-right: var(--gutter);
+    padding-left: var(--gutter);
   }
 
   /* На широком экране ряд читается как аккуратная витрина: без
@@ -354,11 +356,11 @@
   }
 
   .works__rows {
-    gap: 2rem;
+    gap: 2.5rem;
   }
 
   .works__row {
-    gap: 0.65rem;
+    gap: 0.8rem;
   }
 
   .works__scroller {
@@ -367,12 +369,11 @@
 
   .works__slide {
     /* Три карточки ровно заполняют ряд: следующая не выглядывает справа. */
-    flex-basis: calc((100% - (2 * var(--works-gap))) / var(--works-shown));
+    flex: 0 0 calc((100% - (2 * var(--works-gap))) / var(--works-shown));
   }
 
   .works__img {
-    /* Компактнее по высоте, чтобы два ряда помещались в десктопный экран. */
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 10;
   }
 
   .works__arrow {

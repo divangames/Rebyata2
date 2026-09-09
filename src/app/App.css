@@ -6,7 +6,7 @@
   margin: 0 auto;
   min-height: 100dvh;
   padding-top: calc(var(--header-h) + env(safe-area-inset-top));
-  padding-bottom: calc(var(--nav-h) + env(safe-area-inset-bottom) + 0.6rem);
+  padding-bottom: calc(var(--nav-h) + env(safe-area-inset-bottom) + 1rem);
   background: var(--page);
 }
 

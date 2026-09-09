@@ -39,7 +39,6 @@ export function ContactsSocial({ onDark = false, pending = false }: Props) {
           onClick={pending ? onPendingClick : undefined}
         >
           <TelegramIcon />
-          <span>Telegram</span>
         </a>
       </li>
       <li>
@@ -53,7 +52,6 @@ export function ContactsSocial({ onDark = false, pending = false }: Props) {
           onClick={pending ? onPendingClick : undefined}
         >
           <img src={maxMark} alt="" width={22} height={22} />
-          <span>MAX</span>
         </a>
       </li>
     </ul>

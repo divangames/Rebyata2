@@ -1,15 +1,15 @@
 /* Блок «Услуги и цены»: серый фон секции, белые карточки с фото. */
 
 .services {
-  --band-pad-bottom: 1.5rem;
+  --band-pad-bottom: 2.1rem;
   display: grid;
-  gap: clamp(0.95rem, 3.2vw, 1.25rem);
+  gap: clamp(1.2rem, 3.6vw, 1.55rem);
   background: var(--service-section);
 }
 
 .services__head {
   display: grid;
-  gap: 0.35rem;
+  gap: 0.55rem;
 }
 
 .services h2 {
@@ -29,7 +29,7 @@
 .services__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(0.6rem, 2.6vw, 0.85rem);
+  gap: clamp(0.8rem, 3vw, 1.05rem);
 }
 
 /* Белая карточка: фото сверху, текст снизу, без внутренних рамок. */
@@ -72,8 +72,8 @@
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
-  gap: 0.22rem;
-  padding: 0.28rem 0.85rem 0.9rem;
+  gap: 0.32rem;
+  padding: 0.55rem 0.95rem 1.05rem;
 }
 
 .services__card h3 {
@@ -117,7 +117,7 @@
 /* Оценка и курьер: полная ширина на телефоне, как в hero. */
 .services__actions {
   display: grid;
-  gap: 0.65rem;
+  gap: 0.8rem;
 }
 
 .services__actions .btn--secondary {
@@ -136,6 +136,7 @@
 
 .services__messengers {
   width: 100%;
+  justify-content: center;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -171,7 +172,7 @@
 
 @media (min-width: 48rem) {
   .services__grid {
-    gap: 1rem;
+    gap: 1.2rem;
   }
 
   .services__photo {
@@ -179,8 +180,8 @@
   }
 
   .services__body {
-    padding: 0.35rem 1.05rem 1.05rem;
-    gap: 0.28rem;
+    padding: 0.6rem 1.15rem 1.2rem;
+    gap: 0.38rem;
   }
 
   .services__card h3 {
@@ -214,14 +215,14 @@
 
 @media (min-width: 64rem) {
   .services {
-    --band-pad-top: 2.5rem;
-    --band-pad-bottom: 2rem;
-    gap: 1.5rem;
+    --band-pad-top: 3.2rem;
+    --band-pad-bottom: 2.8rem;
+    gap: 1.9rem;
   }
 
   .services__head {
     display: grid;
-    gap: 0.4rem;
+    gap: 0.55rem;
     max-width: 40rem;
   }
 
@@ -238,7 +239,7 @@
   /* Четыре услуги в один ряд на всю колонку --content. */
   .services__grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: clamp(0.85rem, 1.2vw, 1.35rem);
+    gap: clamp(1.05rem, 1.5vw, 1.6rem);
     width: 100%;
     max-width: none;
   }
@@ -259,8 +260,8 @@
   }
 
   .services__body {
-    padding: 0.55rem 1rem 1.2rem;
-    gap: 0.32rem;
+    padding: 0.75rem 1.1rem 1.35rem;
+    gap: 0.4rem;
     min-height: 6.75rem;
   }
 
@@ -282,7 +283,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: stretch;
-    gap: 0.75rem 1rem;
+    gap: 0.9rem 1.2rem;
     width: 100%;
     max-width: none;
     justify-self: stretch;
@@ -305,6 +306,7 @@
   }
 
   .services__messengers {
-    max-width: 22rem;
+    max-width: none;
+    justify-content: flex-start;
   }
 }

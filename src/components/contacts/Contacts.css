@@ -7,18 +7,18 @@
 }
 
 .contacts__body {
-  --band-pad-bottom: 1.35rem;
+  --band-pad-bottom: 1.9rem;
   z-index: 2;
   display: grid;
-  gap: 1.15rem;
+  gap: 1.45rem;
   background: var(--page);
   container-type: inline-size;
 }
 
 .contacts__cta {
   display: grid;
-  gap: 0.7rem;
-  padding: 1.15rem 1.1rem 1.2rem;
+  gap: 0.85rem;
+  padding: 1.35rem 1.2rem 1.4rem;
   background: color-mix(in srgb, var(--page-white) 82%, var(--page));
   color: var(--ink);
   border-radius: var(--radius-lg);
@@ -39,7 +39,7 @@
 
 .contacts__cta-actions {
   display: grid;
-  gap: 0.65rem;
+  gap: 0.8rem;
 }
 
 .contacts__cta-actions .btn--secondary {
@@ -48,7 +48,7 @@
 }
 
 .contacts__title {
-  margin: 0.15rem 0 0;
+  margin: 0.35rem 0 0;
   font-family: var(--font-display);
   font-size: clamp(1.25rem, 5.6vw, 1.7rem);
   line-height: 1.05;
@@ -56,7 +56,7 @@
 
 .contacts__list {
   display: grid;
-  gap: 0.85rem;
+  gap: 1.05rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -65,7 +65,7 @@
 .contacts__list li {
   display: flex;
   align-items: flex-start;
-  gap: 0.7rem;
+  gap: 0.85rem;
 }
 
 .contacts__list svg {
@@ -157,33 +157,33 @@
 .contacts__social {
   display: flex;
   justify-content: center;
-  gap: 0.85rem;
-  margin: 0.15rem 0 0.2rem;
+  gap: 1rem;
+  margin: 0.35rem 0 0.4rem;
   padding: 0;
   list-style: none;
 }
 
 .contacts__social-link {
   display: inline-flex;
-  min-width: 9.5rem;
-  min-height: 2.9rem;
+  width: 3rem;
+  height: 3rem;
+  min-width: 3rem;
+  min-height: 3rem;
   align-items: center;
   justify-content: center;
-  gap: 0.55rem;
-  padding: 0.7rem 0.9rem;
+  padding: 0;
   border: 1px solid var(--line);
-  border-radius: var(--radius-pill);
+  border-radius: 50%;
   background: var(--black);
   color: var(--white);
-  font-weight: 700;
   text-decoration: none;
   transition: transform 0.28s var(--ease), background 0.28s var(--ease);
 }
 
 .contacts__social-link svg,
 .contacts__social-link img {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.35rem;
+  height: 1.35rem;
   object-fit: contain;
 }
 
@@ -208,11 +208,11 @@
 }
 
 .contacts footer {
-  --band-pad-top: 1.45rem;
-  --band-pad-bottom: 1.3rem;
+  --band-pad-top: 1.85rem;
+  --band-pad-bottom: 1.7rem;
   z-index: 1;
   display: grid;
-  gap: 0.35rem;
+  gap: 0.55rem;
   background: var(--black);
   color: var(--muted-dark);
   font-size: 0.8rem;
@@ -245,7 +245,7 @@
 
 @container (min-width: 28rem) {
   .contacts__cta {
-    padding: 1.35rem 1.3rem;
+    padding: 1.55rem 1.5rem;
   }
 
   .contacts__map {
@@ -260,21 +260,21 @@
   }
 
   .contacts__body {
-    --band-pad-top: 2.5rem;
-    --band-pad-bottom: 0.85rem;
+    --band-pad-top: 3.2rem;
+    --band-pad-bottom: 1.4rem;
     grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
     grid-template-areas:
       "cta map"
       "title map"
       "list map";
-    column-gap: 2.2rem;
-    row-gap: 1rem;
+    column-gap: 2.8rem;
+    row-gap: 1.35rem;
     align-items: start;
   }
 
   .contacts__cta {
     grid-area: cta;
-    padding: 1.5rem 1.45rem 1.55rem;
+    padding: 1.75rem 1.65rem 1.8rem;
   }
 
   .contacts__cta h2 {
@@ -299,8 +299,8 @@
 
   /* Подвал до края окна: без ковша и без розовой полосы снизу. */
   .contacts footer {
-    --band-pad-top: 2rem;
-    --band-pad-bottom: 2.2rem;
+    --band-pad-top: 2.5rem;
+    --band-pad-bottom: 2.6rem;
     justify-items: center;
     text-align: center;
     border-bottom-left-radius: 0;

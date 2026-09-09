@@ -24,7 +24,7 @@ body {
   color: var(--ink);
   font-family: var(--font-ui);
   font-size: clamp(0.92rem, 2.6vw, 1.05rem);
-  line-height: 1.45;
+  line-height: 1.5;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
 }
@@ -78,10 +78,10 @@ h3 {
 /* Нижний край блока: мягкое скругление поверх следующего фона. */
 .band {
   position: relative;
-  padding-top: var(--band-pad-top, var(--space-xl));
-  padding-right: 1.05rem;
-  padding-left: 1.05rem;
-  padding-bottom: calc(var(--band-pad-bottom, 1.2rem) + var(--scoop) * 0.45);
+  padding-top: var(--band-pad-top, var(--band-pad-y));
+  padding-right: var(--gutter);
+  padding-left: var(--gutter);
+  padding-bottom: calc(var(--band-pad-bottom, var(--band-pad-y)) + var(--scoop) * 0.45);
   border-bottom-left-radius: var(--scoop);
   border-bottom-right-radius: var(--scoop);
 }
@@ -89,7 +89,7 @@ h3 {
 .app main > .band + .band,
 .contacts > .band + .band {
   margin-top: calc(-1 * var(--scoop));
-  padding-top: calc(var(--band-pad-top, var(--space-xl)) + var(--scoop));
+  padding-top: calc(var(--band-pad-top, var(--band-pad-y)) + var(--scoop));
 }
 
 .faq + .contacts {
@@ -97,7 +97,7 @@ h3 {
 }
 
 .faq + .contacts .contacts__body {
-  padding-top: calc(var(--band-pad-top, var(--space-xl)) + var(--scoop));
+  padding-top: calc(var(--band-pad-top, var(--band-pad-y)) + var(--scoop));
 }
 
 .sr-only {
@@ -119,19 +119,19 @@ h3 {
   }
 
   .band {
-    padding-top: var(--band-pad-top, clamp(2.4rem, 4vw, 3.4rem));
-    padding-right: max(2rem, calc((100% - var(--content)) / 2));
-    padding-left: max(2rem, calc((100% - var(--content)) / 2));
-    padding-bottom: calc(var(--band-pad-bottom, 2rem) + var(--scoop) * 0.45);
+    padding-top: var(--band-pad-top, var(--band-pad-y));
+    padding-right: var(--gutter);
+    padding-left: var(--gutter);
+    padding-bottom: calc(var(--band-pad-bottom, var(--band-pad-y)) + var(--scoop) * 0.45);
   }
 
   .app main > .band + .band,
   .contacts > .band + .band {
-    padding-top: calc(var(--band-pad-top, clamp(2.4rem, 4vw, 3.4rem)) + var(--scoop));
+    padding-top: calc(var(--band-pad-top, var(--band-pad-y)) + var(--scoop));
   }
 
   .faq + .contacts .contacts__body {
-    padding-top: calc(var(--band-pad-top, clamp(2.4rem, 4vw, 3.4rem)) + var(--scoop));
+    padding-top: calc(var(--band-pad-top, var(--band-pad-y)) + var(--scoop));
   }
 }
 

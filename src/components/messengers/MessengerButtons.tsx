@@ -129,7 +129,7 @@ function onMessengerClick(
   onOpen?.(id);
 }
 
-/** Тёмные или светлые пилюли: переход в мессенджер или выбор канала связи. */
+/** Тёмные круги или светлые кнопки: переход в мессенджер или выбор канала связи. */
 export function MessengerButtons({
   pending = false,
   className = "",
@@ -193,11 +193,11 @@ export function MessengerButtons({
             href={messengerHref(item.id, pending)}
             target={pending ? undefined : "_blank"}
             rel={pending ? undefined : "noopener noreferrer"}
+            aria-label={item.label}
             aria-disabled={pending || undefined}
             onClick={(event) => onMessengerClick(item.id, pending, onOpen, event)}
           >
             <ChannelMark id={item.id} />
-            <span>{item.label}</span>
           </a>
         ),
       )}

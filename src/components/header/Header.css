@@ -7,7 +7,7 @@
   z-index: 30;
   width: min(100%, 52rem);
   min-height: calc(var(--header-h) + env(safe-area-inset-top));
-  padding: calc(0.28rem + env(safe-area-inset-top)) 0.55rem 0.28rem 1rem;
+  padding: calc(0.32rem + env(safe-area-inset-top)) 0.55rem 0.32rem var(--gutter);
   background: var(--black);
   transform: translateX(-50%);
 }
@@ -62,7 +62,7 @@
     left: 0;
     width: 100%;
     min-height: 4.25rem;
-    padding: 0.45rem max(2rem, calc((100% - var(--content)) / 2));
+    padding: 0.55rem var(--gutter);
     transform: none;
   }
 

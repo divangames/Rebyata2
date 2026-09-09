@@ -14,6 +14,7 @@ deploy.zip
 *.local
 src/assets/work/НЕ ТРОГАТЬ!/
 src/assets/НЕ ТРОГАТЬ!/
+*.exe
 
 # Editor directories and files
 .vscode/*
