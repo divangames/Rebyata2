@@ -32,6 +32,22 @@ export function ClockIcon({ className }: IconProps) {
   );
 }
 
+/** Конверт для email. */
+export function MailIcon({ className }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="3.5" y="5.5" width="17" height="13" rx="2" stroke="currentColor" strokeWidth="1.5" />
+      <path
+        d="m4.2 7.2 7.1 5.2c.4.3 1 .3 1.4 0l7.1-5.2"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 /** Бумажный самолётик Telegram. */
 export function TelegramIcon({ className }: IconProps) {
   return (

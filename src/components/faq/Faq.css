@@ -10,12 +10,18 @@
 }
 
 .faq h2 {
+  order: 0;
   font-family: var(--font-display);
   font-size: clamp(1.3rem, 6vw, 1.85rem);
   line-height: 1.05;
 }
 
+.faq__aside {
+  display: contents;
+}
+
 .faq__list {
+  order: 1;
   display: grid;
   gap: 0.7rem;
   margin: 0;
@@ -91,6 +97,7 @@
 }
 
 .faq__help {
+  order: 2;
   display: grid;
   gap: 0.4rem;
   margin-top: 0.5rem;
@@ -112,6 +119,7 @@
 }
 
 .faq__write {
+  order: 3;
   margin: 0;
   color: var(--muted);
   font-size: clamp(0.86rem, 3vw, 0.95rem);
@@ -120,6 +128,7 @@
 }
 
 .faq__messengers {
+  order: 4;
   margin-top: 0.15rem;
 }
 
@@ -168,9 +177,15 @@
     align-items: start;
   }
 
-  .faq h2 {
+  .faq__aside {
+    display: grid;
     grid-column: 1;
-    grid-row: 1;
+    order: initial;
+    gap: 1.15rem;
+    align-self: start;
+  }
+
+  .faq h2 {
     font-size: clamp(1.8rem, 2.6vw, 2.3rem);
     max-width: none;
     line-height: 1.22;
@@ -185,23 +200,15 @@
 
   .faq__list {
     grid-column: 2;
-    grid-row: 1 / span 4;
+    grid-row: 1;
+    order: initial;
   }
 
   .faq__help {
-    grid-column: 1;
-    grid-row: 2;
     margin-top: 1.35rem;
   }
 
-  .faq__write {
-    grid-column: 1;
-    grid-row: 3;
-  }
-
   .faq__messengers {
-    grid-column: 1;
-    grid-row: 4;
     justify-self: start;
     align-self: start;
   }

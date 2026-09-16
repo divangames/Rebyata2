@@ -26,10 +26,18 @@ export function Faq({ onEvaluate, onCourier }: Props) {
 
   return (
     <section className="faq band" id="faq" aria-labelledby="faq-title">
-      <h2 id="faq-title">
-        Отвечаем
-        <span className="faq__title-rest"> на вопросы</span>
-      </h2>
+      <div className="faq__aside">
+        <h2 id="faq-title">
+          Отвечаем
+          <span className="faq__title-rest"> на вопросы</span>
+        </h2>
+        <div className="faq__help">
+          <strong>Не нашли ответ?</strong>
+          <p>Напишите нам — ответим в мессенджерах</p>
+        </div>
+        <p className="faq__write">{cta.writeVia}</p>
+        <MessengerButtons className="faq__messengers" />
+      </div>
       <ul className="faq__list">
         {faqItems.map((item) => (
           <FaqItem
@@ -42,12 +50,6 @@ export function Faq({ onEvaluate, onCourier }: Props) {
           />
         ))}
       </ul>
-      <div className="faq__help">
-        <strong>Не нашли ответ?</strong>
-        <p>Напишите нам — ответим в мессенджерах</p>
-      </div>
-      <p className="faq__write">{cta.writeVia}</p>
-      <MessengerButtons className="faq__messengers" />
     </section>
   );
 }

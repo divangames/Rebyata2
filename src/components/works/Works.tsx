@@ -71,7 +71,8 @@ export function Works({ onEvaluate, onCourier }: Props) {
             </h3>
             <WorkCarousel
               items={row.items}
-              paused={active !== null}
+              paused={active !== null || !visible}
+              animateFirst={index === 0}
               hint={index === 0 && hintReady}
               label={row.title}
               onOpen={setActive}

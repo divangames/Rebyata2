@@ -7,7 +7,7 @@
 import { contacts, cta } from "../../config/content";
 import { yandexMapsUrl } from "../../helpers/maps";
 import { Button } from "../button/Button";
-import { ClockIcon, PhoneIcon } from "../contacts/ContactIcons";
+import { ClockIcon, MailIcon, PhoneIcon } from "../contacts/ContactIcons";
 import { ContactPhone } from "../contacts/ContactPhone";
 import { MessengerButtons } from "../messengers/MessengerButtons";
 import { PinIcon } from "../icons/Icons";
@@ -23,7 +23,7 @@ export function MenuDrawerMeta({ onEvaluate, onCourier }: Props) {
     lat: contacts.map.lat,
     lon: contacts.map.lon,
     zoom: contacts.map.zoom,
-    address: contacts.address,
+    address: `${contacts.address}, ${contacts.venue}`,
   });
 
   return (
@@ -33,12 +33,19 @@ export function MenuDrawerMeta({ onEvaluate, onCourier }: Props) {
         <li>
           <PinIcon />
           <a href={mapsUrl} target="_blank" rel="noreferrer">
-            {contacts.address}
+            <span className="drawer__address">
+              <strong>{contacts.address}</strong>
+              <span>{contacts.venue}</span>
+            </span>
           </a>
         </li>
         <li>
           <PhoneIcon />
           <ContactPhone />
+        </li>
+        <li>
+          <MailIcon />
+          <a href={`mailto:${contacts.email}`}>{contacts.email}</a>
         </li>
         <li>
           <ClockIcon />

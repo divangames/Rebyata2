@@ -129,6 +129,11 @@
   padding: 0;
   border: 0;
   background: none;
+  cursor: ew-resize;
+}
+
+.works__shot--single .works__open {
+  cursor: pointer;
 }
 
 .works__shot {
@@ -156,22 +161,27 @@
 .works__img--before {
   position: absolute;
   inset: 0;
-  clip-path: inset(0 78% 0 0);
-  animation: works-wipe-clip 4.4s ease-in-out infinite;
-  animation-delay: var(--works-delay, 0s);
+  clip-path: inset(0 calc(100% - var(--works-compare, 48%)) 0 0);
 }
 
 .works__rule {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 22%;
+  left: var(--works-compare, 48%);
   z-index: 2;
   width: 0;
   overflow: visible;
   pointer-events: none;
-  animation: works-wipe-line 4.4s ease-in-out infinite;
-  animation-delay: var(--works-delay, 0s);
+}
+
+/* Один разделитель мягко показывает механику; остальные не отвлекают. */
+.works__shot.is-animated:not(.is-manual) .works__img--before {
+  animation: works-wipe-clip 5.2s ease-in-out infinite;
+}
+
+.works__shot.is-animated:not(.is-manual) .works__rule {
+  animation: works-wipe-line 5.2s ease-in-out infinite;
 }
 
 .works__line {
@@ -270,9 +280,16 @@
   }
 }
 
-.works__scroller.is-paused .works__img--before,
-.works__scroller.is-paused .works__rule {
+.works__scroller.is-paused .works__shot.is-animated .works__img--before,
+.works__scroller.is-paused .works__shot.is-animated .works__rule {
   animation-play-state: paused;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .works__shot.is-animated:hover:not(.is-manual) .works__img--before,
+  .works__shot.is-animated:hover:not(.is-manual) .works__rule {
+    animation-play-state: paused;
+  }
 }
 
 @media (max-width: 47.99rem) {

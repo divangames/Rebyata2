@@ -23,6 +23,8 @@ type Props = {
   className?: string;
   /** Внешний вид: тёмные пилюли или белые, как «Вызвать курьера». */
   variant?: MessengerVariant;
+  /** Показывать название сети рядом с иконкой. В подвале — только иконки. */
+  labeled?: boolean;
   /** Добавляет кнопку «Звонок» в режиме выбора. */
   withCall?: boolean;
   /** Выбранный канал в режиме выбора. */
@@ -134,15 +136,24 @@ export function MessengerButtons({
   pending = false,
   className = "",
   variant = "dark",
+  labeled = true,
   withCall = false,
   selected = null,
   onSelect,
   onOpen,
 }: Props) {
   const choice = Boolean(onSelect);
-  const rootClass = `messenger-buttons messenger-buttons--${variant}${choice ? " messenger-buttons--choice" : ""}${
-    withCall ? " messenger-buttons--with-call" : ""
-  }${className ? ` ${className}` : ""}`;
+  const showLabels = labeled || choice;
+  const rootClass = [
+    "messenger-buttons",
+    `messenger-buttons--${variant}`,
+    choice ? "messenger-buttons--choice" : "",
+    showLabels && !choice ? "messenger-buttons--labeled" : "",
+    withCall ? "messenger-buttons--with-call" : "",
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   if (onSelect) {
     return (
@@ -193,11 +204,12 @@ export function MessengerButtons({
             href={messengerHref(item.id, pending)}
             target={pending ? undefined : "_blank"}
             rel={pending ? undefined : "noopener noreferrer"}
-            aria-label={item.label}
+            aria-label={showLabels ? undefined : item.label}
             aria-disabled={pending || undefined}
             onClick={(event) => onMessengerClick(item.id, pending, onOpen, event)}
           >
             <ChannelMark id={item.id} />
+            {showLabels ? <span>{item.label}</span> : null}
           </a>
         ),
       )}

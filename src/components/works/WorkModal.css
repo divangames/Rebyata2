@@ -23,15 +23,34 @@
   right: 0;
   bottom: 0;
   display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto auto;
   gap: 0.7rem;
   width: 100%;
-  max-height: min(92dvh, 52rem);
-  overflow: auto;
+  height: min(100dvh, 52rem);
+  max-height: 100dvh;
+  overflow: hidden;
   padding: 1.2rem 1.1rem calc(1.15rem + env(safe-area-inset-bottom));
   background: #eceae6;
   color: #141414;
   border-radius: 1.4rem 1.4rem 0 0;
   box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.28);
+}
+
+.work-modal__panel > .compare {
+  min-height: 0;
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+
+.work-modal__panel > .compare .compare__stage {
+  height: 100%;
+  min-height: 0;
+  aspect-ratio: auto;
+}
+
+.work-modal__panel > .work-modal__single {
+  height: 100%;
+  min-height: 0;
+  aspect-ratio: auto;
 }
 
 .work-modal.is-open .work-modal__panel {
@@ -169,6 +188,7 @@
     bottom: auto;
     top: 50%;
     width: min(42rem, calc(100% - 3rem));
+    height: min(92dvh, 44rem);
     max-height: min(92dvh, 44rem);
     padding: 1.45rem 1.4rem 1.35rem;
     border-radius: 1.25rem;

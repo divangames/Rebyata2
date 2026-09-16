@@ -13,7 +13,7 @@ const point = {
   lat: contacts.map.lat,
   lon: contacts.map.lon,
   zoom: contacts.map.zoom,
-  address: contacts.address,
+  address: `${contacts.address}, ${contacts.venue}`,
 };
 
 /** Карта с ленивой загрузкой iframe; клик по всей области открывает Яндекс.Карты. */

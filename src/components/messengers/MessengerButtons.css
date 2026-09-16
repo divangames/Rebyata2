@@ -1,4 +1,4 @@
-/* Кнопки Telegram и MAX: круглые иконки, в выборе канала — пилюли с подписью. */
+/* Кнопки Telegram и MAX: с подписью — пилюли, в подвале — только круги. */
 
 .messenger-buttons {
   display: flex;
@@ -7,10 +7,12 @@
   gap: 0.9rem;
 }
 
-.messenger-buttons--choice {
+.messenger-buttons--choice,
+.messenger-buttons--labeled {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.65rem;
+  width: 100%;
 }
 
 .messenger-buttons--with-call {
@@ -74,7 +76,8 @@
   flex: 0 0 auto;
 }
 
-.messenger-buttons--choice .messenger-buttons__btn {
+.messenger-buttons--choice .messenger-buttons__btn,
+.messenger-buttons--labeled .messenger-buttons__btn {
   width: auto;
   height: auto;
   min-width: 0;
@@ -115,12 +118,17 @@
   }
 
   .messenger-buttons--choice .messenger-buttons__btn.is-selected:hover,
-  .messenger-buttons--panel .messenger-buttons__btn:hover {
+  .messenger-buttons--labeled.messenger-buttons--panel .messenger-buttons__btn:hover,
+  .messenger-buttons--panel:not(.messenger-buttons--labeled) .messenger-buttons__btn:hover {
     background: color-mix(in srgb, var(--green) 12%, #26292d);
   }
 
   .messenger-buttons--choice .messenger-buttons__btn.is-selected:hover {
     background: color-mix(in srgb, var(--green) 20%, var(--graphite));
+  }
+
+  .messenger-buttons--labeled .messenger-buttons__btn:hover {
+    background: color-mix(in srgb, var(--green) 12%, #26292d);
   }
 }
 

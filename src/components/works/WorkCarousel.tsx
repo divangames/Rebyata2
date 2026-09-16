@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////
 
-import { useRef, type CSSProperties, type PointerEvent } from "react";
+import { useRef, type PointerEvent } from "react";
 import { useInfiniteStrip } from "../../hooks/useInfiniteStrip";
 import type { WorkExample } from "../../types";
 import { WorkPreview } from "./WorkPreview";
@@ -12,6 +12,7 @@ import { WorkPreview } from "./WorkPreview";
 type Props = {
   items: WorkExample[];
   paused: boolean;
+  animateFirst?: boolean;
   hint?: boolean;
   label: string;
   onOpen: (item: WorkExample) => void;
@@ -25,7 +26,7 @@ function loopItems(items: WorkExample[]): WorkExample[] {
 }
 
 /** Лента без стрелок и точек: свайп и клик по карточке. */
-export function WorkCarousel({ items, paused, hint = false, label, onOpen }: Props) {
+export function WorkCarousel({ items, paused, animateFirst = false, hint = false, label, onOpen }: Props) {
   const { ref } = useInfiniteStrip(items.length);
   const drag = useRef({ x: 0, moved: false });
   const looped = loopItems(items);
@@ -78,19 +79,15 @@ export function WorkCarousel({ items, paused, hint = false, label, onOpen }: Pro
             key={`${index}-${item.id}`}
             className="works__slide"
             data-strip-slide=""
-            style={{ "--works-delay": `${(index % items.length) * 0.35}s` } as CSSProperties}
           >
             <p className="works__name">{item.title}</p>
             <div className="works__card">
-              <WorkPreview {...(item.preview ?? item.slides[0])} />
-              <button
-                type="button"
-                className="works__open"
-                onClick={() => onCardActivate(item)}
-                aria-haspopup="dialog"
-              >
-                <span className="works__sr">Открыть сравнение: {item.title}</span>
-              </button>
+              <WorkPreview
+                {...(item.preview ?? item.slides[0])}
+                title={item.title}
+                animated={animateFirst && index === items.length}
+                onOpen={() => onCardActivate(item)}
+              />
             </div>
           </li>
         ))}

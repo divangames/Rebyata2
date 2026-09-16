@@ -103,7 +103,7 @@ export function FooterCue() {
         label={footerCue.handFull}
       />
       <CueArrow alive={alive} />
-      <MessengerButtons className="footer-cue__messengers messenger-buttons--panel" />
+      <MessengerButtons labeled={false} className="footer-cue__messengers messenger-buttons--panel" />
     </div>
   );
 }

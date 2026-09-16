@@ -9,7 +9,7 @@ import { yandexMapsUrl } from "../../helpers/maps";
 import { Button } from "../button/Button";
 import { FooterCue } from "../footer/FooterCue";
 import { PinIcon } from "../icons/Icons";
-import { ClockIcon, PhoneIcon } from "./ContactIcons";
+import { ClockIcon, MailIcon, PhoneIcon } from "./ContactIcons";
 import { ContactPhone } from "./ContactPhone";
 import { ContactsMap } from "./ContactsMap";
 import "./Contacts.css";
@@ -43,7 +43,7 @@ export function Contacts({ onEvaluate, onCourier, onJump }: Props) {
     lat: contacts.map.lat,
     lon: contacts.map.lon,
     zoom: contacts.map.zoom,
-    address: contacts.address,
+    address: `${contacts.address}, ${contacts.venue}`,
   });
 
   return (
@@ -66,12 +66,19 @@ export function Contacts({ onEvaluate, onCourier, onJump }: Props) {
           <li>
             <PinIcon />
             <a href={mapsUrl} target="_blank" rel="noreferrer">
-              {contacts.address}
+              <span className="contacts__address">
+                <strong>{contacts.address}</strong>
+                <span>{contacts.venue}</span>
+              </span>
             </a>
           </li>
           <li>
             <PhoneIcon />
             <ContactPhone />
+          </li>
+          <li>
+            <MailIcon />
+            <a href={`mailto:${contacts.email}`}>{contacts.email}</a>
           </li>
           <li>
             <ClockIcon />
