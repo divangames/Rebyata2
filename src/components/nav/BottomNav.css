@@ -7,7 +7,7 @@
   bottom: 0;
   z-index: 30;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 0.2rem;
   padding: 0.45rem 0.4rem calc(0.45rem + env(safe-area-inset-bottom));
   background: #fff;
@@ -34,6 +34,11 @@
   color: #222;
   font-size: 0.68rem;
   font-weight: 500;
+}
+
+/* Временно скрываем вход в профиль, не удаляя кнопку и её логику. */
+.dock__item--profile {
+  display: none;
 }
 
 .dock__item svg {

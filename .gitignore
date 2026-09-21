@@ -12,6 +12,9 @@ dist
 dist-ssr
 deploy.zip
 *.local
+# Секреты Telegram — только на сервере
+api/config.php
+deploy/api/config.php
 src/assets/work/НЕ ТРОГАТЬ!/
 src/assets/НЕ ТРОГАТЬ!/
 *.exe

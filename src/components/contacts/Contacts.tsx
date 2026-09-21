@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////
 
-import { brand, contacts, cta, footerNav } from "../../config/content";
+import { brand, contacts, cta, footerNav, legal } from "../../config/content";
 import { yandexMapsUrl } from "../../helpers/maps";
 import { Button } from "../button/Button";
 import { FooterCue } from "../footer/FooterCue";
@@ -92,6 +92,11 @@ export function Contacts({ onEvaluate, onCourier, onJump }: Props) {
         <FooterCue />
         <p>{brand.copyright}</p>
         <p>{brand.kicker}</p>
+        <p className="contacts__legal">
+          <span>{legal.entity}</span>
+          <span>ИНН {legal.inn}</span>
+          <span>ОГРНИП {legal.ogrnip}</span>
+        </p>
         <nav>
           {footerNav.map((label) => (
             <button key={label} type="button" onClick={() => onJump(footerTarget(label))}>

@@ -78,7 +78,8 @@
 
 @media (min-width: 64rem) {
   .header-profile {
-    display: block;
+    /* Временно скрываем вход в профиль, не удаляя компонент. */
+    display: none;
   }
 }
 

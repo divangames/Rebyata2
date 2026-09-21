@@ -7,6 +7,7 @@
 import { useEffect, useId, useState, type FormEvent } from "react";
 import { courierCopy, cta, requestCopy } from "../../config/content";
 import { formatRuPhone, isFullRuPhone } from "../../helpers/phone";
+import { submitLead } from "../../services/leadService";
 import { Button } from "../button/Button";
 import { CloseIcon } from "../icons/Icons";
 import { MessengerButtons } from "../messengers/MessengerButtons";
@@ -25,6 +26,7 @@ export function CourierSheet({ open, onClose, onSuccess }: Props) {
   const phoneId = useId();
   const [phone, setPhone] = useState("+7");
   const [error, setError] = useState("");
+  const [sending, setSending] = useState(false);
 
   useEffect(() => {
     if (!open) {
@@ -32,17 +34,29 @@ export function CourierSheet({ open, onClose, onSuccess }: Props) {
     }
     setPhone("+7");
     setError("");
+    setSending(false);
   }, [open]);
 
-  /** Проверяет телефон и открывает общее окно благодарности. */
-  function onSubmit(event: FormEvent) {
+  /** Проверяет телефон, шлёт заявку в Telegram и открывает благодарность. */
+  async function onSubmit(event: FormEvent) {
     event.preventDefault();
+    if (sending) {
+      return;
+    }
     if (!isFullRuPhone(phone)) {
       setError(requestCopy.phoneError);
       return;
     }
     setError("");
-    onSuccess();
+    setSending(true);
+    try {
+      await submitLead({ kind: "courier", phone });
+      onSuccess();
+    } catch {
+      setError(requestCopy.submitError);
+    } finally {
+      setSending(false);
+    }
   }
 
   return (
@@ -53,7 +67,7 @@ export function CourierSheet({ open, onClose, onSuccess }: Props) {
           className="sheet__panel courier"
           role="dialog"
           aria-labelledby="courier-title"
-          onSubmit={onSubmit}
+          onSubmit={(event) => void onSubmit(event)}
         >
           <button type="button" className="sheet__close" onClick={onClose} aria-label="Закрыть">
             <CloseIcon />
@@ -69,11 +83,14 @@ export function CourierSheet({ open, onClose, onSuccess }: Props) {
               autoComplete="tel"
               inputMode="tel"
               value={phone}
+              disabled={sending}
               onChange={(event) => setPhone(formatRuPhone(event.target.value))}
             />
           </label>
           {error ? <p className="courier__error">{error}</p> : null}
-          <Button type="submit">{courierCopy.submit}</Button>
+          <Button type="submit" disabled={sending}>
+            {sending ? requestCopy.submitting : courierCopy.submit}
+          </Button>
           <p className="courier__write">{requestCopy.messengersLead}</p>
           <MessengerButtons onOpen={onSuccess} />
           <p className="courier__note">{courierCopy.note}</p>

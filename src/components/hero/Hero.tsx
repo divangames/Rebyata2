@@ -6,7 +6,6 @@
 
 import heroMain from "../../assets/HERO/main.webp";
 import { brand, categories, cta } from "../../config/content";
-import { logos } from "../../config/logos";
 import { Button } from "../button/Button";
 import { iconForCategory } from "../icons/categoryMap";
 import { AnimatedSlogan } from "../slogan/AnimatedSlogan";
@@ -23,8 +22,10 @@ export function Hero({ onEvaluate, onCourier }: Props) {
     <section className="hero band" id="hero">
       <p className="hero__kicker">{brand.kicker}</p>
       <div className="hero__title-row">
-        <h1 className="hero__logo">
-          <img src={logos.vertical} alt={brand.name} width="320" height="110" />
+        <h1 className="hero__headline">
+          <span>ПОДАРИ ВТОРУЮ</span>
+          <span>ЖИЗНЬ ЛЮБИМЫМ</span>
+          <span>ВЕЩАМ</span>
         </h1>
         <AnimatedSlogan />
       </div>

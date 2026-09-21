@@ -229,6 +229,14 @@
   font-size: 0.8rem;
 }
 
+.contacts__legal {
+  display: grid;
+  gap: 0.2rem;
+  max-width: 36ch;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--muted-dark) 88%, transparent);
+}
+
 .contacts footer nav {
   display: flex;
   flex-wrap: wrap;
@@ -332,5 +340,10 @@
 
   .contacts footer nav {
     justify-content: center;
+  }
+
+  .contacts__legal {
+    max-width: 42ch;
+    justify-items: center;
   }
 }

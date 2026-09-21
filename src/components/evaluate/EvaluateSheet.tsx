@@ -7,6 +7,7 @@
 import { useEffect, useId, useState, type ChangeEvent, type FormEvent } from "react";
 import { cta, evaluateCopy } from "../../config/content";
 import { formatRuPhone, isFullRuPhone } from "../../helpers/phone";
+import { submitLead } from "../../services/leadService";
 import { Button } from "../button/Button";
 import { CameraIcon, CloseIcon } from "../icons/Icons";
 import { MessengerButtons } from "../messengers/MessengerButtons";
@@ -30,6 +31,7 @@ export function EvaluateSheet({ open, onClose, onSuccess }: Props) {
   const [files, setFiles] = useState<File[]>([]);
   const [phone, setPhone] = useState("+7");
   const [error, setError] = useState("");
+  const [sending, setSending] = useState(false);
 
   useEffect(() => {
     if (!open) {
@@ -37,6 +39,7 @@ export function EvaluateSheet({ open, onClose, onSuccess }: Props) {
       setFiles([]);
       setPhone("+7");
       setError("");
+      setSending(false);
     }
   }, [open]);
 
@@ -64,15 +67,26 @@ export function EvaluateSheet({ open, onClose, onSuccess }: Props) {
     setStep(2);
   }
 
-  /** Проверяет телефон и открывает окно благодарности с сроком оценки. */
-  function onSubmit(event: FormEvent) {
+  /** Проверяет телефон, шлёт заявку с фото в Telegram и открывает благодарность. */
+  async function onSubmit(event: FormEvent) {
     event.preventDefault();
+    if (sending) {
+      return;
+    }
     if (!isFullRuPhone(phone)) {
       setError(evaluateCopy.phoneError);
       return;
     }
     setError("");
-    onSuccess();
+    setSending(true);
+    try {
+      await submitLead({ kind: "evaluate", phone, photos: files });
+      onSuccess();
+    } catch {
+      setError(evaluateCopy.submitError);
+    } finally {
+      setSending(false);
+    }
   }
 
   const canAddMore = files.length < MAX_PHOTOS;
@@ -92,7 +106,7 @@ export function EvaluateSheet({ open, onClose, onSuccess }: Props) {
           </button>
 
           {step === 2 ? (
-            <button type="button" className="sheet__back" onClick={() => setStep(1)}>
+            <button type="button" className="sheet__back" onClick={() => setStep(1)} disabled={sending}>
               ← Назад
             </button>
           ) : null}
@@ -135,7 +149,7 @@ export function EvaluateSheet({ open, onClose, onSuccess }: Props) {
               ) : null}
             </>
           ) : (
-            <form className="sheet__contact" onSubmit={onSubmit}>
+            <form className="sheet__contact" onSubmit={(event) => void onSubmit(event)}>
               <label className="sheet__field" htmlFor={phoneId}>
                 {evaluateCopy.phoneLabel}
                 <input
@@ -145,13 +159,16 @@ export function EvaluateSheet({ open, onClose, onSuccess }: Props) {
                   autoComplete="tel"
                   inputMode="tel"
                   value={phone}
+                  disabled={sending}
                   onChange={(event) => setPhone(formatRuPhone(event.target.value))}
                 />
               </label>
 
               {error ? <p className="sheet__error">{error}</p> : null}
 
-              <Button type="submit">{evaluateCopy.submit}</Button>
+              <Button type="submit" disabled={sending}>
+                {sending ? evaluateCopy.submitting : evaluateCopy.submit}
+              </Button>
 
               <p className="sheet__write">{cta.writeVia}</p>
               <MessengerButtons onOpen={onSuccess} />

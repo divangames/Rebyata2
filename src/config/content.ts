@@ -44,6 +44,13 @@ export const brand = {
   copyright: "© 2026 Свои ребята",
 } as const;
 
+/** Реквизиты ИП для подвала. */
+export const legal = {
+  entity: "ИП Смольянинов Сергей Владимирович",
+  inn: "246114928605",
+  ogrnip: "325246800178032",
+} as const;
+
 export const categories = [
   { id: "shoes", label: "Обувь" },
   { id: "bags", label: "Сумки" },
@@ -77,6 +84,8 @@ export const requestCopy = {
   consent: "Нажимая кнопку, вы соглашаетесь с обработкой данных",
   sent: "Заявка принята. Перезвоним в течение 5 минут.",
   phoneError: "Укажите номер телефона",
+  submitError: "Не удалось отправить. Попробуйте ещё раз или напишите в мессенджер.",
+  submitting: "Отправляем…",
 } as const;
 
 /** Общее окно после заявки, курьера или оценки. */
@@ -102,6 +111,8 @@ export const evaluateCopy = {
   phoneLabel: "Телефон",
   submit: "Получить стоимость",
   phoneError: "Укажите номер телефона",
+  submitError: "Не удалось отправить. Попробуйте ещё раз или напишите в мессенджер.",
+  submitting: "Отправляем…",
 } as const;
 
 /** Срок ответа на оценку по фото. */
@@ -374,8 +385,8 @@ export const contacts = {
   venue: "Бизнес-центр БАЛАНС",
   email: "svoi-rebyata-24@yandex.ru",
   mapOpenLabel: "Открыть карту",
-  telegramUrl: "https://t.me/",
-  maxUrl: "https://max.ru/",
+  telegramUrl: "https://t.me/svoi_rebyata_24",
+  maxUrl: "https://max.ru/u/f9LHodD0cOJIIsaJT2NGVNkV13xx7egFDoq9MBBHAw0lXgIKpM-cgbkU6IU",
   map: {
     lat: 56.019883,
     lon: 92.838684,

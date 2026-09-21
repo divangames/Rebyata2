@@ -12,11 +12,24 @@ PWA-посадочник химчистки, реставрации и ремо�
 - `src/assets/HERO` — главное фото первого экрана
 - `src/assets/work` — пары «до / после» для примеров работ (`*_1` / `*_01` — после, `*_2` / `*_02` — до)
 - `src/assets/icons` — знак MAX для подвала
+- `src/assets/favicon` — исходники значков (ico, svg, png 16/32, apple-touch, android-chrome)
 - `src/hooks` — reduced motion, мощность устройства и подсказка установки PWA
 - `src/styles` — токены брендбука
 - `public/images` — логотипы
-- `public/favicon.svg` — значок вкладки (без внешнего DOCTYPE)
+- `public/` — фавиконки и манифест (копия из `src/assets/favicon`)
 - `public/fonts` — лицензионные Intro и Druk Wide Bold
+- `api/` — PHP-прокси заявок в Telegram (`lead.php`, секреты в `config.php`)
+
+## Заявки в Telegram
+
+Формы «Узнать стоимость», «Вызвать курьера» и заявка по услуге отправляют текст (и фото при оценке) в группу через бота.
+
+1. На PHP-хостинге должна лежать папка `api/` (её копирует `prepare:deploy`).
+2. Скопируйте `api/config.example.php` → `api/config.php` и укажите `bot_token` и `chat_id`.
+3. Бот должен быть добавлен в группу заявок и иметь право писать сообщения.
+4. На GitHub Pages PHP не выполняется — заявки работают только на PHP-хостинге с залитной `api/`.
+
+Локальная проверка API: `php -S 127.0.0.1:8080 -t .` из корня проекта, затем POST на `http://127.0.0.1:8080/api/lead.php`.
 
 ## Запуск
 
@@ -48,7 +61,7 @@ Windows: двойной щелчок по `deploy.bat` (нужен Node.js в PA
 
 Скрипт соберёт статическую папку `deploy\` и архив `deploy.zip`. Готовая папка также лежит в репозитории: [deploy](https://github.com/divangames/Rebyata2/tree/main/deploy). Залейте **содержимое** `deploy\` в корень сайта (`public_html`, `www`, `htdocs`). Node.js на хостинге не нужен. Для PWA нужен HTTPS.
 
-Подойдёт любой статический хостинг (Apache, Nginx, Cloudflare Pages, Netlify, GitHub Pages).
+Подойдёт любой статический хостинг (Apache, Nginx, Cloudflare Pages, Netlify, GitHub Pages). Для приёма заявок в Telegram нужен PHP (см. раздел выше).
 
 Онлайн-версия на GitHub Pages: [divangames.github.io/Rebyata2](https://divangames.github.io/Rebyata2/). Сборка публикуется автоматически при пуше в `main`.
 
@@ -60,4 +73,4 @@ Windows: двойной щелчок по `deploy.bat` (нужен Node.js в PA
 
 ## Технологии
 
-React 19, TypeScript, Vite, CSS без UI-китов. Service worker — `public/sw.js`.
+React 19, TypeScript, Vite, CSS без UI-китов. Service worker — `public/sw.js`. Заявки — PHP + Telegram Bot API.

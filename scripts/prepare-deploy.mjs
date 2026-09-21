@@ -20,6 +20,7 @@ import { fileURLToPath } from "node:url";
 const rootDir = join(dirname(fileURLToPath(import.meta.url)), "..");
 const distDir = join(rootDir, "dist");
 const deployDir = join(rootDir, "deploy");
+const apiDir = join(rootDir, "api");
 const zipPath = join(rootDir, "deploy.zip");
 const htaccessSource = join(rootDir, "scripts", "hosting", "apache.htaccess");
 
@@ -49,11 +50,23 @@ async function removeDirWithRetry(targetDir) {
   }
 }
 
-/** Копирует dist в чистую папку deploy и добавляет .htaccess */
+/** Копирует PHP API заявок (config.php — если есть локально). */
+function copyApiToDeploy() {
+  if (!existsSync(apiDir)) {
+    return;
+  }
+
+  const targetApi = join(deployDir, "api");
+  mkdirSync(targetApi, { recursive: true });
+  cpSync(apiDir, targetApi, { recursive: true });
+}
+
+/** Копирует dist в чистую папку deploy, PHP API и .htaccess */
 async function copyBuildToDeploy() {
   await removeDirWithRetry(deployDir);
   mkdirSync(deployDir, { recursive: true });
   cpSync(distDir, deployDir, { recursive: true });
+  copyApiToDeploy();
   writeFileSync(join(deployDir, ".htaccess"), readFileSync(htaccessSource));
 }
 
@@ -87,4 +100,5 @@ if (existsSync(zipPath)) {
 }
 console.log("");
 console.log("Залейте содержимое папки deploy в корень сайта (public_html, www, htdocs).");
+console.log("Для заявок в Telegram нужен PHP: папка api/ с config.php (образец — api/config.example.php).");
 console.log("Node.js на хостинге не нужен.");

@@ -7,6 +7,7 @@
 import { useEffect, useId, useState, type FormEvent } from "react";
 import { requestCopy } from "../../config/content";
 import { formatRuPhone, isFullRuPhone } from "../../helpers/phone";
+import { submitLead } from "../../services/leadService";
 import { Button } from "../button/Button";
 import { CloseIcon } from "../icons/Icons";
 import { MessengerButtons } from "../messengers/MessengerButtons";
@@ -25,6 +26,7 @@ export function RequestModal({ open, serviceTitle, onClose, onSuccess }: Props) 
   const phoneId = useId();
   const [phone, setPhone] = useState("+7");
   const [error, setError] = useState("");
+  const [sending, setSending] = useState(false);
 
   useEffect(() => {
     if (!open) {
@@ -32,17 +34,29 @@ export function RequestModal({ open, serviceTitle, onClose, onSuccess }: Props) 
     }
     setPhone("+7");
     setError("");
+    setSending(false);
   }, [open, serviceTitle]);
 
-  /** Проверяет телефон и открывает общее окно благодарности. */
-  function onSubmit(event: FormEvent) {
+  /** Проверяет телефон, шлёт заявку в Telegram и открывает благодарность. */
+  async function onSubmit(event: FormEvent) {
     event.preventDefault();
+    if (sending) {
+      return;
+    }
     if (!isFullRuPhone(phone)) {
       setError(requestCopy.phoneError);
       return;
     }
     setError("");
-    onSuccess();
+    setSending(true);
+    try {
+      await submitLead({ kind: "request", phone, serviceTitle });
+      onSuccess();
+    } catch {
+      setError(requestCopy.submitError);
+    } finally {
+      setSending(false);
+    }
   }
 
   return (
@@ -53,7 +67,7 @@ export function RequestModal({ open, serviceTitle, onClose, onSuccess }: Props) 
           className="request__panel"
           role="dialog"
           aria-labelledby="request-title"
-          onSubmit={onSubmit}
+          onSubmit={(event) => void onSubmit(event)}
         >
           <button type="button" className="request__close" onClick={onClose} aria-label="Закрыть">
             <CloseIcon />
@@ -72,13 +86,16 @@ export function RequestModal({ open, serviceTitle, onClose, onSuccess }: Props) 
               autoComplete="tel"
               inputMode="tel"
               value={phone}
+              disabled={sending}
               onChange={(event) => setPhone(formatRuPhone(event.target.value))}
             />
           </label>
 
           {error ? <p className="request__error">{error}</p> : null}
 
-          <Button type="submit">{requestCopy.callback}</Button>
+          <Button type="submit" disabled={sending}>
+            {sending ? requestCopy.submitting : requestCopy.callback}
+          </Button>
 
           <p className="request__messengers-lead">{requestCopy.messengersLead}</p>
           <MessengerButtons className="request__messengers" onOpen={onSuccess} />
