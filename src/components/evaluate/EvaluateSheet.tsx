@@ -173,7 +173,7 @@ export function EvaluateSheet({ open, onClose, onSuccess }: Props) {
               </Button>
 
               <p className="sheet__write">{cta.writeVia}</p>
-              <MessengerButtons onOpen={onSuccess} />
+              <MessengerButtons />
             </form>
           )}
         </section>

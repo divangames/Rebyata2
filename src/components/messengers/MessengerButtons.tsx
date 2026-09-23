@@ -31,8 +31,6 @@ type Props = {
   selected?: ContactChannel | null;
   /** Включает режим выбора вместо перехода по ссылке. */
   onSelect?: (id: ContactChannel) => void;
-  /** Сообщает родителю, что пользователь ушёл в мессенджер. */
-  onOpen?: (id: MessengerId) => void;
 };
 
 const messengerItems: { id: MessengerId; label: string }[] = [
@@ -117,18 +115,11 @@ function LightLinkContent({ id, label }: { id: MessengerId; label: string }) {
   );
 }
 
-/** Открывает мессенджер и сообщает родителю. */
-function onMessengerClick(
-  id: MessengerId,
-  pending: boolean,
-  onOpen: ((id: MessengerId) => void) | undefined,
-  event: { preventDefault: () => void },
-) {
+/** Не даёт открыть заглушку, если рабочая ссылка ещё не задана. */
+function onMessengerClick(pending: boolean, event: { preventDefault: () => void }) {
   if (pending) {
     onPendingClick(event);
-    return;
   }
-  onOpen?.(id);
 }
 
 /** Тёмные круги или светлые кнопки: переход в мессенджер или выбор канала связи. */
@@ -140,7 +131,6 @@ export function MessengerButtons({
   withCall = false,
   selected = null,
   onSelect,
-  onOpen,
 }: Props) {
   const choice = Boolean(onSelect);
   const showLabels = labeled || choice;
@@ -188,7 +178,7 @@ export function MessengerButtons({
             target={pending ? undefined : "_blank"}
             rel={pending ? undefined : "noopener noreferrer"}
             aria-disabled={pending || undefined}
-            onClick={(event) => onMessengerClick(item.id, pending, onOpen, event)}
+            onClick={(event) => onMessengerClick(pending, event)}
           >
             <span className="btn__idle">
               <LightLinkContent id={item.id} label={item.label} />
@@ -206,7 +196,7 @@ export function MessengerButtons({
             rel={pending ? undefined : "noopener noreferrer"}
             aria-label={showLabels ? undefined : item.label}
             aria-disabled={pending || undefined}
-            onClick={(event) => onMessengerClick(item.id, pending, onOpen, event)}
+            onClick={(event) => onMessengerClick(pending, event)}
           >
             <ChannelMark id={item.id} />
             {showLabels ? <span>{item.label}</span> : null}

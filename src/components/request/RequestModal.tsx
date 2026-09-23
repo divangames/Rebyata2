@@ -98,7 +98,7 @@ export function RequestModal({ open, serviceTitle, onClose, onSuccess }: Props) 
           </Button>
 
           <p className="request__messengers-lead">{requestCopy.messengersLead}</p>
-          <MessengerButtons className="request__messengers" onOpen={onSuccess} />
+          <MessengerButtons className="request__messengers" />
 
           <p className="request__consent">{requestCopy.consent}</p>
         </form>

@@ -94,7 +94,7 @@ export function CourierSheet({ open, onClose, onSuccess }: Props) {
             {sending ? requestCopy.submitting : courierCopy.submit}
           </Button>
           <p className="courier__write">{requestCopy.messengersLead}</p>
-          <MessengerButtons onOpen={onSuccess} />
+          <MessengerButtons />
           <p className="courier__note">{courierCopy.note}</p>
           <p className="courier__consent">{requestCopy.consent}</p>
         </form>
