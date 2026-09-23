@@ -8,6 +8,7 @@ import { useEffect, useId, useState, type ChangeEvent, type FormEvent } from "re
 import { cta, evaluateCopy } from "../../config/content";
 import { formatRuPhone, isFullRuPhone } from "../../helpers/phone";
 import { submitLead } from "../../services/leadService";
+import { reachGoal } from "../../services/metrika";
 import { Button } from "../button/Button";
 import { CameraIcon, CloseIcon } from "../icons/Icons";
 import { MessengerButtons } from "../messengers/MessengerButtons";
@@ -81,6 +82,7 @@ export function EvaluateSheet({ open, onClose, onSuccess }: Props) {
     setSending(true);
     try {
       await submitLead({ kind: "evaluate", phone, photos: files });
+      reachGoal("lead-price");
       onSuccess();
     } catch {
       setError(evaluateCopy.submitError);

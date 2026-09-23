@@ -4,8 +4,9 @@
 //
 ////////////////////////////////////////////////////////
 
-import { brand } from "../../config/content";
+import { brand, contacts } from "../../config/content";
 import { logos } from "../../config/logos";
+import { digitsOnly } from "../../helpers/phone";
 import type { DemoUser } from "../../hooks/useDemoAuth";
 import type { ScreenId } from "../../types";
 import { MenuIcon } from "../icons/Icons";
@@ -77,6 +78,9 @@ export function Header({
           </button>
         </nav>
         <div className="header__actions">
+          <a className="header__phone" href={`tel:+${digitsOnly(contacts.phone)}`}>
+            {contacts.phone}
+          </a>
           <HeaderProfileMenu
             user={user}
             onLogin={onAccountLogin}

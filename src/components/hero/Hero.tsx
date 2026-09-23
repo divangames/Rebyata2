@@ -23,7 +23,7 @@ export function Hero({ onEvaluate, onCourier }: Props) {
       <p className="hero__kicker">{brand.kicker}</p>
       <div className="hero__title-row">
         <h1 className="hero__headline">
-          <span>ПОДАРИ ВТОРУЮ</span>
+          <span>ПОДАРИТЕ ВТОРУЮ</span>
           <span>ЖИЗНЬ ЛЮБИМЫМ</span>
           <span>ВЕЩАМ</span>
         </h1>

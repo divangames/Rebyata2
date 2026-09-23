@@ -8,6 +8,7 @@ import { useEffect, useId, useState, type FormEvent } from "react";
 import { courierCopy, cta, requestCopy } from "../../config/content";
 import { formatRuPhone, isFullRuPhone } from "../../helpers/phone";
 import { submitLead } from "../../services/leadService";
+import { reachGoal } from "../../services/metrika";
 import { Button } from "../button/Button";
 import { CloseIcon } from "../icons/Icons";
 import { MessengerButtons } from "../messengers/MessengerButtons";
@@ -51,6 +52,7 @@ export function CourierSheet({ open, onClose, onSuccess }: Props) {
     setSending(true);
     try {
       await submitLead({ kind: "courier", phone });
+      reachGoal("lead-courier");
       onSuccess();
     } catch {
       setError(requestCopy.submitError);
